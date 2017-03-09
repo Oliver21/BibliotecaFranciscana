@@ -17,6 +17,16 @@ class Functions{
     function __destruct()
     {
     }
+    
+    # Destroy a user session
+    function close_session(){
+        # Start session for last time
+        session_start();
+        # Unset all the session variables
+        $_SESSION = array();
+        # Destroy the session
+        session_destroy();
+    }
 
     # Add a user to the 'Usuario' table
     function add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena){
@@ -76,5 +86,5 @@ class Functions{
 # $functions->add_user("Test04", "TestAP", "TestAM", "test04", "Admin", "0", "8111628532", "test01@test.com", "Test Address", "Tec", "test");
 
 # Test de buscar usuario
-$functions = new Functions();
-$functions->check_user('test04', 'test');
+# $functions = new Functions();
+# $functions->check_user('test04', 'test');

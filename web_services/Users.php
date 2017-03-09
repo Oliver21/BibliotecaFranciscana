@@ -18,10 +18,17 @@ if (isset($_POST['action'])){
         case 2:
             check_user($functions);
             break;
+        case 3:
+            close_session($functions);
+            break;
     }
 
 } else {
     echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
+}
+
+function close_session($functions){
+    $functions->close_session();
 }
 
 function check_user_param($keyword){
