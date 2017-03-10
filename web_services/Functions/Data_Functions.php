@@ -28,6 +28,30 @@ class Functions{
         session_destroy();
     }
 
+    # Get all the books information
+    function get_books(){
+        # Query that selects all the books from the table
+        $query = "SELECT * FROM Libro";
+        if ($result = mysqli_query($this->db, $query)){
+            # Check for the number of books
+            if ($result -> num_rows > 0){
+                $books = array();
+                while ($row = mysqli_fetch_row($result)){
+                    array_push($books, $row);
+                }
+                $books['status'] = 1;
+                return ( $books);
+            } else {
+                # There are no books in the table
+                return ( array("status" => 2, "message" => "No se han agregado libros.") );
+            }
+        } else {
+            # If something went wrong
+            return ( array("status" => 0, "message" => "Algo salió mal obtener la información de los libros."));
+        }
+
+    }
+
     # Add a user to the 'Usuario' table
     function add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena){
         # Check that the username does not exist
@@ -88,3 +112,7 @@ class Functions{
 # Test de buscar usuario
 # $functions = new Functions();
 # $functions->check_user('test04', 'test');
+
+# Test de selección de libros
+$functions = new Functions();
+$functions->get_books();
