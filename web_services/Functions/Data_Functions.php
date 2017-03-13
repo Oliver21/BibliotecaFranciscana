@@ -17,6 +17,62 @@ class Functions{
     function __destruct()
     {
     }
+    
+    # Destroy a user session
+    function close_session(){
+        # Start session for last time
+        session_start();
+        # Unset all the session variables
+        $_SESSION = array();
+        # Destroy the session
+        session_destroy();
+    }
+
+    # Get all the magazines information
+    function get_magazines(){
+        # Query that selects all the magazines from the table
+        $query = "SELECT * FROM Revista";
+        if ($result = mysqli_query($this->db, $query)){
+            # Check for the number of magazines
+            if ($result -> num_rows > 0){
+                $magazines = array();
+                while ($row = mysqli_fetch_row($result)){
+                    array_push($magazines, $row);
+                }
+                $magazines['status'] = 1;
+                return ( $magazines);
+            } else {
+                # There are no magazines in the table
+                return ( array("status" => 2, "message" => "No se han agregado revistas.") );
+            }
+        } else {
+            # If something went wrong
+            return ( array("status" => 0, "message" => "Algo salió mal obtener la información de las revistas."));
+        }
+    }
+
+    # Get all the books information
+    function get_books(){
+        # Query that selects all the books from the table
+        $query = "SELECT * FROM Libro";
+        if ($result = mysqli_query($this->db, $query)){
+            # Check for the number of books
+            if ($result -> num_rows > 0){
+                $books = array();
+                while ($row = mysqli_fetch_row($result)){
+                    array_push($books, $row);
+                }
+                $books['status'] = 1;
+                return ( $books);
+            } else {
+                # There are no books in the table
+                return ( array("status" => 2, "message" => "No se han agregado libros.") );
+            }
+        } else {
+            # If something went wrong
+            return ( array("status" => 0, "message" => "Algo salió mal obtener la información de los libros."));
+        }
+    }
 
     # Add a user to the 'Usuario' table
     function add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena){
@@ -76,5 +132,13 @@ class Functions{
 # $functions->add_user("Test04", "TestAP", "TestAM", "test04", "Admin", "0", "8111628532", "test01@test.com", "Test Address", "Tec", "test");
 
 # Test de buscar usuario
-$functions = new Functions();
-$functions->check_user('test04', 'test');
+# $functions = new Functions();
+# $functions->check_user('test04', 'test');
+
+# Test de selección de libros
+# $functions = new Functions();
+# $functions->get_books();
+
+# Test de selección de revistas
+# $functions = new Functions();
+# echo json_encode( $functions->get_magazines();

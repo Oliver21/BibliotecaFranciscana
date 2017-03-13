@@ -27,3 +27,11 @@ h1 {
 .dropdown-content li > a, .dropdown-content li > span {
   color: #171717;
 }
+
+footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:70px;
+  width:100%;
+}
