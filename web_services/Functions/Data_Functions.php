@@ -28,6 +28,29 @@ class Functions{
         session_destroy();
     }
 
+    # Get all the magazines information
+    function get_magazines(){
+        # Query that selects all the magazines from the table
+        $query = "SELECT * FROM Revista";
+        if ($result = mysqli_query($this->db, $query)){
+            # Check for the number of magazines
+            if ($result -> num_rows > 0){
+                $magazines = array();
+                while ($row = mysqli_fetch_row($result)){
+                    array_push($magazines, $row);
+                }
+                $magazines['status'] = 1;
+                return ( $magazines);
+            } else {
+                # There are no magazines in the table
+                return ( array("status" => 2, "message" => "No se han agregado revistas.") );
+            }
+        } else {
+            # If something went wrong
+            return ( array("status" => 0, "message" => "Algo salió mal obtener la información de las revistas."));
+        }
+    }
+
     # Get all the books information
     function get_books(){
         # Query that selects all the books from the table
@@ -49,7 +72,6 @@ class Functions{
             # If something went wrong
             return ( array("status" => 0, "message" => "Algo salió mal obtener la información de los libros."));
         }
-
     }
 
     # Add a user to the 'Usuario' table
@@ -114,5 +136,9 @@ class Functions{
 # $functions->check_user('test04', 'test');
 
 # Test de selección de libros
-$functions = new Functions();
-$functions->get_books();
+# $functions = new Functions();
+# $functions->get_books();
+
+# Test de selección de revistas
+# $functions = new Functions();
+# echo json_encode( $functions->get_magazines();
