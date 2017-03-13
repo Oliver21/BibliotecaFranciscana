@@ -25,8 +25,6 @@ body {
 
   <nav class="brown" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><i class="material-icons">local_library</i></a>
-      <!-- <div class="nav-wrapper container">
-      <a id="logo-container" href="index.html" class="brand-logo"><IMG SRC="../images/logo3.png" HEIGHT=60> Teologado Franciscano</a> -->
       <ul id="nav-mobile" class="side-nav">
         <li><a href="revistas.html">Iniciar Sesion</a></li>
         <li><a href="#">Salir</a></li>
@@ -44,24 +42,129 @@ body {
       </div>
     </div>
 
-    <!--
-    <a class="waves-effect waves-light btn "><i class="material-icons right">perm_identity</i>Agregar usuario</a>
-    <a class="waves-effect waves-light btn"><i class="material-icons right">class</i>Agregar libro</a>
-    <a class="waves-effect waves-light btn"><i class="material-icons right">library_books</i>Agregar revista</a>
-    <a class="waves-effect waves-light btn"><i class="material-icons right">subtitles</i>Agregar editorial</a> -->
+<!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UN USUARIO||||||||||||||||||||||||||-->
+<div id="usuario" style='display:none;'>
+  <div class="section">
+      <div class="row">
+        <h4 class="col s4 offset-s4">Aqui agregaras un usuario</h4>
+        <div class="input-field col s3 offset-s2">
+          <i class="material-icons prefix">perm_identity</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Nombre</label>
+        </div>
+          
+        <div class="input-field col s3 offset-s2">
+          <i class="material-icons prefix">perm_identity</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Apellido Paterno</label>
+        </div>
+
+        <div class="input-field col s3 offset-s2">
+          <i class="material-icons prefix">perm_identity</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Apellido Materno</label>
+        </div>
+        
+        <div class="input-field col s3 offset-s2">
+          <i class="material-icons prefix">perm_identity</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Username</label>
+        </div>
+
+        <div class="input-field col s3 offset-s2">
+          <i class="material-icons prefix">lock</i>
+          <input id="last_name" type="password" class="validate">
+          <label for="last_name">Contraseña</label>
+        </div>
+
+        <div class="input-field col s3 offset-s2">
+          <i class="material-icons prefix">phone</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Telefono</label>
+        </div>
+
+        <div class="input-field col s3 offset-s2">
+          <i class="material-icons prefix">email</i>
+          <input id="last_name" type="email" class="validate">
+          <label for="last_name">Correo</label>
+        </div>
+
+        <div class="input-field col s3 offset-s2">
+            <div class="input-field">
+            <select>
+              <option value="" disabled selected>Esoger opción</option>
+              <option value="1">Administrador</option>
+              <option value="2">General</option>
+            </select>
+            <label>Tipo de Usuario:</label>
+          </div>
+        </div>
+      
+      </div>
+  </div>
+</div>
+
+
+<!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UN LIRBO||||||||||||||||||||||||||-->
+<div id="libro" style='display:none;'>
+  <div class="section">
+      <div class="row">
+        <h4 class="col s4 offset-s4">Aqui agregaras un libro</h4>
+        <div class="input-field col s6 offset-s3">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Usuario</label>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+<!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UNA REVISTA||||||||||||||||||||||||||-->
+<div id="revista" style='display:none;'>
+  <div class="section">
+      <div class="row">
+        <h4 class="col s4 offset-s4">Aqui agregaras una revista</h4>
+        <div class="input-field col s6 offset-s3">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Usuario</label>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+<!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UNA EDITORIAL||||||||||||||||||||||||||-->
+<div id="editorial" style='display:none;'>
+  <div class="section">
+      <div class="row">
+        <h4 class="col s4 offset-s4">Aqui agregaras una editorial</h4>
+        <div class="input-field col s6 offset-s3">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Usuario</label>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+  <!--||||||||||||||||||||||||||||||||||BOTON FLOTANTE|||||||||||||||||||||||||||||||||||||-->
       <div class="fixed-action-btn">
     <a class="btn-floating btn-large red">
       <i class="large material-icons">add</i>
     </a>
     <ul>
-      <li><a class="btn-floating red"><i class="material-icons">perm_identity</i>Agregar Usuario</a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">class</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">library_books</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">subtitles</i></a></li>
+      <li><a class="btn-floating red"><i class="material-icons" onclick="usuario()">perm_identity</i></a>Agregar Usuario</li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons" onclick="libro()">class</i></a>Agregar libro</li>
+      <li><a class="btn-floating green"><i class="material-icons" onclick="revista()">library_books</i></a>Agregar revista</li>
+      <li><a class="btn-floating blue"><i class="material-icons" onclick="editorial()">subtitles</i></a>Agregar editorial</li>
     </ul>
   </div>
 
 
+<!--||||||||||||||||||||||||||||||||||FOTTER|||||||||||||||||||||||||||||||||||||-->
   <footer class="page-footer brown">
     <div class="footer-copyright brown darken-3">
       <div class="container">
@@ -73,5 +176,34 @@ body {
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="../js/materialize.js"></script>
     <script src="../js/init.js"></script>
+  <script type="text/javascript">
+  function usuario() {
+    document.getElementById('libro').style.display = 'none';
+    document.getElementById('revista').style.display = 'none';
+    document.getElementById('editorial').style.display = 'none';
+    document.getElementById('usuario').style.display = 'block';
+  }
+
+    function libro() {
+    document.getElementById('usuario').style.display = 'none';
+    document.getElementById('revista').style.display = 'none';
+    document.getElementById('editorial').style.display = 'none';
+    document.getElementById('libro').style.display = 'block';
+  }
+
+   function revista() {
+    document.getElementById('usuario').style.display = 'none';
+    document.getElementById('libro').style.display = 'none';
+    document.getElementById('editorial').style.display = 'none';
+    document.getElementById('revista').style.display = 'block';
+  }
+
+   function editorial() {
+    document.getElementById('usuario').style.display = 'none';
+    document.getElementById('revista').style.display = 'none';
+    document.getElementById('libro').style.display = 'none';
+    document.getElementById('editorial').style.display = 'block';
+  }
+</script>
 </body>
 </html>
