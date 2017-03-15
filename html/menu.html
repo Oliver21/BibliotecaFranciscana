@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--  background-image: url("../images/wall22.jpg"); -->
 <style>
 body {
-  background-image: url("../images/wall17.png");
   background-repeat: no-repeat;
   background-position: left top;
   background-attachment: fixed;
   background-size: 100% 100%;
 }
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
 </style>
+<body>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -20,8 +30,7 @@ body {
   <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 
-
-<body>
+<main>
 
   <nav class="brown" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><i class="material-icons">local_library</i></a>
@@ -38,7 +47,7 @@ body {
     <div class="section">
       <div class="center row">
         <h3>Biblioteca Teologado Franciscano</h3>
-        <h6 class="header col s12 light">Menú de opciones</h6>
+        <h6>Menú de opciones</h6>
       </div>
     </div>
 
@@ -46,50 +55,51 @@ body {
 <div id="usuario" style='display:none;'>
   <div class="section">
       <div class="row">
-        <h4 class="col s4 offset-s4">Aqui agregaras un usuario</h4>
-        <div class="input-field col s3 offset-s2">
+        <h5 class="center">Agregar usuario</h5>
+
+        <div class="input-field col s3 offset-s1">
           <i class="material-icons prefix">perm_identity</i>
           <input id="last_name" type="text" class="validate">
           <label for="last_name">Nombre</label>
         </div>
           
-        <div class="input-field col s3 offset-s2">
+        <div class="input-field col s3 offset-s1">
           <i class="material-icons prefix">perm_identity</i>
           <input id="last_name" type="text" class="validate">
           <label for="last_name">Apellido Paterno</label>
         </div>
 
-        <div class="input-field col s3 offset-s2">
+        <div class="input-field col s3 offset-s1">
           <i class="material-icons prefix">perm_identity</i>
           <input id="last_name" type="text" class="validate">
           <label for="last_name">Apellido Materno</label>
         </div>
         
-        <div class="input-field col s3 offset-s2">
+        <div class="input-field col s3 offset-s1">
           <i class="material-icons prefix">perm_identity</i>
           <input id="last_name" type="text" class="validate">
           <label for="last_name">Username</label>
         </div>
 
-        <div class="input-field col s3 offset-s2">
+        <div class="input-field col s3 offset-s1">
           <i class="material-icons prefix">lock</i>
           <input id="last_name" type="password" class="validate">
           <label for="last_name">Contraseña</label>
         </div>
 
-        <div class="input-field col s3 offset-s2">
+        <div class="input-field col s3 offset-s1">
           <i class="material-icons prefix">phone</i>
           <input id="last_name" type="text" class="validate">
           <label for="last_name">Telefono</label>
         </div>
 
-        <div class="input-field col s3 offset-s2">
+        <div class="input-field col s3 offset-s1">
           <i class="material-icons prefix">email</i>
           <input id="last_name" type="email" class="validate">
           <label for="last_name">Correo</label>
         </div>
 
-        <div class="input-field col s3 offset-s2">
+        <div class="input-field col s3 offset-s1">
             <div class="input-field">
             <select>
               <option value="" disabled selected>Esoger opción</option>
@@ -105,16 +115,77 @@ body {
 </div>
 
 
-<!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UN LIRBO||||||||||||||||||||||||||-->
+<!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UN LIBRO||||||||||||||||||||||||||-->
 <div id="libro" style='display:none;'>
   <div class="section">
       <div class="row">
-        <h4 class="col s4 offset-s4">Aqui agregaras un libro</h4>
-        <div class="input-field col s6 offset-s3">
-          <i class="material-icons prefix">account_circle</i>
+        <h5 class="col s8 offset-s4">Aqui agregaras un libro</h5>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">class</i>
           <input id="last_name" type="text" class="validate">
-          <label for="last_name">Usuario</label>
+          <label for="last_name">Titulo</label>
         </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">perm_identity</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">ISBN/ISSN</label>
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">class</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Titulo original</label>
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">subtitles</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Subtitulo</label>
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">description</i>
+          <input id="last_name" type="number" class="validate">
+          <label for="last_name">Número de edición</label>
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">room</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Lugar publico</label>
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">perm_contact_calendar</i>
+          <input id="last_name" type="date" class="validate">
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">library_books</i>
+          <input id="last_name" type="number" class="validate">
+          <label for="last_name">Número de copias</label>
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">shopping_cart</i>
+          <input id="last_name" type="number" class="validate">
+          <label for="last_name">Costo</label>
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">library_books</i>
+          <input id="last_name" type="number" class="validate">
+          <label for="last_name">Número de páginas</label>
+        </div>
+
+        <div class="input-field col s3 offset-s1">
+          <i class="material-icons prefix">store</i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Proovedor</label>
+        </div>
+
       </div>
   </div>
 </div>
@@ -162,14 +233,15 @@ body {
       <li><a class="btn-floating blue"><i class="material-icons" onclick="editorial()">subtitles</i></a>Agregar editorial</li>
     </ul>
   </div>
-
-
-<!--||||||||||||||||||||||||||||||||||FOTTER|||||||||||||||||||||||||||||||||||||-->
+</main>
+<!--||||||||||||||||||||||||||||||||||FOOTER|||||||||||||||||||||||||||||||||||||-->
   <footer class="page-footer brown">
     <div class="footer-copyright brown darken-3">
       <div class="container">
-        <a class="brown-text text-lighten-4 right" href="http://materializecss.com">© 2017 Instituto Tecnológico de Estudios Superiores de Monterrey</a>
+        <a class="brown-text text-lighten-4 right">© 2017 Instituto Tecnológico de Estudios Superiores de Monterrey</a>
       </div>
+    </div>
+  </footer>
 
 
     <!--  Scripts-->
