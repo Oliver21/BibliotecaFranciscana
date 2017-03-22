@@ -18,7 +18,7 @@ body {
     flex: 1 0 auto;
   }
 </style>
-<body>
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -118,14 +118,12 @@ body {
         </div>
 
         <div class="input-field col s4">
-            <div class="input-field">
             <select id="tipo">
               <option value="" disabled selected>Esoger opción</option>
               <option value="administrador">Administrador</option>
               <option value="general">General</option>
             </select>
             <label>Tipo de Usuario:</label>
-          </div>
         </div>
       
       </div>
@@ -135,8 +133,8 @@ body {
               </button>
               </center>
   </div>
-</div>
-
+</div> <!--Cierra id usuario-->
+<!--|||||||||||||||||||||||||||||||TERMINA USUARIO|||||||||||||||||||||||||-->
 
 <!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UN LIBRO||||||||||||||||||||||||||-->
 <div id="libro" style='display:none;'>
@@ -209,59 +207,86 @@ body {
           <label for="last_name">Proovedor</label>
         </div>
 
+        <div class="input-field col s4">
+          <i class="material-icons prefix">library_books</i>
+          <input id="proovedorlibro" type="text" class="validate" style="font-size: 15pt;">
+          <label for="last_name">Sección</label>
+        </div>
+
+        <div class="input-field col s4">
+          <i class="material-icons prefix">explicit</i>
+          <input id="proovedorlibro" type="text" class="validate" style="font-size: 15pt;">
+          <label for="last_name">Editorial</label>
+        </div>
+
+        <div class="input-field col s4">
+          <i class="material-icons prefix">assignment_ind</i>
+          <input id="proovedorlibro" type="text" class="validate" style="font-size: 15pt;">
+          <label for="last_name">Autor</label>
+        </div>
+
       </div>
 
 
-        <div class="input-field col s4">
+        <div class="input-field col s8 offset-s1">
           <input type="checkbox" id="test5">
           <label for="test5">Ilustraciones</label>
-        </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <div class="input-field col s4">
+        
           <input type="checkbox" id="test6">
           <label for="test6">Gráficas</label>
-        </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <div class="input-field col s4">
+
+        
           <input type="checkbox" id="test7">
           <label for="test7">Mapas</label>
-        </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <div class="input-field col s4">
+
+       
           <input type="checkbox" id="test8">
           <label for="test8">Bibliografía</label>
-        </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <div class="input-field col s4">
+
+        
           <input type="checkbox" id="test9">
           <label for="test9">Pasta blanda</label>
-        </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <div class="input-field col s4">
+
+          
           <input type="checkbox" id="test10">
-          <label for="test10">Planos</label>
-        </div>
+          <label for="test10">Planos  </label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <div class="input-field col s4">
+
+        
           <input type="checkbox" id="test11">
           <label for="test11">Disponible</label>
         </div>
+  </div>
 
+
+
+        <div class="section">
         <center>
           <button class="btn waves-effect waves-light" type="submit" name="action" id="addlibro">Agregar libro
             <i class="material-icons right">done_all</i>
           </button>
         </center>
+      </div>
 
-  </div>
-</div>
-
+  </div> <!--CIERRA ID LIBRO-->
+  <!--|||||||||||||||||AQUI TERMINA EL LIBRO|||||||||||||||||||||||||||||||||||-->
 
 <!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UNA REVISTA||||||||||||||||||||||||||-->
 <div id="revista" style='display:none;'>
   <div class="section">
       <div class="row">
-        <h5 class="col s8 offset-s4">Agregar revista</h5>
+        <h5 class="center">Agregar revista</h5>
 
         <div class="input-field col s4">
           <i class="material-icons prefix">class</i>
@@ -339,7 +364,7 @@ body {
 
   </div>
 </div>
-
+<!--||||||||||||||||||||||CIERRA REVISTA|||||||||||||||||||||||||||||||||||||||-->
 
 <!--|||||||||||||||||||||DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UNA EDITORIAL||||||||||||||||||||||||||-->
 <div id="editorial" style='display:none;'>
@@ -368,16 +393,15 @@ body {
       <li><a class="btn-floating blue"><i class="material-icons" onclick="editorial()">subtitles</i></a>Agregar editorial</li>
     </ul>
   </div>
-
 </main>
 <!--||||||||||||||||||||||||||||||||||FOOTER|||||||||||||||||||||||||||||||||||||-->
-  <footer class="page-footer brown">
+ <!-- <footer class="page-footer brown">
     <div class="footer-copyright brown darken-3">
       <div class="container">
         <a class="brown-text text-lighten-4 right">© 2017 Instituto Tecnológico de Estudios Superiores de Monterrey</a>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
 
     <!--  Scripts-->
@@ -413,5 +437,5 @@ body {
     document.getElementById('editorial').style.display = 'block';
   }
 </script>
-</body>
+
 </html>
