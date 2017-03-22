@@ -28,6 +28,30 @@ class Functions{
         session_destroy();
     }
 
+    # Get the list of series
+    function get_series(){
+        # Query that selects all the series from the table
+        $query = "SELECT * FROM Serie";
+        if ($result = mysqli_query($this->db, $query)){
+            # Check for the number of series
+            if ($result -> num_rows > 0){
+                $series = array();
+                while ($row = mysqli_fetch_row($result)){
+                    $values = array( "id_serie" => $row[0], "nombre_serie" => $row[1], "volumen_serie" => $row[2] );
+                    array_push($series, $values);
+                }
+                $series['status'] = 1;
+                return ( $series);
+            } else {
+                # The authors table is empty
+                return ( array("status" => 2, "message" => "No se han agregado series.") );
+            }
+        } else {
+            # Something went wrong
+            return ( array("status" => 0, "message" => "Algo salió mal obtener la información de las series."));
+        }
+    }
+
     # Get the list of authors
     function get_authors(){
         # Query that selects all the authors from the table
