@@ -28,6 +28,53 @@ class Functions{
         session_destroy();
     }
 
+    # Get the list of series
+    function get_series(){
+        # Query that selects all the series from the table
+        $query = "SELECT * FROM Serie";
+        if ($result = mysqli_query($this->db, $query)){
+            # Check for the number of series
+            if ($result -> num_rows > 0){
+                $series = array();
+                while ($row = mysqli_fetch_row($result)){
+                    $values = array( "id_serie" => $row[0], "nombre_serie" => $row[1], "volumen_serie" => $row[2] );
+                    array_push($series, $values);
+                }
+                $series['status'] = 1;
+                return ( $series);
+            } else {
+                # The authors table is empty
+                return ( array("status" => 2, "message" => "No se han agregado series.") );
+            }
+        } else {
+            # Something went wrong
+            return ( array("status" => 0, "message" => "Algo salió mal obtener la información de las series."));
+        }
+    }
+
+    # Get the list of authors
+    function get_authors(){
+        # Query that selects all the authors from the table
+        $query = "SELECT * FROM Autor";
+        if ($result = mysqli_query($this->db, $query)){
+            # Check for the number of magazines
+            if ($result -> num_rows > 0){
+                 $authors = array();
+                while ($row = mysqli_fetch_row($result)){
+                    array_push($authors, $row);
+                 }
+                $authors['status'] = 1;
+                return ( $authors);
+            } else {
+                # The authors table is empty
+                return ( array("status" => 2, "message" => "No se han agregado autores.") );
+            }
+        } else {
+            # Something went wrong
+            return ( array("status" => 0, "message" => "Algo salió mal obtener la información de los autores."));
+        }
+    }
+
     # Get all the magazines information
     function get_magazines(){
         # Query that selects all the magazines from the table
@@ -142,3 +189,7 @@ class Functions{
 # Test de selección de revistas
 # $functions = new Functions();
 # echo json_encode( $functions->get_magazines();
+
+# Test de selección de autores
+# $functions = new Functions();
+# echo json_encode( $functions->get_authors());
