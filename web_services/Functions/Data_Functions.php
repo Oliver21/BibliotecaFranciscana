@@ -17,7 +17,7 @@ class Functions{
     function __destruct()
     {
     }
-    
+
     # Destroy a user session
     function close_session(){
         # Start session for last time
@@ -59,10 +59,10 @@ class Functions{
         if ($result = mysqli_query($this->db, $query)){
             # Check for the number of magazines
             if ($result -> num_rows > 0){
-                 $authors = array();
+                $authors = array();
                 while ($row = mysqli_fetch_row($result)){
                     array_push($authors, $row);
-                 }
+                }
                 $authors['status'] = 1;
                 return ( $authors);
             } else {
@@ -109,8 +109,9 @@ class Functions{
                 while ($row = mysqli_fetch_row($result)){
                     array_push($books, $row);
                 }
-                $books['status'] = 1;
-                return ( $books);
+                $answer = array( "books" => $books, "status" => 1 );
+                # $books['status'] = 1;
+                return ( $answer);
             } else {
                 # There are no books in the table
                 return ( array("status" => 2, "message" => "No se han agregado libros.") );
@@ -154,7 +155,7 @@ class Functions{
     function check_user($Username, $Contrasena){
         # Query that checks if the user is in the database
         $query = "SELECT * FROM Usuario WHERE Username = '$Username' AND Contrasena = md5('$Contrasena')";
-        
+
         # Execute query
         if ($result = mysqli_query($this->db, $query)){
             if ($result -> num_rows < 1){
@@ -162,7 +163,7 @@ class Functions{
                 return ( array("status" => 2, "message" => "No se ha encontrado usuario con estas credenciales."));
             } else {
                 $results = $result->fetch_array(MYSQLI_ASSOC);
-                
+
                 $results['status'] = 1;
                 return ( $results);
             }

@@ -15,9 +15,11 @@ if (isset($_POST['action'])){
         case 1:
             get_books($functions);
             break;
+        # Select a specific book of the list
         case 2:
             get_specific_book($functions);
             break;
+        # Edit book information
         case 3:
             edit_book($functions);
             break;
