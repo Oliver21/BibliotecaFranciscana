@@ -46,7 +46,11 @@ function get_books($functions){
 
 # get_specific_book
 function get_specific_book($functions){
+    $id_libro = $_POST['id_libro'];
+
+    $result = $functions->get_specific_book($id_libro);
     
+    echo json_encode( $result ); 
 }
 
 # edit_book

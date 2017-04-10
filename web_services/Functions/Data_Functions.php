@@ -64,7 +64,7 @@ class Functions
             # Check for the number of magazines
             if ($result->num_rows > 0) {
                 $authors = array();
-                while ($row = mysqli_fetch_row($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     array_push($authors, $row);
                 }
                 $authors['status'] = 1;
@@ -88,7 +88,7 @@ class Functions
             # Check for the number of magazines
             if ($result->num_rows > 0) {
                 $magazines = array();
-                while ($row = mysqli_fetch_row($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     array_push($magazines, $row);
                 }
                 $magazines['status'] = 1;
@@ -112,10 +112,11 @@ class Functions
             # Check for the number of books
             if ($result->num_rows > 0) {
                 $books = array();
-                while ($row = mysqli_fetch_row($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     array_push($books, $row);
                 }
                 $answer = array("books" => $books, "status" => 1);
+                # var_dump($answer);
                 # $books['status'] = 1;
                 return ($answer);
             } else {
@@ -126,6 +127,25 @@ class Functions
             # If something went wrong
             return (array("status" => 0, "message" => "Algo salió mal obtener la información de los libros."));
         }
+    }
+
+    # Select a specific book
+    function get_specific_book($id){
+        # Query that select the specific book
+        $query = "SELECT * FROM Libro WHERE id_libro = $id";
+
+        if ( $result = mysqli_query($this->db, $query) ){
+
+            $row = mysqli_fetch_assoc ($result);
+
+            return $row;
+
+
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del libro."));
+        }
+
     }
 
     # Add a user to the 'Usuario' table
@@ -216,6 +236,7 @@ class Functions
             return (array("status" => 0, "message" => "Algo salió mal al validar el libro."));
         }
     }
+
 }
 
 # Test de añadir usuario
@@ -228,11 +249,11 @@ class Functions
 
 # Test de selección de libros
 # $functions = new Functions();
-# $functions->get_books();
+# echo json_encode( $functions->get_books() );
 
 # Test de selección de revistas
 # $functions = new Functions();
-# echo json_encode( $functions->get_magazines();
+# echo json_encode( $functions->get_magazines() );
 
 # Test de selección de autores
 # $functions = new Functions();
@@ -241,3 +262,7 @@ class Functions
 # Test de inserción de libro
 # $functions = new Functions();
 # echo json_encode( $functions->add_book( "test", "Titulo test", "Subtitulo test", "titulo original test", 4, 1, 3, "06/04/2017", "Monterrey", "06/04/2017", "43dlls", "Proveedor", "observaciones", 3, "apartado", "volumen", 1,1, 1,1,1,1,1,1,3,"Test de add libros" ));
+
+# Test de selección de libro específico
+# $functions = new Functions();
+# echo json_encode($functions->get_specific_book(2));
