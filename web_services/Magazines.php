@@ -27,6 +27,9 @@ if (isset($_POST['action'])){
 }
 
 # get_magazines
+/**
+ * @param $functions
+ */
 function get_magazines($functions){
     $result = $functions->get_magazines();
 
@@ -35,11 +38,17 @@ function get_magazines($functions){
 }
 
 # get_specific_magazine
+/**
+ * @param $functions
+ */
 function get_specific_magazine($functions){
 
 }
 
 # edit_magazine
+/**
+ * @param $functions
+ */
 function edit_magazine($functions){
 
 }

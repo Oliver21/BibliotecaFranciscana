@@ -1,11 +1,20 @@
 <?php
 
+/**
+ * Class Functions
+ */
 class Functions
 {
     # Global connection to the database
+    /**
+     * @var mysqli
+     */
     private $db;
 
     # Constructor
+    /**
+     * Functions constructor.
+     */
     function __construct()
     {
         require_once 'Db_Connection.php';
@@ -15,11 +24,17 @@ class Functions
     }
 
     # Destructor
+    /**
+     *
+     */
     function __destruct()
     {
     }
 
     # Destroy a user session
+    /**
+     *
+     */
     function close_session()
     {
         # Start session for last time
@@ -31,6 +46,9 @@ class Functions
     }
 
     # Get the list of series
+    /**
+     * @return array
+     */
     function get_series()
     {
         # Query that selects all the series from the table
@@ -56,6 +74,9 @@ class Functions
     }
 
     # Get the list of authors
+    /**
+     * @return array
+     */
     function get_authors()
     {
         # Query that selects all the authors from the table
@@ -80,6 +101,9 @@ class Functions
     }
 
     # Get all the magazines information
+    /**
+     * @return array
+     */
     function get_magazines()
     {
         # Query that selects all the magazines from the table
@@ -104,6 +128,9 @@ class Functions
     }
 
     # Get all the books information
+    /**
+     * @return array
+     */
     function get_books()
     {
         # Query that selects all the books from the table
@@ -130,6 +157,10 @@ class Functions
     }
 
     # Select a specific book
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_book($id){
         # Query that select the specific book
         $query = "SELECT * FROM Libro WHERE id_libro = $id";
@@ -149,6 +180,20 @@ class Functions
     }
 
     # Add a user to the 'Usuario' table
+    /**
+     * @param $Nombre
+     * @param $Ap_Paterno
+     * @param $Ap_Materno
+     * @param $Username
+     * @param $Tipo_Usuario
+     * @param $Grado
+     * @param $Telefono
+     * @param $Correo
+     * @param $Direccion
+     * @param $Instituto_Proveniencia
+     * @param $Contrasena
+     * @return array
+     */
     function add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena)
     {
         # Check that the username does not exist
@@ -179,6 +224,11 @@ class Functions
     }
 
     # Check if the user exist in the table
+    /**
+     * @param $Username
+     * @param $Contrasena
+     * @return array|mixed
+     */
     function check_user($Username, $Contrasena)
     {
         # Query that checks if the user is in the database
@@ -202,6 +252,35 @@ class Functions
     }
 
     # Add a book to the table
+    /**
+     * @param $isbn
+     * @param $titulo_libro
+     * @param $subtitulo_libro
+     * @param $titulo_original
+     * @param $numero_paginas
+     * @param $id_editorial
+     * @param $numero_edicion
+     * @param $fecha_edicion
+     * @param $lugar_publicacion
+     * @param $fecha_adquisicion
+     * @param $costo_libro
+     * @param $proveedor_libro
+     * @param $observaciones_libro
+     * @param $id_seccion
+     * @param $id_apartado
+     * @param $volumen_libro
+     * @param $ilustraciones
+     * @param $graficas
+     * @param $mapas
+     * @param $bibliografia
+     * @param $indice
+     * @param $pasta_blanda
+     * @param $planos
+     * @param $estatus
+     * @param $numero_copias
+     * @param $palabras_clave
+     * @return array
+     */
     function add_book($isbn, $titulo_libro, $subtitulo_libro, $titulo_original, $numero_paginas, $id_editorial, $numero_edicion,
                       $fecha_edicion, $lugar_publicacion, $fecha_adquisicion, $costo_libro, $proveedor_libro, $observaciones_libro, $id_seccion, $id_apartado,
                       $volumen_libro, $ilustraciones, $graficas, $mapas, $bibliografia, $indice, $pasta_blanda, $planos, $estatus, $numero_copias, $palabras_clave)

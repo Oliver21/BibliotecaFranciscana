@@ -28,6 +28,9 @@ if (isset($_POST['action'])){
 }
 
 # get_authors
+/**
+ * @param $functions
+ */
 function get_authors($functions){
     $result = $functions->get_authors();
 
@@ -36,11 +39,17 @@ function get_authors($functions){
 }
 
 # get_specific_author
+/**
+ * @param $functions
+ */
 function get_specific_author($functions){
 
 }
 
 # edit_author
+/**
+ * @param $functions
+ */
 function edit_author($functions){
 
 }

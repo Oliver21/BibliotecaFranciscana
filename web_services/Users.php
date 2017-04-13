@@ -27,10 +27,17 @@ if (isset($_POST['action'])){
     echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
 }
 
+/**
+ * @param $functions
+ */
 function close_session($functions){
     $functions->close_session();
 }
 
+/**
+ * @param $keyword
+ * @return mixed
+ */
 function check_user_param($keyword){
     # Check if the values were provided
     if (isset($_POST[$keyword])){
@@ -42,6 +49,10 @@ function check_user_param($keyword){
     }
 }
 
+/**
+ * @param $keyword
+ * @return null
+ */
 function check_user_null($keyword){
     # The value can be null
     if (isset($_POST[$keyword])){
@@ -52,6 +63,9 @@ function check_user_null($keyword){
     }
 }
 
+/**
+ * @param $functions
+ */
 function add_user($functions){
     # Check if the values were provided
     $Nombre = check_user_param('Nombre');
@@ -70,6 +84,9 @@ function add_user($functions){
     echo json_encode( $functions->add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena) );
 }
 
+/**
+ * @param $functions
+ */
 function check_user($functions){
     # Check if the values were provided
     $Username = check_user_param('Username');

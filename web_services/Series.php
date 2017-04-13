@@ -28,6 +28,9 @@ if (isset($_POST['action'])){
 }
 
 # get_series
+/**
+ * @param $functions
+ */
 function get_series($functions){
     $result = $functions->get_series();
 
@@ -36,11 +39,17 @@ function get_series($functions){
 }
 
 # get_specific_serie
+/**
+ * @param $functions
+ */
 function get_specific_serie($functions){
 
 }
 
 # edit_serie
+/**
+ * @param $functions
+ */
 function edit_serie($functions){
 
 }

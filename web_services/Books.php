@@ -37,6 +37,9 @@ if (isset($_POST['action'])){
 }
 
 # get_books
+/**
+ * @param $functions
+ */
 function get_books($functions){
     $result = $functions->get_books();
 
@@ -45,6 +48,9 @@ function get_books($functions){
 }
 
 # get_specific_book
+/**
+ * @param $functions
+ */
 function get_specific_book($functions){
     $id_libro = $_POST['id_libro'];
 
@@ -54,11 +60,17 @@ function get_specific_book($functions){
 }
 
 # edit_book
+/**
+ * @param $functions
+ */
 function edit_book($functions){
 
 }
 
 # add_book
+/**
+ * @param $functions
+ */
 function add_book($functions){
     $isbn = $_POST['ISBN'];
     $titulo_libro = $_POST['titulo_libro'];
