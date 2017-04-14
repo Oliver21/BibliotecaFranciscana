@@ -125,7 +125,58 @@ class Functions
 
 
 
+    # Edit user information
+    /**
+     * @param $Nombre
+     * @param $Ap_Paterno
+     * @param $Ap_Materno
+     * @param $Username
+     * @param $Tipo_Usuario
+     * @param $Grado
+     * @param $Telefono
+     * @param $Correo
+     * @param $Direccion
+     * @param $Instituto_Proveniencia
+     * @param $Contrasena
+     * @return array
+     */
+    function edit_user($Id_Usuario, $Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena){
+        # Check that the user exists
+        $query_validate = "SELECT * FROM Usuario WHERE Id_Usuario = $Id_Usuario";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the user
+                $query_update = "UPDATE Usuario SET Nombre = '$Nombre', Ap_Paterno = '$Ap_Paterno', Ap_Materno = '$Ap_Materno', Username = '$Username' ,Tipo_Usuario = '$Tipo_Usuario', Grado = '$Grado', Telefono = '$Telefono', Correo = '$Correo', Direccion = '$Direccion', Instituto_Proveniencia = '$Instituto_Proveniencia', Contrasena = '$Contrasena' WHERE Id_Usuario = $Id_Usuario";
+
+                # Execute the update query
+
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Usuario editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del usuario"));
+                }
+            } else {
+                # Users does not exists
+                return (array("status" => 101, "message" => "El usuario no se encuentra en la base de datos: " . $Id_Usuario . " ." . mysqli_error($this->db) ));
+            }
+            
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar usuario: Algo salió mal al validar el usuario."));
+        }
+
+
+    }
+
     # Delete user
+    /**
+     * @param $Username
+     * @return array
+     */
     function delete_user($Username){
         # Check that the user actually exists
         $query_validate = "SELECT 1 FROM Usuario WHERE Username = '$Username'";
@@ -373,7 +424,11 @@ class Functions
 //<editor-fold desc="Tests">
 # Test de añadir usuario
 # $functions = new Functions();
-# $functions->add_user("Test04", "TestAP", "TestAM", "test04", "Admin", "0", "8111628532", "test01@test.com", "Test Address", "Tec", "test");
+# echo json_encode( $functions->add_user("Test04", "TestAP", "TestAM", "test", "Admin", "0", "8111628532", "test01@test.com", "Test Address", "Tec", "test") );
+
+# Test de editar un usuario
+# $functions = new Functions();
+# echo json_encode( $functions->edit_user(44, "Test_Edit", "TestAP_Edit", "TestAM_Edit", "test_edit", "Admin", "0", "8111628532_E", "test01_edit@test.com", "Test Edit Address", "Tec", "test") );
 
 # Test de buscar usuario
 # $functions = new Functions();
