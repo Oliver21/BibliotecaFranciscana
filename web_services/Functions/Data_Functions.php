@@ -251,6 +251,39 @@ class Functions
         }
     }
 
+    # Delete user
+    function delete_user($Username){
+        # Check that the user actually exists
+        $query_validate = "SELECT 1 FROM Usuario WHERE Username = '$Username'";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The username does not exists
+                return (array("status" => 100, "message" => "No existe el usuario a eliminar."));
+            } else {
+                # Delete the user from the database
+                # Query to eliminate the user
+                $query_delete = "DELETE FROM Usuario WHERE Username = '$Username'";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # Se borró el usuario
+                    return array("status" => 1, "message" => "Usuario eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el usuario." . mysqli_error($this->db) ));
+                }
+
+            }
+
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar usuario: Algo salió mal al validar el usuario."));
+        }
+    }
+
     # Add a book to the table
     /**
      * @param $isbn
@@ -325,6 +358,10 @@ class Functions
 # Test de buscar usuario
 # $functions = new Functions();
 # $functions->check_user('test04', 'test');
+
+# Test de eliminar usuario
+# $functions = new Functions();
+# echo json_encode( $functions->delete_user('test') );
 
 # Test de selección de libros
 # $functions = new Functions();

@@ -15,16 +15,38 @@ if (isset($_POST['action'])){
         case 1:
             add_user($functions);
             break;
+        # Check if the user exists
         case 2:
             check_user($functions);
             break;
         case 3:
             close_session($functions);
             break;
+        case 4:
+            delete_user($functions);
+            break;
+        default:
+            echo json_encode( array("status"=> 600, "message" => "Acción no válida." ) );
     }
 
 } else {
     echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
+}
+
+/**
+ * @param $functions
+ */
+function delete_user($functions){
+    if ( isset($_POST['Username']) ){
+        $Username = $_POST['Username'];
+    } else {
+        # Username not in request parameters
+        echo json_encode( array("status"=> 102, "message" => "No se recibió el nombre de usuario." ) );
+    }
+
+    # Perform the call to Data Functions
+    echo json_encode($functions->delete_user($Username));
+
 }
 
 /**
