@@ -123,8 +123,6 @@ class Functions
         }
     }
 
-
-
     # Edit user information
     /**
      * @param $Nombre
@@ -329,6 +327,69 @@ class Functions
             return (array("status" => 0, "message" => "Algo salió mal al validar el libro."));
         }
     }
+
+    # Edit books
+    function edit_book($id_libro, $isbn,$titulo_libro, $subtitulo_libro, $titulo_original, $numero_paginas, $id_editorial, $numero_edicion, $fecha_edicion, $lugar_publicacion,$fecha_adquisicion, $costo_libro, $proveedor_libro, $observaciones_libro, $id_seccion, $id_apartado, $volumen_libro, $ilustraciones, $graficas, $mapas, $bibliografia, $indice, $pasta_blanda, $planos, $estatus, $numero_copias, $palabras_clave ){
+        # Check that the book exists
+        $query_validate = "SELECT * FROM Libro WHERE id_libro = $id_libro";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the user
+                $query_update = "UPDATE Libro SET ISBN = '$isbn', titulo_libro = '$titulo_libro', subtitulo_libro = '$subtitulo_libro', titulo_original = '$titulo_original', numero_paginas = $numero_paginas, id_editorial = $id_editorial, numero_edicion = $numero_edicion, fecha_edicion = '$fecha_edicion', lugar_publicacion = '$lugar_publicacion', fecha_adquisicion = '$fecha_adquisicion', costo_libro = '$costo_libro', proveedor_libro = '$proveedor_libro', observaciones_libro = '$observaciones_libro', id_seccion = $id_seccion, id_apartado = '$id_apartado', volumen_libro = '$volumen_libro', ilustraciones = $ilustraciones, graficas = $graficas, mapas = $mapas, bibliografia = $bibliografia, indice = $indice, pasta_blanda = $pasta_blanda, planos = $planos, estatus = $estatus, numero_copias = $numero_copias, palabras_clave = '$palabras_clave' WHERE id_libro = $id_libro";
+
+                # Execute the update query
+
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Libro editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del libro"));
+                }
+            } else {
+                # Book does not exists
+                return (array("status" => 101, "message" => "El libro no se encuentra en la base de datos: " . $id_libro . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar libro: Algo salió mal al validar el libro."));
+        }
+    }
+
+    # Delete book
+    function delete_book($id_libro){
+        # Check that the book actually exists
+        $query_validate = "SELECT 1 FROM Libro WHERE id_libro = $id_libro";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The book does not exists
+                return (array("status" => 100, "message" => "No existe el libro a eliminar."));
+            } else {
+                # Delete the book from the database
+                # Query to eliminate the book
+                $query_delete = "DELETE FROM Libro WHERE id_libro = $id_libro";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # Se borró el usuario
+                    return array("status" => 1, "message" => "Libro eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el libro." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar libro: Algo salió mal al validar el libro."));
+        }
+    }
+
+
     //</editor-fold>
 
     //<editor-fold desc="Serie functions">
@@ -419,7 +480,15 @@ class Functions
     }
     
     # Add magazine to the database
-    
+    /*
+    id_revista
+    id_seccion
+    id_editorial
+    nombre_revista
+    periodicidad
+    palabras_clave
+    notas_adicionales
+    */
     
     # Edit magazine
     
@@ -462,6 +531,13 @@ class Functions
 # Test de inserción de libro
 # $functions = new Functions();
 # echo json_encode( $functions->add_book( "test", "Titulo test", "Subtitulo test", "titulo original test", 4, 1, 3, "06/04/2017", "Monterrey", "06/04/2017", "43dlls", "Proveedor", "observaciones", 3, "apartado", "volumen", 1,1, 1,1,1,1,1,1,3,"Test de add libros" ));
+
+# Test de editar un libro
+$functions = new Functions();
+echo json_encode( $functions->edit_book(275, "test_edit", "Titulo editado test", "Subtitulo editado test", "titulo original test", 4, 1, 3, "06/04/2017", "Monterrey", "06/04/2017", "43dlls", "Proveedor", "observaciones", 3, "apartado", "volumen", 1,1, 1,1,1,1,1,1,3,"Test de edit libros" ) );
+
+# Test de eliminar un libro
+
 
 # Test de selección de libro específico
 # $functions = new Functions();

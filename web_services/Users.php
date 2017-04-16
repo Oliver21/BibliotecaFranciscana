@@ -19,15 +19,19 @@ if (isset($_POST['action'])){
         case 2:
             check_user($functions);
             break;
+        # Close session 
         case 3:
             close_session($functions);
             break;
+        # Delete user 
         case 4:
             delete_user($functions);
             break;
+        # Edit user
         case 5:
             edit_user($functions);
             break;
+        # If the action is something different than expected
         default:
             echo json_encode( array("status"=> 600, "message" => "Acción no válida." ) );
     }
