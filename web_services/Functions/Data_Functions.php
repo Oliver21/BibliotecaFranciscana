@@ -261,8 +261,6 @@ class Functions
 
     }
 
-
-
     # Add a book to the table
     /**
      * @param $isbn
@@ -329,7 +327,37 @@ class Functions
     }
 
     # Edit books
-    function edit_book($id_libro, $isbn,$titulo_libro, $subtitulo_libro, $titulo_original, $numero_paginas, $id_editorial, $numero_edicion, $fecha_edicion, $lugar_publicacion,$fecha_adquisicion, $costo_libro, $proveedor_libro, $observaciones_libro, $id_seccion, $id_apartado, $volumen_libro, $ilustraciones, $graficas, $mapas, $bibliografia, $indice, $pasta_blanda, $planos, $estatus, $numero_copias, $palabras_clave ){
+    /**
+     * @param $id_libro
+     * @param $isbn
+     * @param $titulo_libro
+     * @param $subtitulo_libro
+     * @param $titulo_original
+     * @param $numero_paginas
+     * @param $id_editorial
+     * @param $numero_edicion
+     * @param $fecha_edicion
+     * @param $lugar_publicacion
+     * @param $fecha_adquisicion
+     * @param $costo_libro
+     * @param $proveedor_libro
+     * @param $observaciones_libro
+     * @param $id_seccion
+     * @param $id_apartado
+     * @param $volumen_libro
+     * @param $ilustraciones
+     * @param $graficas
+     * @param $mapas
+     * @param $bibliografia
+     * @param $indice
+     * @param $pasta_blanda
+     * @param $planos
+     * @param $estatus
+     * @param $numero_copias
+     * @param $palabras_clave
+     * @return array
+     */
+    function edit_book($id_libro, $isbn, $titulo_libro, $subtitulo_libro, $titulo_original, $numero_paginas, $id_editorial, $numero_edicion, $fecha_edicion, $lugar_publicacion, $fecha_adquisicion, $costo_libro, $proveedor_libro, $observaciones_libro, $id_seccion, $id_apartado, $volumen_libro, $ilustraciones, $graficas, $mapas, $bibliografia, $indice, $pasta_blanda, $planos, $estatus, $numero_copias, $palabras_clave ){
         # Check that the book exists
         $query_validate = "SELECT * FROM Libro WHERE id_libro = $id_libro";
 
@@ -359,6 +387,10 @@ class Functions
     }
 
     # Delete book
+    /**
+     * @param $id_libro
+     * @return array
+     */
     function delete_book($id_libro){
         # Check that the book actually exists
         $query_validate = "SELECT 1 FROM Libro WHERE id_libro = $id_libro";
@@ -533,11 +565,12 @@ class Functions
 # echo json_encode( $functions->add_book( "test", "Titulo test", "Subtitulo test", "titulo original test", 4, 1, 3, "06/04/2017", "Monterrey", "06/04/2017", "43dlls", "Proveedor", "observaciones", 3, "apartado", "volumen", 1,1, 1,1,1,1,1,1,3,"Test de add libros" ));
 
 # Test de editar un libro
-$functions = new Functions();
-echo json_encode( $functions->edit_book(275, "test_edit", "Titulo editado test", "Subtitulo editado test", "titulo original test", 4, 1, 3, "06/04/2017", "Monterrey", "06/04/2017", "43dlls", "Proveedor", "observaciones", 3, "apartado", "volumen", 1,1, 1,1,1,1,1,1,3,"Test de edit libros" ) );
+# $functions = new Functions();
+# echo json_encode( $functions->edit_book(275, "test_edit", "Titulo editado test", "Subtitulo editado test", "titulo original test", 4, 1, 3, "06/04/2017", "Monterrey", "06/04/2017", "43dlls", "Proveedor", "observaciones", 3, "apartado", "volumen", 1,1, 1,1,1,1,1,1,3,"Test de edit libros" ) );
 
 # Test de eliminar un libro
-
+# $functions = new Functions();
+# echo json_encode( $functions->delete_book(275) );
 
 # Test de selección de libro específico
 # $functions = new Functions();
