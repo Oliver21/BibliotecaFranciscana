@@ -25,6 +25,9 @@ if (isset($_POST['action'])){
         case 4:
             delete_user($functions);
             break;
+        case 5:
+            edit_user($functions);
+            break;
         default:
             echo json_encode( array("status"=> 600, "message" => "Acción no válida." ) );
     }
@@ -47,6 +50,29 @@ function delete_user($functions){
     # Perform the call to Data Functions
     echo json_encode($functions->delete_user($Username));
 
+}
+
+
+/**
+ * @param $functions
+ */
+function edit_user($functions){
+    # Get all the user information
+    $Id_Usuario = $_POST['Id_Usuario'];
+    $Nombre = $_POST['Nombre'];
+    $Ap_Paterno = $_POST['Ap_Paterno'];
+    $Ap_Materno = $_POST['Ap_Materno'];
+    $Username = $_POST['Username'];
+    $Tipo_Usuario = $_POST['Tipo_Usuario'];
+    $Grado = $_POST['Grado'];
+    $Telefono = $_POST['Telefono'];
+    $Correo = $_POST['Correo'];
+    $Direccion = $_POST['Direccion'];
+    $Instituto_Proveniencia = $_POST['Instituto_Proveniencia'];
+    $Contrasena = $_POST['Contrasena'];
+    
+    # Perform call to functions
+    echo json_encode( $functions->edit_user($Id_Usuario, $Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena) );
 }
 
 /**

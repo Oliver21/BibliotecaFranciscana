@@ -417,6 +417,15 @@ class Functions
             return (array("status" => 0, "message" => "Algo salió mal obtener la información de las revistas."));
         }
     }
+    
+    # Add magazine to the database
+    
+    
+    # Edit magazine
+    
+    
+    # Delete magazine
+    
     //</editor-fold>
 
 }
