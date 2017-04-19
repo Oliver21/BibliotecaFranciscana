@@ -452,6 +452,25 @@ class Functions
             return (array("status" => 0, "message" => "Algo salió mal obtener la información de las series."));
         }
     }
+
+
+    # Insert a new serie
+    function insert_serie($nombre_serie, $volumen_serie){
+        # nombre_serie
+        # volumen_serie
+        # Create the query
+        $query = "INSERT INTO Serie (nombre_serie, volumen_serie) VALUES ('$nombre_serie', '$volumen_serie')";
+
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "La serie se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar una serie."));
+        }
+    }
+
+
     //</editor-fold>
 
     //<editor-fold desc="Author functions">
@@ -575,4 +594,14 @@ class Functions
 # Test de selección de libro específico
 # $functions = new Functions();
 # echo json_encode($functions->get_specific_book(2));
+
+
+# Test de selección de series
+# $functions = new Functions();
+# echo json_encode( $functions->get_series() );
+
+# Test de inserción de serie
+# $functions = new Functions();
+# echo json_encode( $functions->insert_serie("test_serie", "test") );
+
 //</editor-fold>

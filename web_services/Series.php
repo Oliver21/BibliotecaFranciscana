@@ -21,10 +21,28 @@ if (isset($_POST['action'])){
         case 3:
             edit_serie($functions);
             break;
+        case 4:
+            add_serie($functions);
+            break;
+        default:
+            echo json_encode( array("status" => 600, "message" => "Acción no válida.") );
     }
 
 } else {
     echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
+}
+
+# add_serie
+function add_serie($functions){
+    # nombre_serie
+    # volumen_serie
+    if ( ! isset($_POST['nombre_serie']) ){
+        echo json_encode( array("status" => 601, "message" => ".") );
+    } else {
+        $nombre_serie = $_POST['nombre_serie'];
+        $volumen_serie = $_POST['volumen_serie'];
+        echo json_encode( $functions->insert_serie($nombre_serie, $volumen_serie) );
+    }
 }
 
 # get_series
