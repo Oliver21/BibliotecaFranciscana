@@ -1,0 +1,47 @@
+/* Custom Stylesheet */
+/**
+* Use this file to override Materialize files so you can update
+* the core Materialize files in the future
+*
+* Made By MaterializeCSS.com
+*/
+
+body {
+  background-color: #CCCCCC;
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+h1 {
+  font-size:3rem;
+}
+
+.btnLogout {
+  border-left: 1px solid white;
+  position: absolute;
+  top: 15%;
+  bottom: 15%;
+}
+
+.addUserBtn {
+  position: absolute;
+  top: 12%;
+  right: 3%;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #171717;
+}
+
+footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:70px;
+  width:100%;
+}
