@@ -24,12 +24,29 @@ if (isset($_POST['action'])){
         case 4:
             add_serie($functions);
             break;
+        case 5:
+            delete_serie($functions);
         default:
             echo json_encode( array("status" => 600, "message" => "Acción no válida.") );
     }
 
 } else {
     echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
+}
+
+# delete serie
+function delete_serie($functions){
+
+
+    if ( isset( $_POST['id_serie'] ) ){
+        $id_serie = $_POST['id_serie'];
+        # Display the result
+        echo json_encode( $functions->delete_serie($id_serie) );
+    } else {
+        echo json_encode( array( "status" => 0, "message" =>"No se recibió la serie a borrar." ) );
+    }
+
+
 }
 
 # add_serie
@@ -69,5 +86,10 @@ function get_specific_serie($functions){
  * @param $functions
  */
 function edit_serie($functions){
+    $id_serie = $_POST['id_serie'];
+    $nombre_serie = $_POST['nombre_serie'];
+    $volumen_serie = $_POST['volumen_serie'];
 
+    # Display the result
+    echo json_encode( $functions->edit_serie($id_serie, $nombre_serie, $volumen_serie) );
 }

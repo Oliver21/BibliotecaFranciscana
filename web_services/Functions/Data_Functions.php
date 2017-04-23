@@ -470,6 +470,64 @@ class Functions
         }
     }
 
+    # Edit a serie
+    function edit_serie($id_serie, $nombre_serie, $volumen_serie){
+        # Check that the user exists
+        $query_validate = "SELECT * FROM Serie WHERE id_serie = $id_serie";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the serie
+                $query_update = "UPDATE Serie SET nombre_serie = '$nombre_serie', volumen_serie = '$volumen_serie' WHERE id_serie = $id_serie";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Serie editada exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información de la serie"));
+                }
+            } else {
+                # Serie does not exists
+                return (array("status" => 101, "message" => "La serie no se encuentra en la base de datos: " . $id_serie . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar serie: Algo salió mal al validar la serie."));
+        }
+    }
+
+    function delete_serie($id_serie){
+        # Check that the user actually exists
+        $query_validate = "SELECT 1 FROM Serie WHERE id_serie = '$id_serie'";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The serie does not exists
+                return (array("status" => 100, "message" => "No existe la serie a eliminar."));
+            } else {
+                # Delete the serie from the database
+                # Query to eliminate the serie
+                $query_delete = "DELETE FROM Serie WHERE id_serie = '$id_serie'";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the serie was deleted
+                    return array("status" => 1, "message" => "Serie eliminada exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar la serie." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar serie: Algo salió mal al validar la serie."));
+        }
+    }
+
 
     //</editor-fold>
 
@@ -571,14 +629,6 @@ class Functions
 # $functions = new Functions();
 # echo json_encode( $functions->get_books() );
 
-# Test de selección de revistas
-# $functions = new Functions();
-# echo json_encode( $functions->get_magazines() );
-
-# Test de selección de autores
-# $functions = new Functions();
-# echo json_encode( $functions->get_authors());
-
 # Test de inserción de libro
 # $functions = new Functions();
 # echo json_encode( $functions->add_book( "test", "Titulo test", "Subtitulo test", "titulo original test", 4, 1, 3, "06/04/2017", "Monterrey", "06/04/2017", "43dlls", "Proveedor", "observaciones", 3, "apartado", "volumen", 1,1, 1,1,1,1,1,1,3,"Test de add libros" ));
@@ -595,6 +645,13 @@ class Functions
 # $functions = new Functions();
 # echo json_encode($functions->get_specific_book(2));
 
+# Test de selección de revistas
+# $functions = new Functions();
+# echo json_encode( $functions->get_magazines() );
+
+# Test de selección de autores
+# $functions = new Functions();
+# echo json_encode( $functions->get_authors());
 
 # Test de selección de series
 # $functions = new Functions();
@@ -603,5 +660,13 @@ class Functions
 # Test de inserción de serie
 # $functions = new Functions();
 # echo json_encode( $functions->insert_serie("test_serie", "test") );
+
+# Test de editar serie
+# $functions = new Functions();
+# echo json_encode( $functions->edit_serie(14, "test__edit_serie", "test_volumen_edit") );
+
+# Test de eliminar serie
+# $functions = new Functions();
+# echo json_encode( $functions->delete_serie(14) );
 
 //</editor-fold>
