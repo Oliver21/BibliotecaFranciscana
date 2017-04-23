@@ -26,6 +26,7 @@ if (isset($_POST['action'])){
             break;
         case 5:
             delete_serie($functions);
+            break;
         default:
             echo json_encode( array("status" => 600, "message" => "Acción no válida.") );
     }
