@@ -36,6 +36,9 @@ if (isset($_POST['action'])){
 }
 
 # delete serie
+/**
+ * @param $functions
+ */
 function delete_serie($functions){
 
 
@@ -51,6 +54,9 @@ function delete_serie($functions){
 }
 
 # add_serie
+/**
+ * @param $functions
+ */
 function add_serie($functions){
     # nombre_serie
     # volumen_serie

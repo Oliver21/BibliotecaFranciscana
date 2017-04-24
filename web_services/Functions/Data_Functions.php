@@ -455,6 +455,11 @@ class Functions
 
 
     # Insert a new serie
+    /**
+     * @param $nombre_serie
+     * @param $volumen_serie
+     * @return array
+     */
     function insert_serie($nombre_serie, $volumen_serie){
         # nombre_serie
         # volumen_serie
@@ -471,6 +476,12 @@ class Functions
     }
 
     # Edit a serie
+    /**
+     * @param $id_serie
+     * @param $nombre_serie
+     * @param $volumen_serie
+     * @return array
+     */
     function edit_serie($id_serie, $nombre_serie, $volumen_serie){
         # Check that the user exists
         $query_validate = "SELECT * FROM Serie WHERE id_serie = $id_serie";
@@ -498,6 +509,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id_serie
+     * @return array
+     */
     function delete_serie($id_serie){
         # Check that the user actually exists
         $query_validate = "SELECT 1 FROM Serie WHERE id_serie = '$id_serie'";
@@ -606,6 +621,124 @@ class Functions
     
     //</editor-fold>
 
+    //<editor-fold desc="Section functions">
+    # add a section to the database
+    /**
+     * @param $nombre_seccion
+     * @return array
+     */
+    function add_section($nombre_seccion){
+        # nombre_seccion
+        # Create the query
+        $query = "INSERT INTO Seccion (nombre_seccion) VALUES ('$nombre_seccion')";
+
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "La sección se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar una sección."));
+        }
+    }
+
+    # get sections
+    /**
+     * @return array
+     */
+    function get_sections()
+    {
+        # Query that selects all the sections from the table
+        $query = "SELECT * FROM Seccion";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Check for the number of sections
+            if ($result->num_rows > 0) {
+                $sections = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($sections, $row);
+                }
+                $answer = array("books" => $sections, "status" => 1);
+                # var_dump($answer);
+                # $books['status'] = 1;
+                return ($answer);
+            } else {
+                # There are no sections in the table
+                return (array("status" => 2, "message" => "No hay secciones.."));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de las secciones."));
+        }
+    }
+
+    # edit a section
+    /**
+     * @param $id_seccion
+     * @param $nombre_seccion
+     * @return array
+     */
+    function edit_section($id_seccion, $nombre_seccion){
+        # Check that the section exists
+        $query_validate = "SELECT * FROM Seccion WHERE id_seccion = $id_seccion";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the section
+                $query_update = "UPDATE Seccion SET nombre_seccion = '$nombre_seccion' WHERE id_seccion = $id_seccion";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Sección editada exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información de la sección"));
+                }
+            } else {
+                # Section does not exists
+                return (array("status" => 101, "message" => "La sección no se encuentra en la base de datos: " . $id_seccion . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar sección: Algo salió mal al validar la sección."));
+        }
+    }
+
+    # delete a section
+    /**
+     * @param $id_seccion
+     * @return array
+     */
+    function delete_section($id_seccion){
+        # Check that the section actually exists
+        $query_validate = "SELECT 1 FROM Seccion WHERE id_seccion = '$id_seccion'";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The section does not exists
+                return (array("status" => 100, "message" => "No existe la sección a eliminar."));
+            } else {
+                # Delete the section from the database
+                # Query to eliminate the section
+                $query_delete = "DELETE FROM Seccion WHERE id_seccion = '$id_seccion'";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the section was deleted
+                    return array("status" => 1, "message" => "Sección eliminada exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar la sección." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar sección: Algo salió mal al validar la sección."));
+        }
+    }
+
+    //</editor-fold>
 }
 
 //<editor-fold desc="Tests">
