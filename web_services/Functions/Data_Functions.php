@@ -613,12 +613,101 @@ class Functions
     palabras_clave
     notas_adicionales
     */
+    /**
+     * @param $id_seccion
+     * @param $id_editorial
+     * @param $nombre_revista
+     * @param $periodicidad
+     * @param $palabras_clave
+     * @param $notas_adicionales
+     * @return array
+     */
+    function add_magazine($id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales){
+        $query = "INSERT INTO Revista (id_seccion, id_editorial, nombre_revista, periodicidad, palabras_clave, notas_adicionales) VALUES ($id_seccion, $id_editorial, '$nombre_revista', '$periodicidad', '$palabras_clave', '$notas_adicionales')";
+
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "La revista se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar una revista."));
+        }
+    }
     
     # Edit magazine
-    
+    /**
+     * @param $id_revista
+     * @param $id_seccion
+     * @param $id_editorial
+     * @param $nombre_revista
+     * @param $periodicidad
+     * @param $palabras_clave
+     * @param $notas_adicionales
+     * @return array
+     */
+    function edit_magazine($id_revista, $id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales ){
+        # Check that the section exists
+        $query_validate = "SELECT * FROM Revista WHERE id_revista = $id_revista";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the section
+                $query_update = "UPDATE Revista SET id_seccion = $id_seccion, id_editorial = $id_editorial, nombre_revista = '$nombre_revista', periodicidad = '$periodicidad', palabras_clave = '$palabras_clave', notas_adicionales = '$notas_adicionales' WHERE id_revista = $id_revista";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Revista editada exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información de la revista"));
+                }
+            } else {
+                # Section does not exists
+                return (array("status" => 101, "message" => "La revista no se encuentra en la base de datos: " . $id_revista . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar revista: Algo salió mal al validar la revista."));
+        }
+    }
     
     # Delete magazine
-    
+    /**
+     * @param $id_revista
+     * @return array
+     */
+    function delete_magazine($id_revista){
+        # Check that the magazine actually exists
+        $query_validate = "SELECT 1 FROM Revista WHERE id_revista = '$id_revista'";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The magazine does not exists
+                return (array("status" => 100, "message" => "No existe la revista a eliminar."));
+            } else {
+                # Delete the magazine from the database
+                # Query to eliminate the magazine
+                $query_delete = "DELETE FROM Revista WHERE id_revista = '$id_revista'";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the magazine was deleted
+                    return array("status" => 1, "message" => "Revista eliminada exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar la revista." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar revista: Algo salió mal al validar la revista."));
+        }
+    }
+
+
     //</editor-fold>
 
     //<editor-fold desc="Section functions">
