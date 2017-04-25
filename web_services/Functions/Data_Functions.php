@@ -828,6 +828,113 @@ class Functions
     }
 
     //</editor-fold>
+
+    //<editor-fold desc="Editorial functions">
+
+    # Get all the editorial entries
+    function get_editorial()
+    {
+        # Query that selects all the editorials from the table
+        $query = "SELECT * FROM Serie";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Check for the number of series
+            if ($result->num_rows > 0) {
+                $series = array();
+                while ($row = mysqli_fetch_row($result)) {
+                    $values = array("id_serie" => $row[0], "nombre_serie" => $row[1], "volumen_serie" => $row[2]);
+                    array_push($series, $values);
+                }
+                $series['status'] = 1;
+                return ($series);
+            } else {
+                # The authors table is empty
+                return (array("status" => 2, "message" => "No se han agregado series."));
+            }
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de las series."));
+        }
+    }
+
+    # Insert a new editorial
+    function add_editorial($nombre_editorial, $nombre_direccion){
+        # id_editorial
+        # nombre_editorial
+        # nombre_direccion
+
+        # Create the query
+        $query = "INSERT INTO Editorial (nombre_editorial, nombre_direccion) VALUES ('$nombre_editorial', '$nombre_direccion')";
+
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "La editorial se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar la editorial."));
+        }
+    }
+
+    # Edit a editorial
+    function edit_editorial($id_editorial, $nombre_editorial, $nombre_direccion){
+        # Check that the editorial exists
+        $query_validate = "SELECT * FROM Editorial WHERE id_editorial = $id_editorial";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the editorial
+                $query_update = "UPDATE Editorial SET nombre_editorial = '$nombre_editorial', nombre_direccion = '$nombre_direccion' WHERE id_editorial = $id_editorial";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Editorial editada exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información de la editorial"));
+                }
+            } else {
+                # Editorial does not exists
+                return (array("status" => 101, "message" => "La editorial no se encuentra en la base de datos: " . $id_editorial . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar editorial: Algo salió mal al validar la editorial."));
+        }
+    }
+
+    # delete a editorial
+    function delete_editorial($id_editorial){
+        # Check that the editorial actually exists
+        $query_validate = "SELECT 1 FROM Editorial WHERE id_editorial = $id_editorial";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The editorial does not exists
+                return (array("status" => 100, "message" => "No existe la editorial a eliminar."));
+            } else {
+                # Delete the editorial from the database
+                # Query to eliminate the editorial
+                $query_delete = "DELETE FROM Editorial WHERE id_editorial = $id_editorial";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the editorial was deleted
+                    return array("status" => 1, "message" => "Editorial eliminada exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar la editorial." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar editorial: Algo salió mal al validar la editorial."));
+        }
+    }
+
+    //</editor-fold>
+
 }
 
 //<editor-fold desc="Tests">
