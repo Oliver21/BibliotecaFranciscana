@@ -1,7 +1,7 @@
 <?php
 
 # Access the operation of the user
-if (isset($_POST['action'])){
+if (isset($_POST['action'])) {
     # Get the functions file
     require_once "Functions/Data_Functions.php";
     $functions = new Functions();
@@ -10,7 +10,7 @@ if (isset($_POST['action'])){
     $action = $_POST['action'];
 
     # Perform the action
-    switch ($action){
+    switch ($action) {
         # Add a user to the table
         case 1:
             add_user($functions);
@@ -33,22 +33,23 @@ if (isset($_POST['action'])){
             break;
         # If the action is something different than expected
         default:
-            echo json_encode( array("status"=> 600, "message" => "Acción no válida." ) );
+            echo json_encode(array("status" => 600, "message" => "Acción no válida."));
     }
 
 } else {
-    echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
+    echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
 }
 
 /**
  * @param $functions
  */
-function delete_user($functions){
-    if ( isset($_POST['Username']) ){
+function delete_user($functions)
+{
+    if (isset($_POST['Username'])) {
         $Username = $_POST['Username'];
     } else {
         # Username not in request parameters
-        echo json_encode( array("status"=> 102, "message" => "No se recibió el nombre de usuario." ) );
+        echo json_encode(array("status" => 102, "message" => "No se recibió el nombre de usuario."));
     }
 
     # Perform the call to Data Functions
@@ -60,7 +61,8 @@ function delete_user($functions){
 /**
  * @param $functions
  */
-function edit_user($functions){
+function edit_user($functions)
+{
     # Get all the user information
     $Id_Usuario = $_POST['Id_Usuario'];
     $Nombre = $_POST['Nombre'];
@@ -74,15 +76,16 @@ function edit_user($functions){
     $Direccion = $_POST['Direccion'];
     $Instituto_Proveniencia = $_POST['Instituto_Proveniencia'];
     $Contrasena = $_POST['Contrasena'];
-    
+
     # Perform call to functions
-    echo json_encode( $functions->edit_user($Id_Usuario, $Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena) );
+    echo json_encode($functions->edit_user($Id_Usuario, $Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena));
 }
 
 /**
  * @param $functions
  */
-function close_session($functions){
+function close_session($functions)
+{
     $functions->close_session();
 }
 
@@ -90,14 +93,15 @@ function close_session($functions){
  * @param $keyword
  * @return mixed
  */
-function check_user_param($keyword){
+function check_user_param($keyword)
+{
     # Check if the values were provided
-    if (isset($_POST[$keyword])){
+    if (isset($_POST[$keyword])) {
         # Extract the data
         return $_POST[$keyword];
     } else {
         # Status 3 indicates missing data
-        die (json_encode( array("status" => 3, "message" => "No se encuentra $keyword.") ));
+        die (json_encode(array("status" => 3, "message" => "No se encuentra $keyword.")));
     }
 }
 
@@ -105,9 +109,10 @@ function check_user_param($keyword){
  * @param $keyword
  * @return null
  */
-function check_user_null($keyword){
+function check_user_null($keyword)
+{
     # The value can be null
-    if (isset($_POST[$keyword])){
+    if (isset($_POST[$keyword])) {
         # Extract the data
         return $_POST[$keyword];
     } else {
@@ -118,7 +123,8 @@ function check_user_null($keyword){
 /**
  * @param $functions
  */
-function add_user($functions){
+function add_user($functions)
+{
     # Check if the values were provided
     $Nombre = check_user_param('Nombre');
     $Ap_Paterno = check_user_param('Ap_Paterno');
@@ -133,37 +139,38 @@ function add_user($functions){
     $Instituto_Proveniencia = check_user_null('Instituto_Proveniencia');
 
     # Return to the front-end the answer of the call
-    echo json_encode( $functions->add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena) );
+    echo json_encode($functions->add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena));
 }
 
 /**
  * @param $functions
  */
-function check_user($functions){
+function check_user($functions)
+{
     # Check if the values were provided
     $Username = check_user_param('Username');
     $Contrasena = check_user_param('Contrasena');
-    
+
     # Return to the front-end the answer of the call
     $result = $functions->check_user($Username, $Contrasena);
 
     # Check the status value
-    switch ($result['status']){
+    switch ($result['status']) {
         case 1:
             # Create session
             session_start();
             # Save session variables
             $_SESSION = $result;
             # Response to the front-end 
-            echo json_encode( array("status" => 1, "message" => "Inicio exitoso.", "Nombre" => $result['Nombre'] ) );
+            echo json_encode(array("status" => 1, "message" => "Inicio exitoso.", "Nombre" => $result['Nombre']));
             break;
         case 2:
             # Response to the front-end 
-            echo json_encode( array("status" => 2, "message" => "Usuario no encontrado.") );
+            echo json_encode(array("status" => 2, "message" => "Usuario no encontrado."));
             break;
         case 0;
             # Response to the front-end 
-            echo json_encode( array("status" => 0, "message" => "Falló la búsqueda del usuario.") );
+            echo json_encode(array("status" => 0, "message" => "Falló la búsqueda del usuario."));
             break;
     }
 }

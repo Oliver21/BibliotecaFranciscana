@@ -1,7 +1,7 @@
 <?php
 
 # Access the operation to do with a editorial
-if (isset($_POST['action'])){
+if (isset($_POST['action'])) {
     # Get the functions file
     require_once "Functions/Data_Functions.php";
     $functions = new Functions();
@@ -10,7 +10,7 @@ if (isset($_POST['action'])){
     $action = $_POST['action'];
 
     # Perform the action
-    switch ($action){
+    switch ($action) {
         # Select the list of editorials
         case 1:
             get_editorials($functions);
@@ -28,26 +28,27 @@ if (isset($_POST['action'])){
             delete_editorial($functions);
             break;
         default:
-            echo json_encode( array("status" => 600, "message" => "Acción no válida.") );
+            echo json_encode(array("status" => 600, "message" => "Acción no válida."));
     }
 
 } else {
-    echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
+    echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
 }
 
 # delete editorial
 /**
  * @param $functions
  */
-function delete_editorial($functions){
+function delete_editorial($functions)
+{
 
 
-    if ( isset( $_POST['id_editorial'] ) ){
+    if (isset($_POST['id_editorial'])) {
         $id_editorial = $_POST['id_editorial'];
         # Display the result
-        echo json_encode( $functions->delete_editorial($id_editorial) );
+        echo json_encode($functions->delete_editorial($id_editorial));
     } else {
-        echo json_encode( array( "status" => 0, "message" =>"No se recibió la editorial a borrar." ) );
+        echo json_encode(array("status" => 0, "message" => "No se recibió la editorial a borrar."));
     }
 
 
@@ -57,15 +58,16 @@ function delete_editorial($functions){
 /**
  * @param $functions
  */
-function add_editorial($functions){
+function add_editorial($functions)
+{
     # nombre_editorial
     # nombre_direccion
-    if ( ! isset($_POST['nombre_editorial']) ){
-        echo json_encode( array("status" => 601, "message" => ".") );
+    if (!isset($_POST['nombre_editorial'])) {
+        echo json_encode(array("status" => 601, "message" => "."));
     } else {
         $nombre_editorial = $_POST['nombre_editorial'];
         $nombre_direccion = $_POST['nombre_direccion'];
-        echo json_encode( $functions->add_editorial($nombre_editorial, $nombre_direccion) );
+        echo json_encode($functions->add_editorial($nombre_editorial, $nombre_direccion));
     }
 }
 
@@ -73,7 +75,8 @@ function add_editorial($functions){
 /**
  * @param $functions
  */
-function get_editorials($functions){
+function get_editorials($functions)
+{
     $result = $functions->get_editorial();
 
     # Display the result whatever its status is
@@ -84,7 +87,8 @@ function get_editorials($functions){
 /**
  * @param $functions
  */
-function get_specific_editorial($functions){
+function get_specific_editorial($functions)
+{
 
 }
 
@@ -92,11 +96,12 @@ function get_specific_editorial($functions){
 /**
  * @param $functions
  */
-function edit_editorial($functions){
+function edit_editorial($functions)
+{
     $id_editorial = $_POST['id_editorial'];
     $nombre_editorial = $_POST['nombre_editorial'];
-    $nombre_direccion= $_POST['nombre_direccion'];
+    $nombre_direccion = $_POST['nombre_direccion'];
 
     # Display the result
-    echo json_encode( $functions->edit_editorial($id_editorial, $nombre_editorial, $nombre_direccion) );
+    echo json_encode($functions->edit_editorial($id_editorial, $nombre_editorial, $nombre_direccion));
 }

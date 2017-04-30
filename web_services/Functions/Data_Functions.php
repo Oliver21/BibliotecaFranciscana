@@ -1083,9 +1083,6 @@ class Functions
      * Articulo
      * Tema
      */
-    //<editor-fold desc="Coleccion functions">
-
-    //</editor-fold>
 
     //<editor-fold desc="Apartado functions">
     //</editor-fold>
@@ -1097,6 +1094,134 @@ class Functions
     //</editor-fold>
 
     //<editor-fold desc="Articulo functions">
+    //</editor-fold>
+
+    //<editor-fold desc="Coleccion functions">
+
+    # Get the list of collections
+    /**
+     * @return array
+     */
+    function get_collections()
+    {
+        # Query that selects all the collections from the table
+        $query = "SELECT * FROM Coleccion";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Check for the number of collections
+            if ($result->num_rows > 0) {
+                $collections = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($collections, $row);
+                }
+                $collections['status'] = 1;
+                return ($collections);
+            } else {
+                # The collection table is empty
+                return (array("status" => 2, "message" => "No se han agregado colecciones."));
+            }
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de las colecciones."));
+        }
+    }
+
+# Add collections
+    /*
+         * id_coleccion
+         * nombre_coleccion
+         * numero_coleccion
+         * volumenes
+         * id_seccion
+         */
+    /**
+     * @param $nombre_coleccion
+     * @param $numero_coleccion
+     * @param $volumenes
+     * @param $id_seccion
+     * @return array
+     */
+    function add_collection($nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion ){
+        # Create the query
+        $query = "INSERT INTO Coleccion ( nombre_coleccion, numero_coleccion, volumenes, id_seccion ) VALUES ( '$nombre_coleccion', $numero_coleccion, '$volumenes', $id_seccion )";
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "La colección se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar una colección."));
+        }
+    }
+
+# Edit a collection
+    /**
+     * @param $id_coleccion
+     * @param $nombre_coleccion
+     * @param $numero_coleccion
+     * @param $volumenes
+     * @param $id_seccion
+     * @return array
+     */
+    function edit_collection($id_coleccion, $nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion ){
+        # Check that the collection exists
+        $query_validate = "SELECT * FROM Coleccion WHERE id_coleccion = $id_coleccion";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the collection
+                $query_update = "UPDATE Coleccion SET nombre_coleccion = '$nombre_coleccion', numero_coleccion = $numero_coleccion, volumenes = '$volumenes', id_seccion = $id_seccion WHERE id_coleccion = $id_coleccion";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Colección editada exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información de la colección"));
+                }
+            } else {
+                # Serie does not exists
+                return (array("status" => 101, "message" => "La colección no se encuentra en la base de datos: " . $id_coleccion . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar colección: Algo salió mal al validar la colección."));
+        }
+    }
+
+    /**
+     * @param $id_coleccion
+     * @return array
+     */
+    function delete_collection($id_coleccion){
+        # Check that the collection actually exists
+        $query_validate = "SELECT 1 FROM Coleccion WHERE id_collecion = $id_coleccion";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The collection does not exists
+                return (array("status" => 100, "message" => "No existe la coleccion a eliminar."));
+            } else {
+                # Delete the collection from the database
+                # Query to eliminate the collection
+                $query_delete = "DELETE FROM Coleccion WHERE id_coleccion = $id_coleccion";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the collection was deleted
+                    return array("status" => 1, "message" => "Coleccion eliminada exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar la coleccion." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar colección: Algo salió mal al validar la colección."));
+        }
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Obra functions">

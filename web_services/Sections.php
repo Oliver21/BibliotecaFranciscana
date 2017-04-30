@@ -1,7 +1,7 @@
 <?php
 
 # Access the operation to do with a section
-if (isset($_POST['action'])){
+if (isset($_POST['action'])) {
     # Get the functions file
     require_once "Functions/Data_Functions.php";
     $functions = new Functions();
@@ -10,7 +10,7 @@ if (isset($_POST['action'])){
     $action = $_POST['action'];
 
     # Perform the action
-    switch ($action){
+    switch ($action) {
         # Select the list of sections
         case 1:
             get_sections($functions);
@@ -28,26 +28,27 @@ if (isset($_POST['action'])){
             delete_section($functions);
             break;
         default:
-            echo json_encode( array("status" => 600, "message" => "Acción no válida.") );
+            echo json_encode(array("status" => 600, "message" => "Acción no válida."));
     }
 
 } else {
-    echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
+    echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
 }
 
 # delete section
 /**
  * @param $functions
  */
-function delete_section($functions){
+function delete_section($functions)
+{
 
 
-    if ( isset( $_POST['id_seccion'] ) ){
+    if (isset($_POST['id_seccion'])) {
         $id_section = $_POST['id_section'];
         # Display the result
-        echo json_encode( $functions->delete_section($id_section) );
+        echo json_encode($functions->delete_section($id_section));
     } else {
-        echo json_encode( array( "status" => 0, "message" =>"No se recibió la sección a borrar." ) );
+        echo json_encode(array("status" => 0, "message" => "No se recibió la sección a borrar."));
     }
 }
 
@@ -55,13 +56,14 @@ function delete_section($functions){
 /**
  * @param $functions
  */
-function add_section($functions){
+function add_section($functions)
+{
     # nombre_seccion
-    if ( ! isset($_POST['nombre_seccion']) ){
-        echo json_encode( array("status" => 601, "message" => "No se recibió la sección.") );
+    if (!isset($_POST['nombre_seccion'])) {
+        echo json_encode(array("status" => 601, "message" => "No se recibió la sección."));
     } else {
         $nombre_seccion = $_POST['nombre_seccion'];
-        echo json_encode( $functions->add_section($nombre_seccion) );
+        echo json_encode($functions->add_section($nombre_seccion));
     }
 }
 
@@ -69,7 +71,8 @@ function add_section($functions){
 /**
  * @param $functions
  */
-function get_sections($functions){
+function get_sections($functions)
+{
     $result = $functions->get_sections();
 
     # Display the result whatever its status is
@@ -80,7 +83,8 @@ function get_sections($functions){
 /**
  * @param $functions
  */
-function get_specific_section($functions){
+function get_specific_section($functions)
+{
 
 }
 
@@ -88,10 +92,11 @@ function get_specific_section($functions){
 /**
  * @param $functions
  */
-function edit_section($functions){
+function edit_section($functions)
+{
     $id_seccion = $_POST['id_seccion'];
     $nombre_seccion = $_POST['nombre_seccion'];
 
     # Display the result
-    echo json_encode( $functions->edit_section($id_seccion, $nombre_seccion) );
+    echo json_encode($functions->edit_section($id_seccion, $nombre_seccion));
 }
