@@ -1041,6 +1041,105 @@ class Functions
     //</editor-fold>
 
     //<editor-fold desc="Tema functions">
+    # Get the list of themes
+    function get_themes()
+    {
+        # Query that selects all the themes from the table
+        $query = "SELECT * FROM Tema";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Check for the number of themes
+            if ($result->num_rows > 0) {
+                $themes = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($themes, $row);
+                }
+                $themes['status'] = 1;
+                return ($themes);
+            } else {
+                # The themes table is empty
+                return (array("status" => 2, "message" => "No se han agregado temas."));
+            }
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de los temas."));
+        }
+    }
+
+# Add theme
+    /*
+     * id_tema
+     * tema
+     */
+    function add_theme($tema){
+        # Create the query
+        $query = "INSERT INTO Tema (tema) VALUES ( '$tema' )";
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "El tema se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar un tema."));
+        }
+    }
+
+# Edit a theme
+    function edit_theme($id_tema, $tema){
+        # Check that the theme exists
+        $query_validate = "SELECT * FROM Tema WHERE id_tema = $id_tema";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the theme
+                $query_update = "UPDATE Tema SET tema = '$tema' WHERE id_tema = $id_tema";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Tema editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del tema"));
+                }
+            } else {
+                # Theme does not exists
+                return (array("status" => 101, "message" => "El tema no se encuentra en la base de datos: " . $id_tema . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar tema: Algo salió mal al validar el tema."));
+        }
+    }
+
+    # Delete theme
+    function delete_theme($id_tema){
+        # Check that the theme actually exists
+        $query_validate = "SELECT 1 FROM Tema WHERE id_tema = '$id_tema'";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The theme does not exists
+                return (array("status" => 100, "message" => "No existe el tema a eliminar."));
+            } else {
+                # Delete the theme from the database
+                # Query to eliminate the theme
+                $query_delete = "DELETE FROM Tema WHERE id_tema = '$id_tema'";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the theme was deleted
+                    return array("status" => 1, "message" => "Tema eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el tema." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar tema: Algo salió mal al validar el tema."));
+        }
+    }
     //</editor-fold>
 }
 
