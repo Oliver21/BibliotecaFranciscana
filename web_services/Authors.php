@@ -21,6 +21,14 @@ if (isset($_POST['action'])){
         case 3:
             edit_author($functions);
             break;
+        case 4:
+            add_author($functions);
+            break;
+        case 5:
+            delete_author($functions);
+            break;
+        default:
+            echo json_encode( array("status" => 0, "message" => "Acción no válida.") );
     }
 
 } else {
@@ -51,5 +59,36 @@ function get_specific_author($functions){
  * @param $functions
  */
 function edit_author($functions){
+    /*
+    * id_autor
+    * apaterno_autor
+    * amaterno_autor
+    * nombre_autor
+    * nacimiento_autor
+    * nacionalidad_autor
+     */
+    $id_autor = $_POST['id_autor'];
+    $apaterno_autor = $_POST['apaterno_autor'];
+    $amaterno_autor = $_POST['amaterno_autor'];
+    $nombre_autor = $_POST['nombre_autor'];
+    $nacimiento_autor = $_POST['nacimiento_autor'];
+    $nacionalidad_autor = $_POST['nacionalidad_autor'];
+    
+    echo json_encode( $functions->edit_author($id_autor, $apaterno_autor, $amaterno_autor,$nombre_autor, $nacimiento_autor, $nacionalidad_autor) );
+}
 
+function add_author($functions){
+    $apaterno_autor = $_POST['apaterno_autor'];
+    $amaterno_autor = $_POST['amaterno_autor'];
+    $nombre_autor = $_POST['nombre_autor'];
+    $nacimiento_autor = $_POST['nacimiento_autor'];
+    $nacionalidad_autor = $_POST['nacionalidad_autor'];
+    
+    echo json_encode( $functions->add_author($apaterno_autor, $amaterno_autor, $nombre_autor, $nacimiento_autor, $nacionalidad_autor) );
+}
+
+function delete_author($functions){
+    $id_autor = $_POST['id_autor'];
+    
+    echo json_encode( $functions->delete_author($id_autor) );
 }

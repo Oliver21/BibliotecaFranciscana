@@ -548,9 +548,6 @@ class Functions
 
     //<editor-fold desc="Author functions">
     # Get the list of authors
-    /**
-     * @return array
-     */
     function get_authors()
     {
         # Query that selects all the authors from the table
@@ -573,6 +570,86 @@ class Functions
             return (array("status" => 0, "message" => "Algo salió mal obtener la información de los autores."));
         }
     }
+
+    # Add authors
+    /*
+     * id_autor
+     * apaterno_autor
+     * amaterno_autor
+     * nombre_autor
+     * nacimiento_autor
+     * nacionalidad_autor
+     */
+    function add_author($apaterno_autor, $amaterno_autor, $nombre_autor, $nacimiento_autor, $nacionalidad_autor){
+        # Create the query
+        $query = "INSERT INTO Autor (apaterno_autor, amaterno_autor, nombre_autor, nacimiento_autor, nacionalidad_autor) VALUES ( '$apaterno_autor', '$amaterno_autor', '$nombre_autor', '$nacimiento_autor', '$nacionalidad_autor' )";
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "El autor se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar un autor."));
+        }
+    }
+
+    # Edit an author
+    function edit_author($id_autor, $apaterno_autor, $amaterno_autor, $nombre_autor, $nacimiento_autor, $nacionalidad_autor){
+        # Check that the author exists
+        $query_validate = "SELECT * FROM Autor WHERE id_autor = $id_autor";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the author
+                $query_update = "UPDATE Autor SET apaterno_autor = '$apaterno_autor', amaterno_autor = '$amaterno_autor', nombre_autor = '$nombre_autor', nacimiento_autor = '$nacimiento_autor', nacionalidad_autor = '$nacionalidad_autor' WHERE id_autor = $id_autor";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Autor editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del autor"));
+                }
+            } else {
+                # Serie does not exists
+                return (array("status" => 101, "message" => "El autor no se encuentra en la base de datos: " . $id_autor . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar autor: Algo salió mal al validar el autor."));
+        }
+    }
+
+    function delete_autor($id_autor){
+        # Check that the author actually exists
+        $query_validate = "SELECT 1 FROM Autor WHERE id_autor = '$id_autor'";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The author does not exists
+                return (array("status" => 100, "message" => "No existe el autor a eliminar."));
+            } else {
+                # Delete the author from the database
+                # Query to eliminate the author
+                $query_delete = "DELETE FROM Autor WHERE id_autor = '$id_autor'";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the author was deleted
+                    return array("status" => 1, "message" => "Autor eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el autor." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar autor: Algo salió mal al validar el autor."));
+        }
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Magazine functions">
@@ -935,6 +1012,36 @@ class Functions
 
     //</editor-fold>
 
+    /* Pendientes
+     * Colección
+     * Apartado
+     * Obra
+     * Prestamo
+     * Subapartado
+     * Articulo
+     * Tema
+     */
+    //<editor-fold desc="Coleccion functions">
+    
+    //</editor-fold>
+
+    //<editor-fold desc="Apartado functions">
+    //</editor-fold>
+
+    //<editor-fold desc="Obra functions">
+    //</editor-fold>
+
+    //<editor-fold desc="Prestamo functions">
+    //</editor-fold>
+
+    //<editor-fold desc="Subapartado functions">
+    //</editor-fold>
+
+    //<editor-fold desc="Articulo functions">
+    //</editor-fold>
+
+    //<editor-fold desc="Tema functions">
+    //</editor-fold>
 }
 
 //<editor-fold desc="Tests">
