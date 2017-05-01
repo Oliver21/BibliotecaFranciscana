@@ -1200,6 +1200,128 @@ class Functions
     //</editor-fold>
 
     //<editor-fold desc="Subapartado functions">
+
+    # obtener la lista de subapartados
+    /**
+     * @return array
+     */
+    function get_subapartados()
+    {
+        # Query para seleccionar todos los subapartados de la base de datos
+        $query = "SELECT * FROM Subapartado";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Revisar el número de subapartados
+            if ($result->num_rows > 0) {
+                $subapartados = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($subapartados, $row);
+                }
+                $subapartados['status'] = 1;
+                return ($subapartados);
+            } else {
+                # The authors table is empty
+                return (array("status" => 2, "message" => "No se han agregado subapartados."));
+            }
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de los subapartados."));
+        }
+    }
+
+# Add subapartado
+    /*
+     * progresivo
+     * id_apartado
+     * id_seccion
+     * nombre_subapartado
+     */
+    /**
+     * @param $id_apartado
+     * @param $id_seccion
+     * @param $nombre_subapartado
+     * @return array
+     */
+    function add_subapartado($id_apartado, $id_seccion, $nombre_subapartado){
+        # Create the query
+        $query = "INSERT INTO Subapartado ( id_apartado, id_seccion, nombre_subapartado ) VALUES ( '$id_apartado', $id_seccion, '$nombre_subapartado' )";
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "El subapartado se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar un subapartado."));
+        }
+    }
+
+# Edit subapartado
+    /**
+     * @param $progresivo
+     * @param $id_apartado
+     * @param $id_seccion
+     * @param $nombre_subapartado
+     * @return array
+     */
+    function edit_subapartado($progresivo, $id_apartado, $id_seccion, $nombre_subapartado ){
+        # Check that the author exists
+        $query_validate = "SELECT * FROM Subapartado WHERE progresivo = $progresivo";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Actualizar el subapartado
+                $query_update = "UPDATE Subapartado SET id_apartado = '$id_apartado', id_seccion = $id_seccion, nombre_subapartado = '$nombre_subapartado' WHERE progresivo = $progresivo";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Subapartado editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del subapartado"));
+                }
+            } else {
+                # El subapartado no existe
+                return (array("status" => 101, "message" => "El subapartado no se encuentra en la base de datos: " . $progresivo . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar subapartado: Algo salió mal al validar el subapartado."));
+        }
+    }
+
+    /**
+     * @param $progresivo
+     * @return array
+     */
+    function delete_subapartado($progresivo){
+        # Revisar si el subapartado existe en la base de datos
+        $query_validate = "SELECT 1 FROM Subapartado WHERE progresivo = $progresivo";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # El subapartado no existe
+                return (array("status" => 100, "message" => "No existe el subapartado a eliminar."));
+            } else {
+                # Borrar el subapartado de la base de datos
+                # Query para eliminar el subapartado
+                $query_delete = "DELETE FROM Subapartado WHERE progresivo = $progresivo";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # El subapartado fue borrado
+                    return array("status" => 1, "message" => "Subapartado eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el subapartado." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar subapartado: Algo salió mal al validar el subapartado."));
+        }
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Articulo functions">
