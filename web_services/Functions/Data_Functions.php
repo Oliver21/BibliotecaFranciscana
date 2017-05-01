@@ -1074,17 +1074,126 @@ class Functions
 
     //</editor-fold>
 
-    /* Pendientes
-     * Colección
-     * Apartado
-     * Obra
-     * Prestamo
-     * Subapartado
-     * Articulo
-     * Tema
-     */
-
     //<editor-fold desc="Apartado functions">
+
+    # Obtener la lista de apartados
+    /**
+     * @return array
+     */
+    function get_apartados()
+    {
+        # Query para seleccionar todos los apartados de la tabla
+        $query = "SELECT * FROM Apartado";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Revisar el número de apartados
+            if ($result->num_rows > 0) {
+                $apartados = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($apartados, $row);
+                }
+                $apartados['status'] = 1;
+                return ($apartados);
+            } else {
+                # La tabla de apartados esta vacía
+                return (array("status" => 2, "message" => "No se han agregado apartados."));
+            }
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de los apartados."));
+        }
+    }
+
+# Agregar apartados
+    /*
+     * id_apartado
+     * id_seccion
+     * nombre_apartado
+     */
+    /**
+     * @param $id_seccion
+     * @param $nombre_apartado
+     * @return array
+     */
+    function add_apartado($id_seccion, $nombre_apartado){
+        # Create the query
+        $query = "INSERT INTO Apartado ( id_seccion, nombre_apartado ) VALUES ( $id_seccion, '$nombre_apartado' )";
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "El apartado se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar un apartado."));
+        }
+    }
+
+# Editar un apartado
+    /**
+     * @param $id_apartado
+     * @param $id_seccion
+     * @param $nombre_apartado
+     * @return array
+     */
+    function edit_apartado($id_apartado, $id_seccion, $nombre_apartado){
+        # Revisar si el apartado a modificar existe
+        $query_validate = "SELECT * FROM Apartado WHERE id_apartado = $id_apartado";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Actualizar el apartado
+                $query_update = "UPDATE Apartado SET id_seccion = $id_seccion, nombre_apartado = '$nombre_apartado' WHERE id_apartado = $id_apartado";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Apartado editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del apartado"));
+                }
+            } else {
+                # el apartado no existe
+                return (array("status" => 101, "message" => "El apartado no se encuentra en la base de datos: " . $id_apartado . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar apartado: Algo salió mal al validar el apartado."));
+        }
+    }
+
+    /**
+     * @param $id_apartado
+     * @return array
+     */
+    function delete_apartado($id_apartado){
+        # Revisar si existe el apartado a eliminar
+        $query_validate = "SELECT 1 FROM Apartado WHERE id_apartado = $id_apartado";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # El apartado no existe
+                return (array("status" => 100, "message" => "No existe el apartado a eliminar."));
+            } else {
+                # Eliminar el apartado de la base de datos
+                # Query para eliminar el apartado
+                $query_delete = "DELETE FROM Apartado WHERE id_apartado = $id_apartado";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # Apartado eliminado
+                    return array("status" => 1, "message" => "Apartado eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el apartado." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar apartado: Algo salió mal al validar el apartado."));
+        }
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Prestamo functions">
