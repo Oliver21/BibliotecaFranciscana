@@ -1094,6 +1094,137 @@ class Functions
     //</editor-fold>
 
     //<editor-fold desc="Articulo functions">
+
+    # Get the list of article
+    /**
+     * @return array
+     */
+    function get_articles()
+    {
+        # Query that selects all the articles from the table
+        $query = "SELECT * FROM Articulo";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Check for the number of articles
+            if ($result->num_rows > 0) {
+                $articles = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($articles, $row);
+                }
+                $articles['status'] = 1;
+                return ($articles);
+            } else {
+                # The authors table is empty
+                return (array("status" => 2, "message" => "No se han agregado artículos."));
+            }
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de los artículos."));
+        }
+    }
+
+# Add article
+    /*
+     * id_articulo
+     * id_revista
+     * nombre_articulo
+     * cantidad_paginas
+     * numero_ejemplar
+     * año_articulo
+     * reseña_articulo
+     */
+    /**
+     * @param $id_revista
+     * @param $nombre_articulo
+     * @param $cantidad_paginas
+     * @param $numero_ejemplar
+     * @param $año_articulo
+     * @param $reseña_articulo
+     * @return array
+     */
+    function add_article($id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo){
+        # Create the query
+        $query = "INSERT INTO Articulo ( id_revista, nombre_articulo, cantidad_paginas, numero_ejemplar, año_articulo, reseña_articulo ) VALUES ( $id_revista, '$nombre_articulo', '$cantidad_paginas', '$numero_ejemplar', '$año_articulo', '$reseña_articulo' )";
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "El artículo se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar un artículo."));
+        }
+    }
+
+# Edit an article
+    /**
+     * @param $id_articulo
+     * @param $id_revista
+     * @param $nombre_articulo
+     * @param $cantidad_paginas
+     * @param $numero_ejemplar
+     * @param $año_articulo
+     * @param $reseña_articulo
+     * @return array
+     */
+    function edit_article($id_articulo, $id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo){
+        # Check that the article exists
+        $query_validate = "SELECT * FROM Articulo WHERE id_articulo = $id_articulo";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the article
+                $query_update = "UPDATE Articulo SET id_revista = $id_revista, nombre_articulo = '$nombre_articulo', cantidad_paginas = '$cantidad_paginas', numero_ejemplar = '$numero_ejemplar', año_articulo = '$año_articulo', reseña_articulo = $reseña_articulo WHERE id_articulo = $id_articulo";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Artículo editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del artículo"));
+                }
+            } else {
+                # Article does not exists
+                return (array("status" => 101, "message" => "El artículo no se encuentra en la base de datos: " . $id_articulo . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar artículo: Algo salió mal al validar el artículo."));
+        }
+    }
+
+    /**
+     * @param $id_articulo
+     * @return array
+     */
+    function delete_article($id_articulo){
+        # Check that the article actually exists
+        $query_validate = "SELECT 1 FROM Articulo WHERE id_articulo = $id_articulo";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The article does not exists
+                return (array("status" => 100, "message" => "No existe el artículo a eliminar."));
+            } else {
+                # Delete the article from the database
+                # Query to eliminate the article
+                $query_delete = "DELETE FROM Articulo WHERE id_articulo = $id_articulo";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the article was deleted
+                    return array("status" => 1, "message" => "Artículo eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el artículo." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar artículo: Algo salió mal al validar el artículo."));
+        }
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Coleccion functions">

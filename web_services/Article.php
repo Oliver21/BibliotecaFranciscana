@@ -1,0 +1,117 @@
+<?php
+# Access the operation to do with a article
+if (isset($_POST['action'])) {
+    # Get the functions file
+    require_once "Functions/Data_Functions.php";
+    $functions = new Functions();
+
+    # Store the action in a variable
+    $action = $_POST['action'];
+
+    # Perform the action
+    switch ($action) {
+        # Select the list of articles
+        case 1:
+            get_articles($functions);
+            break;
+        case 2:
+            get_specific_article($functions);
+            break;
+        case 3:
+            edit_article($functions);
+            break;
+        case 4:
+            add_article($functions);
+            break;
+        case 5:
+            delete_article($functions);
+            break;
+        default:
+            echo json_encode(array("status" => 600, "message" => "Acción no válida."));
+    }
+
+} else {
+    echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
+}
+
+# delete article
+/**
+ * @param $functions
+ */
+function delete_article($functions)
+{
+    if (isset($_POST['id_articulo'])) {
+        $id_articulo = $_POST['id_articulo'];
+        # Display the result
+        echo json_encode($functions->delete_article($id_articulo));
+    } else {
+        echo json_encode(array("status" => 0, "message" => "No se recibió el artículo a borrar."));
+    }
+}
+
+# add_article
+/**
+ * @param $functions
+ */
+function add_article($functions)
+{
+    /*
+     * id_articulo
+     * id_revista
+     * nombre_articulo
+     * cantidad_paginas
+     * numero_ejemplar
+     * año_articulo
+     * reseña_articulo
+     */
+    if (!isset($_POST['nombre_articulo'])) {
+        echo json_encode(array("status" => 601, "message" => "."));
+    } else {
+        $id_revista = $_POST['id_revista'];
+        $nombre_articulo = $_POST['nombre_articulo'];
+        $cantidad_paginas = $_POST['cantidad_paginas'];
+        $numero_ejemplar = $_POST['numero_ejemplar'];
+        $año_articulo = $_POST['año_articulo'];
+        $reseña_articulo = $_POST['reseña_articulo'];
+        echo json_encode($functions->add_article($id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo));
+    }
+}
+
+# get_articles
+/**
+ * @param $functions
+ */
+function get_articles($functions)
+{
+    $result = $functions->get_articles();
+
+    # Display the result whatever its status is
+    echo json_encode($result);
+}
+
+# get_specific_article
+/**
+ * @param $functions
+ */
+function get_specific_article($functions)
+{
+
+}
+
+# edit_article
+/**
+ * @param $functions
+ */
+function edit_article($functions)
+{
+    $id_articulo = $_POST['id_articulo'];
+    $id_revista = $_POST['id_revista'];
+    $nombre_articulo = $_POST['nombre_articulo'];
+    $cantidad_paginas = $_POST['cantidad_paginas'];
+    $numero_ejemplar = $_POST['numero_ejemplar'];
+    $año_articulo = $_POST['año_articulo'];
+    $reseña_articulo = $_POST['reseña_articulo'];
+
+    # Display the result
+    echo json_encode($functions->edit_article($id_articulo, $id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo));
+}
