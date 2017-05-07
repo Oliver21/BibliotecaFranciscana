@@ -28,7 +28,7 @@ body {
       <!-- <div class="nav-wrapper container">
       <a id="logo-container" href="index.html" class="brand-logo"><IMG SRC="../images/logo3.png" HEIGHT=60> Teologado Franciscano</a> -->
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="revistas.html">Iniciar Sesion</a></li>
+        <li><a href="revistas.html">Iniciar Sesión</a></li>
         <li><a href="#">Salir</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -46,7 +46,7 @@ body {
       <div class="row">
         <div class="input-field col s6 offset-s3">
           <i class="material-icons prefix">account_circle</i>
-          <input id="last_name" type="text" class="validate">
+          <input id="usuario" type="text" class="validate">
           <label for="last_name">Usuario</label>
         </div>
       </div>
@@ -56,26 +56,30 @@ body {
           <i class="material-icons prefix">vpn_key</i>
           <input id="password" type="password" class="validate">
           <label for="password">Contraseña</label>
-        </div> 
+        </div>
       </div>
       <div class="center row">
-        <a href="index.html" class="btn waves-effect waves-light brown" type="submit" name="action">Iniciar Sesión<i class="material-icons right">send</i></a>
+        <a class="btn waves-effect waves-light brown" type="submit" name="action" id="login">Iniciar Sesión<i class="material-icons right">send</i></a>
       </div>
     </div>
+<!--<form method="post" action="http://bibliotecafranciscana.esy.es/web_services/Users.php">
+<input type="radio" name="chargeathome" value="Yes">Yes
+<input type="radio" name="chargeathome" value="No">No
+<input type="submit" name="submit" value="Submit">
+</form> -->
   </div>
 
   <footer class="page-footer brown">
     <div class="footer-copyright brown darken-3">
       <div class="container">
-        <a class="brown-text text-lighten-4 right">© 2017 Instituto Tecnológico de Estudios Superiores de Monterrey</a>
+        <a class="brown-text text-lighten-4 right" href="http://materializecss.com">© 2017 Instituto Tecnológico de Estudios Superiores de Monterrey</a>
       </div>
-    </div>
-  </footer>
 
 
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="../js/materialize.js"></script>
-  <script src="../js/init.js"></script>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../js/materialize.js"></script>
+    <script src="../js/init.js"></script>
+    <script src="../js/login.js"></script>
 </body>
 </html>
