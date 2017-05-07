@@ -6,6 +6,10 @@
 * Made By MaterializeCSS.com
 */
 
+body {
+  background-color: #CCCCCC;
+}
+
 .icon-block {
   padding: 0 15px;
 }
@@ -22,6 +26,12 @@ h1 {
   position: absolute;
   top: 15%;
   bottom: 15%;
+}
+
+.addUserBtn {
+  position: absolute;
+  top: 12%;
+  right: 3%;
 }
 
 .dropdown-content li > a, .dropdown-content li > span {
