@@ -1,7 +1,7 @@
 <?php
 
 # Access the operation to do with a book
-if (isset($_POST['action'])) {
+if (isset($_POST['action'])){
     # Get the functions file
     require_once "Functions/Data_Functions.php";
     $functions = new Functions();
@@ -10,7 +10,7 @@ if (isset($_POST['action'])) {
     $action = $_POST['action'];
 
     # Perform the action
-    switch ($action) {
+    switch ($action){
         # Select the list of books
         case 1:
             get_books($functions);
@@ -32,20 +32,19 @@ if (isset($_POST['action'])) {
             delete_book($functions);
             break;
         default:
-            echo json_encode(array("status" => 660, "message" => "Acción no válida."));
+            echo json_encode( array("status" => 660, "message" => "Acción no válida.") );
             break;
     }
 
 } else {
-    echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
+    echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
 }
 
 # get_books
 /**
  * @param $functions
  */
-function get_books($functions)
-{
+function get_books($functions){
     $result = $functions->get_books();
 
     # Display the result whatever its status is
@@ -56,31 +55,28 @@ function get_books($functions)
 /**
  * @param $functions
  */
-function get_specific_book($functions)
-{
+function get_specific_book($functions){
     $id_libro = $_POST['id_libro'];
 
     $result = $functions->get_specific_book($id_libro);
-
-    echo json_encode($result);
+    
+    echo json_encode( $result ); 
 }
 
 /**
  * @param $functions
  */
-function delete_book($functions)
-{
+function delete_book($functions){
     $id_libro = $_POST['id_libro'];
-
-    echo json_encode($functions->delete_book($id_libro));
+    
+    echo json_encode( $functions->delete_book($id_libro) );
 }
 
 # edit_book
 /**
  * @param $functions
  */
-function edit_book($functions)
-{
+function edit_book($functions){
     $id_libro = $_POST['id_libro'];
     $isbn = $_POST['ISBN'];
     $titulo_libro = $_POST['titulo_libro'];
@@ -114,15 +110,14 @@ function edit_book($functions)
         $id_seccion, $id_apartado, $volumen_libro, $ilustraciones, $graficas, $mapas, $bibliografia, $indice, $pasta_blanda, $planos,
         $estatus, $numero_copias, $palabras_clave);
 
-    echo json_encode($result);
+    echo json_encode( $result );
 }
 
 # add_book
 /**
  * @param $functions
  */
-function add_book($functions)
-{
+function add_book($functions){
     $isbn = $_POST['ISBN'];
     $titulo_libro = $_POST['titulo_libro'];
     $subtitulo_libro = $_POST['subtitulo_libro'];
@@ -144,7 +139,7 @@ function add_book($functions)
     $mapas = $_POST['mapas'];
     $bibliografia = $_POST['bibliografia'];
     $indice = $_POST['indice'];
-    $pasta_blanda = $_POST['pasta_blanda'];
+    $pasta_blanda = $_POST['pasta_blanda'];    
     $planos = $_POST['planos'];
     $estatus = $_POST['estatus'];
     $numero_copias = $_POST['numero_copias'];
@@ -153,5 +148,5 @@ function add_book($functions)
     $result = $functions->add_book($isbn, $titulo_libro, $subtitulo_libro, $titulo_original, $numero_paginas, $id_editorial, $numero_edicion,
         $fecha_edicion, $lugar_publicacion, $fecha_adquisicion, $costo_libro, $proveedor_libro, $observaciones_libro, $id_seccion, $id_apartado,
         $volumen_libro, $ilustraciones, $graficas, $mapas, $bibliografia, $indice, $pasta_blanda, $planos, $estatus, $numero_copias, $palabras_clave);
-    echo json_encode($result);
+    echo json_encode( $result );
 }

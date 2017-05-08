@@ -28,20 +28,22 @@ h1 {
   bottom: 15%;
 }
 
-.addUserBtn {
+.UserBtn {
   position: absolute;
   top: 12%;
-  right: 3%;
+  right: 5%;
 }
 
 .dropdown-content li > a, .dropdown-content li > span {
   color: #171717;
 }
 
-footer {
-  position:fixed;
-  left:0px;
-  bottom:0px;
-  height:70px;
-  width:100%;
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
