@@ -148,3 +148,35 @@ $('#addLibro').click(function () {
         } 
         });
 });
+
+$('#addRevista').click(function () {
+    console.log("Agregamos Revista");
+    var nombrerevista = document.getElementById('nombrerevista').value;
+    var seccionrevista = document.getElementById('seccionrevista').value;
+    var editorialrevista = document.getElementById('editorialrevista').value;
+    var periodicidad = document.getElementById('periodicidad').value;
+    var palabrasclave = document.getElementById('palabrasclave').value;
+    var issnrevista = document.getElementById('issnrevista').value;
+    var numeroejemplarrevista = document.getElementById('numeroejemplarrevista').value;
+    var preciorevista = document.getElementById('preciorevista').value;
+    var anorevista = document.getElementById('anorevista').value;
+    var mesrevista = document.getElementById('mesrevista').value;
+    var semanarevista = document.getElementById('semanarevista').value;
+
+
+    console.log(issnrevista);
+
+    // var nombre = document.getElementById('nombreSeccion').value;
+
+/*    $.post('../web_services/Sections.php', { action : 4, nombre_seccion : nombre},
+        function(returnedData){
+            console.log(returnedData);
+            if (JSON.parse(returnedData).message == "No se recibió la sección."){
+                Materialize.toast('Se necesita un nombre en la seccion!', 4000);
+            } else if (JSON.parse(returnedData).message == "Inicio exitoso."){
+                Materialize.toast('Seccion agregada a la base de datos');
+                window.location.href = "../html/menu.html";
+            }
+        });
+        */
+});
