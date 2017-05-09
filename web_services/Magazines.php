@@ -1,6 +1,6 @@
 <?php
 
-# Access the operation to do with a author
+# Access the operation to do with a magazine
 if (isset($_POST['action'])) {
     # Get the functions file
     require_once "Functions/Data_Functions.php";
@@ -11,21 +11,21 @@ if (isset($_POST['action'])) {
 
     # Perform the action
     switch ($action) {
-        # Select the list of authors
+        # Select the list of magazines
         case 1:
-            get_authors($functions);
+            get_magazines($functions);
             break;
         case 2:
-            get_specific_author($functions);
+            get_specific_magazine($functions);
             break;
         case 3:
-            edit_author($functions);
+            edit_magazine($functions);
             break;
         case 4:
-            add_author($functions);
+            add_magazine($functions);
             break;
         case 5:
-            delete_author($functions);
+            delete_magazine($functions);
             break;
         default:
             echo json_encode(array("status" => 0, "message" => "Acción no válida."));
@@ -35,65 +35,68 @@ if (isset($_POST['action'])) {
     echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
 }
 
-# get_authors
+# get_magazines
 /**
  * @param $functions
  */
-function get_authors($functions)
+function get_magazines($functions)
 {
-    $result = $functions->get_authors();
+    $result = $functions->get_magazines();
 
     # Display the result whatever its status is
     echo json_encode($result);
 }
 
-# get_specific_author
+# get_specific_magazine
 /**
  * @param $functions
  */
-function get_specific_author($functions)
+function get_specific_magazine($functions)
 {
 
 }
 
-# edit_author
+# edit_magazine
 /**
  * @param $functions
  */
-function edit_author($functions)
+function edit_magazine($functions)
 {
     /*
-    * id_autor
-    * apaterno_autor
-    * amaterno_autor
-    * nombre_autor
-    * nacimiento_autor
-    * nacionalidad_autor
-     */
-    $id_autor = $_POST['id_autor'];
-    $apaterno_autor = $_POST['apaterno_autor'];
-    $amaterno_autor = $_POST['amaterno_autor'];
-    $nombre_autor = $_POST['nombre_autor'];
-    $nacimiento_autor = $_POST['nacimiento_autor'];
-    $nacionalidad_autor = $_POST['nacionalidad_autor'];
+    id_revista
+    id_seccion
+    id_editorial
+    nombre_revista
+    periodicidad
+    palabras_clave
+    notas_adicionales
+    */
+    $id_revista = $_POST['id_revista'];
+    $id_seccion = $_POST['id_seccion'];
+    $id_editorial = $_POST['id_editorial'];
+    $nombre_revista = $_POST['nombre_revista'];
+    $periodicidad = $_POST['periodicidad'];
+    $palabras_clave = $_POST['palabras_clave'];
+    $notas_adicionales = $_POST['notas_adicionales'];
 
-    echo json_encode($functions->edit_author($id_autor, $apaterno_autor, $amaterno_autor, $nombre_autor, $nacimiento_autor, $nacionalidad_autor));
+    echo json_encode($functions->edit_magazine($id_revista, $id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales));
 }
 
-function add_author($functions)
+function add_magazine($functions)
 {
-    $apaterno_autor = $_POST['apaterno_autor'];
-    $amaterno_autor = $_POST['amaterno_autor'];
-    $nombre_autor = $_POST['nombre_autor'];
-    $nacimiento_autor = $_POST['nacimiento_autor'];
-    $nacionalidad_autor = $_POST['nacionalidad_autor'];
+    $id_seccion = $_POST['id_seccion'];
+    $id_editorial = $_POST['id_editorial'];
+    $nombre_revista = $_POST['nombre_revista'];
+    $periodicidad = $_POST['periodicidad'];
+    $palabras_clave = $_POST['palabras_clave'];
+    $notas_adicionales = $_POST['notas_adicionales'];
 
-    echo json_encode($functions->add_author($apaterno_autor, $amaterno_autor, $nombre_autor, $nacimiento_autor, $nacionalidad_autor));
+    echo json_encode($functions->add_magazine($id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales));
 }
 
-function delete_author($functions)
+function delete_magazine($functions)
 {
-    $id_autor = $_POST['id_autor'];
+    $id_revista = $_POST['id_revista'];
 
-    echo json_encode($functions->delete_author($id_autor));
+    echo json_encode($functions->delete_magazine($id_revista));
 }

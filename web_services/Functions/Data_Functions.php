@@ -564,7 +564,7 @@ class Functions
         # Query that selects all the authors from the table
         $query = "SELECT * FROM Autor";
         if ($result = mysqli_query($this->db, $query)) {
-            # Check for the number of magazines
+            # Check for the number of authors
             if ($result->num_rows > 0) {
                 $authors = array();
                 while ($row = mysqli_fetch_assoc($result)) {
