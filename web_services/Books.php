@@ -127,10 +127,10 @@ function add_book($functions){
     $numero_edicion = $_POST['numero_edicion'];
     $fecha_edicion = $_POST['fecha_edicion'];
     $lugar_publicacion = $_POST['lugar_publicacion'];
-    $fecha_adquisicion = $_POST['fecha_adquisicion'];
+    $fecha_adquisicion = $_POST['fecha_adquisicion']; //pendiente
     $costo_libro = $_POST['costo_libro'];
     $proveedor_libro = $_POST['proveedor_libro'];
-    $observaciones_libro = $_POST['observaciones_libro'];
+    $observaciones_libro = $_POST['observaciones_libro']; //pendiente
     $id_seccion = $_POST['id_seccion'];
     $id_apartado = $_POST['id_apartado'];
     $volumen_libro = $_POST['volumen_libro'];
@@ -143,7 +143,7 @@ function add_book($functions){
     $planos = $_POST['planos'];
     $estatus = $_POST['estatus'];
     $numero_copias = $_POST['numero_copias'];
-    $palabras_clave = $_POST['palabras_clave'];
+    $palabras_clave = $_POST['palabras_clave']; //pendiente
 
     $result = $functions->add_book($isbn, $titulo_libro, $subtitulo_libro, $titulo_original, $numero_paginas, $id_editorial, $numero_edicion,
         $fecha_edicion, $lugar_publicacion, $fecha_adquisicion, $costo_libro, $proveedor_libro, $observaciones_libro, $id_seccion, $id_apartado,

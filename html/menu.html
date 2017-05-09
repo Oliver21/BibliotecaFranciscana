@@ -240,20 +240,32 @@
 
           <div class="input-field col s4">
             <i class="material-icons prefix">library_books</i>
-            <input id="proovedorlibro" type="text" class="validate" >
+            <input id="seccionlibro" type="text" class="validate" >
             <label for="last_name">Sección</label>
           </div>
 
           <div class="input-field col s4">
             <i class="material-icons prefix">explicit</i>
-            <input id="proovedorlibro" type="text" class="validate" >
+            <input id="editoriallibro" type="text" class="validate" >
             <label for="last_name">Editorial</label>
           </div>
 
           <div class="input-field col s4">
             <i class="material-icons prefix">assignment_ind</i>
-            <input id="proovedorlibro" type="text" class="validate" >
+            <input id="autorlibro" type="text" class="validate" >
             <label for="last_name">Autor</label>
+          </div>
+
+          <div class="input-field col s4">
+            <i class="material-icons prefix">view_carousel</i>
+            <input id="volumenlibro" type="text" class="validate" >
+            <label for="volumenlibro">Volumen libro</label>
+          </div>
+
+          <div class="input-field col s4">
+            <i class="material-icons prefix">class</i>
+            <input id="apartado" type="text" class="validate" >
+            <label for="apartado">Apartado</label>
           </div>
 
         </div>
@@ -261,42 +273,47 @@
         <div class="row">
 
           <div class="input-field col s4">
-            <input type="checkbox" id="test5">
-            <label for="test5">Ilustraciones</label>
+            <input type="checkbox" id="ilustraciones">
+            <label for="ilustraciones">Ilustraciones</label>
           </div>
 
           <div class="input-field col s4">
-            <input type="checkbox" id="test6">
-            <label for="test6">Gráficas</label>
+            <input type="checkbox" id="graficas">
+            <label for="graficas">Gráficas</label>
           </div>
 
           <div class="input-field col s4">
-            <input type="checkbox" id="test7">
-            <label for="test7">Mapas</label>
+            <input type="checkbox" id="mapas">
+            <label for="mapas">Mapas</label>
           </div>
 
           <div class="input-field col s4">
-            <input type="checkbox" id="test8">
-            <label for="test8">Bibliografía</label>
+            <input type="checkbox" id="bibliografia">
+            <label for="bibliografia">Bibliografía</label>
           </div>
 
           <div class="input-field col s4">
-            <input type="checkbox" id="test9">
-            <label for="test9">Pasta blanda</label>
+            <input type="checkbox" id="pasta">
+            <label for="pasta">Pasta blanda</label>
           </div>
 
           <div class="input-field col s4">
-            <input type="checkbox" id="test10">
-            <label for="test10">Planos  </label>
+            <input type="checkbox" id="planos">
+            <label for="planos">Planos</label>
           </div>
 
           <div class="input-field col s4">
-            <input type="checkbox" id="test11">
-            <label for="test11">Disponible</label>
+            <input type="checkbox" id="indice">
+            <label for="indice">Indice</label>
+          </div>
+
+          <div class="input-field col s4">
+            <input type="checkbox" id="disponible">
+            <label for="disponible">Disponible</label>
           </div>
         </div>
         <div class="modal-footer">
-          <a class="btn waves-effect waves-light" type="submit" name="action" id="adduser">Agregar Libro
+          <a class="btn waves-effect waves-light" type="submit" name="action" id="addLibro">Agregar Libro
             <i class="material-icons right">send</i>
           </a>
         </div>
@@ -377,7 +394,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <a class="btn waves-effect waves-light" type="submit" name="action" id="adduser">Agregar Revista
+          <a class="btn waves-effect waves-light" type="submit" name="action" id="addRevista">Agregar Revista
             <i class="material-icons right">send</i>
           </a>
         </div>
@@ -395,9 +412,16 @@
             <input id="nombreEditorial" type="text" class="validate">
             <label for="nombreEditorial">Nombre</label>
           </div>
+
+          <div class="input-field col s6 offset-s3">
+            <i class="material-icons prefix">room</i>
+            <input id="lugarEditorial" type="text" class="validate">
+            <label for="lugarEditorial">Direccion</label>
+          </div>
+
         </div>
         <div class="modal-footer">
-          <a class="btn waves-effect waves-light" type="submit" name="action" id="adduser">Agregar Editorial
+          <a class="btn waves-effect waves-light" type="submit" name="action" id="addEditorial">Agregar Editorial
             <i class="material-icons right">send</i>
           </a>
         </div>
@@ -419,7 +443,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <a class="btn waves-effect waves-light" type="submit" name="action" id="adduser">Agregar Sección
+          <a class="btn waves-effect waves-light" type="submit" name="action" id="addSeccion">Agregar Sección
             <i class="material-icons right">send</i>
           </a>
         </div>
