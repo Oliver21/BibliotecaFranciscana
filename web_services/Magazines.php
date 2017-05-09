@@ -91,7 +91,11 @@ function add_magazine($functions)
     $palabras_clave = $_POST['palabras_clave'];
     $notas_adicionales = $_POST['notas_adicionales'];
 
-    echo json_encode($functions->add_magazine($id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales));
+    if ( isset($nombre_revista) && $nombre_revista != ""){
+        echo json_encode($functions->add_magazine($id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales));
+    } else {
+        echo json_encode(array("status" => 0, "message" => "No hay nombre de revista."));
+    }
 }
 
 function delete_magazine($functions)

@@ -156,27 +156,21 @@ $('#addRevista').click(function () {
     var editorialrevista = document.getElementById('editorialrevista').value;
     var periodicidad = document.getElementById('periodicidad').value;
     var palabrasclave = document.getElementById('palabrasclave').value;
-    var issnrevista = document.getElementById('issnrevista').value;
+    var notasadicionalesrevista = document.getElementById('notasrevista').value;
+
+    /*
+    -> esto va en ejemplar
     var numeroejemplarrevista = document.getElementById('numeroejemplarrevista').value;
     var preciorevista = document.getElementById('preciorevista').value;
     var anorevista = document.getElementById('anorevista').value;
     var mesrevista = document.getElementById('mesrevista').value;
-    var semanarevista = document.getElementById('semanarevista').value;
+    var semanarevista = document.getElementById('semanarevista').value; */
 
-
-    console.log(issnrevista);
-
-    // var nombre = document.getElementById('nombreSeccion').value;
-
-/*    $.post('../web_services/Sections.php', { action : 4, nombre_seccion : nombre},
+    $.post('../web_services/Magazines.php', { action : 4, id_seccion : seccionrevista, id_editorial: editorialrevista,
+        nombre_revista: nombrerevista, periodicidad: periodicidad, palabras_clave: palabrasclave, notas_adicionales: notasadicionalesrevista},
         function(returnedData){
             console.log(returnedData);
-            if (JSON.parse(returnedData).message == "No se recibió la sección."){
-                Materialize.toast('Se necesita un nombre en la seccion!', 4000);
-            } else if (JSON.parse(returnedData).message == "Inicio exitoso."){
-                Materialize.toast('Seccion agregada a la base de datos');
-                window.location.href = "../html/menu.html";
-            }
+            Materialize.toast(JSON.parse(returnedData).message, 4000);
         });
-        */
+
 });
