@@ -1197,6 +1197,134 @@ class Functions
     //</editor-fold>
 
     //<editor-fold desc="Prestamo functions">
+
+    # Get the list of all the loans
+    /**
+     * @return array
+     */
+    function get_loans()
+    {
+        # Query that selects all the loans from the table
+        $query = "SELECT * FROM Prestamo";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Check for the number of loans
+            if ($result->num_rows > 0) {
+                $loans = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($loans, $row);
+                }
+                $loans['status'] = 1;
+                return ($loans);
+            } else {
+                # The loans table is empty
+                return (array("status" => 2, "message" => "No se han agregado préstamos."));
+            }
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de los préstamos."));
+        }
+    }
+
+# Add loan
+    /*
+     * id_prestamo
+     * id_libro
+     * id_usuario
+     * fecha_prestamo
+     * fecha_vencimiento
+     * fecha_devolucion
+     */
+    /**
+     * @param $id_libro
+     * @param $id_usuario
+     * @param $fecha_prestamo
+     * @param $fecha_vencimiento
+     * @param $fecha_devolucion
+     * @return array
+     */
+    function add_loan($id_libro, $id_usuario, $fecha_prestamo, $fecha_vencimiento, $fecha_devolucion){
+        # Create the query
+        $query = "INSERT INTO Prestamo ( id_libro, id_usuario, fecha_prestamo, fecha_vencimiento, fecha_devolucion ) VALUES ( $id_libro, $id_usuario, '$fecha_prestamo', '$fecha_vencimiento', '$fecha_devolucion' )";
+        if ( $result = mysqli_query($this->db, $query) ){
+            # Everything went right
+            return (array("status" => 1, "message" => "El préstamo se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar un préstamo."));
+        }
+    }
+
+# Edit a loan
+    /**
+     * @param $id_prestamo
+     * @param $id_libro
+     * @param $id_usuario
+     * @param $fecha_prestamo
+     * @param $fecha_vencimiento
+     * @param $fecha_devolucion
+     * @return array
+     */
+    function edit_loan($id_prestamo, $id_libro, $id_usuario, $fecha_prestamo, $fecha_vencimiento, $fecha_devolucion){
+        # Check that the loan exists
+        $query_validate = "SELECT * FROM Prestamo WHERE id_prestamo = $id_prestamo";
+
+        # Execute the validation query
+        if ( $result = mysqli_query($this->db, $query_validate) ){
+            if ( $result->num_rows > 0 ){
+                # Update the loan
+                $query_update = "UPDATE Prestamo SET id_libro = $id_libro, id_usuario = $id_usuario, fecha_prestamo = '$fecha_prestamo', fecha_vencimiento = '$fecha_vencimiento', fecha_devolucion = '$fecha_devolucion' WHERE id_prestamo = $id_prestamo";
+                # Execute the update query
+                if ( $result = mysqli_query($this->db, $query_update) ){
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Préstamo editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del préstamo"));
+                }
+            } else {
+                # Loan does not exists
+                return (array("status" => 101, "message" => "El préstamo no se encuentra en la base de datos: " . $id_prestamo . " ." . mysqli_error($this->db) ));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar préstamo: Algo salió mal al validar el préstamo."));
+        }
+    }
+
+    /**
+     * @param $id_prestamo
+     * @return array
+     */
+    function delete_loan($id_prestamo){
+        # Check that the author actually exists
+        $query_validate = "SELECT 1 FROM Prestamo WHERE id_prestamo = $id_prestamo";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)){
+            # Check the number of results
+            if ($result->num_rows < 1 ){
+                # The loan does not exists
+                return (array("status" => 100, "message" => "No existe el préstamo a eliminar."));
+            } else {
+                # Delete the loan from the database
+                # Query to eliminate the loan
+                $query_delete = "DELETE FROM Préstamo WHERE id_prestamo = $id_prestamo";
+
+                # Execute the deletion
+                if ( $result = mysqli_query($this->db, $query_delete) ){
+                    # the loan was deleted
+                    return array("status" => 1, "message" => "Préstamo eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el préstamo." . mysqli_error($this->db) ));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar préstamo: Algo salió mal al validar el préstamo."));
+        }
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Subapartado functions">
