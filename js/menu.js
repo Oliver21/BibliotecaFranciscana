@@ -64,6 +64,22 @@ $('#adduser').click(function () {
 	});
 
 
+	$('#addColeccion').click(function () {
+		console.log("Agregamos Seccion");
+		var nombreColeccion = document.getElementById('nombreColeccion').value;
+		var numeroColeccion = document.getElementById('numeroColeccion').value;
+		var volumenColeccion = document.getElementById('volumenColeccion').value;
+		var seccionColeccion = document.getElementById('seccionColeccion').value;
+
+		$.post('../web_services/Collections.php', { action : 4, nombre_coleccion : nombreColeccion,
+			numero_coleccion : numeroColeccion, volumenes : volumenColeccion, id_seccion : seccionColeccion},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
+
 	$('#addLibro').click(function () {
 		console.log("Agregamos Libro");
 		var titulolibro = document.getElementById('titulolibro').value;
