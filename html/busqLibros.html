@@ -281,7 +281,7 @@
             $.post('../web_services/Books.php', {action : 11},
             function(returnedData){
               console.log(returnedData);
-              Materialize.toast(JSON.parse(returnedData).message, 4000);
+              Materialize.toast(JSON.parse(returnedData).pages, 4000);
             });
           }
         });
