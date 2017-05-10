@@ -17,12 +17,7 @@ $('#adduser').click(function () {
 	    	Correo : correo, Direccion : direccion, Instituto_Proveniencia : instituto},
         function(returnedData){
         	console.log(returnedData);
-        	/*if (JSON.parse(returnedData).message == "Usuario no encontrado."){
-        		Materialize.toast('No se ha podido iniciar sesión!', 4000);
-        	} else if (JSON.parse(returnedData).message == "Inicio exitoso."){
-            Materialize.toast('Bienvenido ' + user, 40000);
-            window.location.href = "../html/menu.html"; 
-        } */
+        	Materialize.toast(JSON.parse(returnedData).message, 4000);
         });
 });
 
@@ -35,12 +30,7 @@ $('#addEditorial').click(function () {
 	    $.post('../web_services/Editorial.php', { action : 4, nombre_editorial : nombre, nombre_direccion : lugar},
         function(returnedData){
         	console.log(returnedData);
-        	if (JSON.parse(returnedData).message == "."){
-        		Materialize.toast('Se necesita un nombre en la editorial!', 4000);
-        	} else if (JSON.parse(returnedData).message == "Inicio exitoso."){
-            Materialize.toast('Editorial agregada a la base de datos');
-            window.location.href = "../html/menu.html"; 
-        } 
+        	Materialize.toast(JSON.parse(returnedData).message, 4000); 
         });
 });
 
@@ -53,12 +43,7 @@ $('#addSeccion').click(function () {
 	    $.post('../web_services/Sections.php', { action : 4, nombre_seccion : nombre},
         function(returnedData){
         	console.log(returnedData);
-        	if (JSON.parse(returnedData).message == "No se recibió la sección."){
-        		Materialize.toast('Se necesita un nombre en la seccion!', 4000);
-        	} else if (JSON.parse(returnedData).message == "Inicio exitoso."){
-            Materialize.toast('Seccion agregada a la base de datos');
-            window.location.href = "../html/menu.html"; 
-        } 
+            Materialize.toast(JSON.parse(returnedData).message, 4000);
         });
 });
 
@@ -140,12 +125,7 @@ $('#addLibro').click(function () {
         numero_copias : copiaslibro, estatus : disponible, id_apartado : apartado, indice : indice, volumen_libro : volumenlibro},   
         function(returnedData){
         	console.log(returnedData);
-        	if (JSON.parse(returnedData).message == "No se recibió la sección."){
-        		Materialize.toast('Se necesita un nombre en la seccion!', 4000);
-        	} else if (JSON.parse(returnedData).message == "Inicio exitoso."){
-            Materialize.toast('Libro agregado a la base de datos');
-            window.location.href = "../html/menu.html"; 
-        } 
+        	Materialize.toast(JSON.parse(returnedData).message, 4000); 
         });
 });
 
