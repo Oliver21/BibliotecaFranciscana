@@ -278,6 +278,11 @@
           useUrlParameter: false,
           onClickCallback: function(requestedPage) {
             console.log('Requested page from #pagination-long: ' + requestedPage);
+            $.post('../web_services/Books.php', {action : 11},
+            function(returnedData){
+              console.log(returnedData);
+              Materialize.toast(JSON.parse(returnedData).message, 4000);
+            });
           }
         });
       });
