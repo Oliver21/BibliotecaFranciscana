@@ -69,8 +69,9 @@ function add_apartado($functions)
     $nombre_apartado = $_POST['nombre_apartado'];
     if (isset( $nombre_apartado ) && $nombre_apartado != "" ) {
         # $nombre_apartado = $_POST['nombre_apartado'];
+        $id_apartado = $_POST['id_apartado'];
         $id_seccion = $_POST['id_seccion'];
-        echo json_encode($functions->add_apartado($id_seccion, $nombre_apartado));
+        echo json_encode($functions->add_apartado($id_apartado, $id_seccion, $nombre_apartado));
     } else {
         echo json_encode(array("status" => 601, "message" => "No se recibió información necesaria del apartado."));
     }
