@@ -63,6 +63,17 @@ $('#adduser').click(function () {
 		});
 	});
 
+		$('#addMateria').click(function () {
+		console.log("Agregamos Materia");
+		var nombreMateria = document.getElementById('nombreMateria').value;
+
+		$.post('../web_services/Theme.php', { action : 4, tema : nombreMateria},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
 
 	$('#addColeccion').click(function () {
 		console.log("Agregamos Collecion");
