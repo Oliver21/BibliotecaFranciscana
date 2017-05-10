@@ -56,15 +56,16 @@ function delete_collection($functions)
  */
 function add_collection($functions)
 {
-    # $nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion 
-    if (!isset($_POST['nombre_coleccion'])) {
-        echo json_encode(array("status" => 601, "message" => "."));
-    } else {
+    # $nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion
+    $nombre_coleccion = $_POST['nombre_coleccion'];
+    if (isset( $nombre_coleccion ) && $nombre_coleccion != "" ) {
         $nombre_coleccion = $_POST['nombre_coleccion'];
         $numero_coleccion = $_POST['numero_coleccion'];
         $volumenes = $_POST['volumenes'];
         $id_seccion = $_POST['id_seccion'];
         echo json_encode($functions->add_collection($nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion));
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió información necesaria de la colección."));
     }
 }
 

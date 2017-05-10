@@ -67,7 +67,7 @@ function add_editorial($functions)
         $nombre_direccion = $_POST['nombre_direccion'];
         echo json_encode($functions->add_editorial($nombre_editorial, $nombre_direccion));
     } else {
-        echo json_encode(array("status" => 601, "message" => "."));
+        echo json_encode(array("status" => 601, "message" => "No se recibió el nombre de editorial."));
     }
 }
 

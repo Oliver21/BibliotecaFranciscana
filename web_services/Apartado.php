@@ -66,13 +66,13 @@ function delete_apartado($functions)
  */
 function add_apartado($functions)
 {
-    if (!isset($_POST['nombre_apartado'])) {
-        echo json_encode(array("status" => 601, "message" => "."));
-    } else {
-        $nombre_apartado = $_POST['nombre_apartado'];
+    $nombre_apartado = $_POST['nombre_apartado'];
+    if (isset( $nombre_apartado ) && $nombre_apartado != "" ) {
+        # $nombre_apartado = $_POST['nombre_apartado'];
         $id_seccion = $_POST['id_seccion'];
-
         echo json_encode($functions->add_apartado($id_seccion, $nombre_apartado));
+    } else {
+        echo json_encode(array("status" => 601, "message" => "."));
     }
 }
 

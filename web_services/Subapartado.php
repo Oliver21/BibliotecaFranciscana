@@ -64,13 +64,14 @@ function delete_subapartado($functions)
  */
 function add_subapartado($functions)
 {
-    if (!isset($_POST['nombre_subapartado'])) {
-        echo json_encode(array("status" => 601, "message" => "."));
-    } else {
+    $nombre_subapartado = $_POST['nombre_subapartado'];
+    if (isset($nombre_subapartado) && $nombre_subapartado != "") {
         $id_apartado = $_POST['id_apartado'];
         $id_seccion = $_POST['id_seccion'];
         $nombre_subapartado = $_POST['nombre_subapartado'];
         echo json_encode($functions->add_subapartado($id_apartado, $id_seccion, $nombre_subapartado));
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió información necesaria del subapartado."));
     }
 }
 

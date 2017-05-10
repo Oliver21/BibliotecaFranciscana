@@ -64,15 +64,16 @@ function add_loan($functions)
      * fecha_vencimiento
      * fecha_devolucion
      */
-    if (!isset($_POST['id_libro'])) {
-        echo json_encode(array("status" => 601, "message" => "."));
-    } else {
+    $id_libro = $_POST['id_libro'];
+    if (isset($id_libro) && $id_libro != "" ) {
         $id_libro = $_POST['id_libro'];
         $id_usuario = $_POST['id_usuario'];
         $fecha_prestamo = $_POST['frecha_prestamo'];
         $fecha_vencimiento = $_POST['fecha_vencimiento'];
         $fecha_devolucion = $_POST['fecha_devolucion'];
         echo json_encode($functions->add_loan($id_libro, $id_usuario, $fecha_prestamo, $fecha_vencimiento, $fecha_devolucion));
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió información necesaria del préstamo."));
     }
 }
 

@@ -59,11 +59,11 @@ function delete_section($functions)
 function add_section($functions)
 {
     # nombre_seccion
-    if (!isset($_POST['nombre_seccion'])) {
-        echo json_encode(array("status" => 601, "message" => "No se recibió la sección."));
-    } else {
-        $nombre_seccion = $_POST['nombre_seccion'];
+    $nombre_seccion = $_POST['nombre_seccion'];
+    if ( isset( $nombre_seccion ) && $nombre_seccion != "" ) {
         echo json_encode($functions->add_section($nombre_seccion));
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió la sección."));
     }
 }
 

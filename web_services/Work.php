@@ -58,12 +58,13 @@ function add_work($functions)
      * nombre_obra
      * numero_tomo
      */
-    if (!isset($_POST['nombre_obra'])) {
-        echo json_encode(array("status" => 601, "message" => "."));
-    } else {
+    $work = $_POST['nombre_obra'];
+    if (isset($work) && $work != "" ) {
         $nombre_obra = $_POST['nombre_obra'];
         $numero_tomo = $_POST['numero_tomo'];
         echo json_encode($functions->add_work($nombre_obra, $numero_tomo));
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió información necesaria de la obra."));
     }
 }
 

@@ -132,8 +132,12 @@ function add_user($functions){
     $Direccion = check_user_null('Direccion');
     $Instituto_Proveniencia = check_user_null('Instituto_Proveniencia');
 
-    # Return to the front-end the answer of the call
-    echo json_encode( $functions->add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena) );
+    if ($Username != "" && $Contrasena != ""){
+        # Return to the front-end the answer of the call
+        echo json_encode( $functions->add_user($Nombre, $Ap_Paterno, $Ap_Materno, $Username, $Tipo_Usuario, $Grado, $Telefono, $Correo, $Direccion, $Instituto_Proveniencia, $Contrasena) );
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió información necesaria del usuario."));
+    }
 }
 
 /**

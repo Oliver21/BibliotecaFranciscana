@@ -64,9 +64,8 @@ function add_article($functions)
      * año_articulo
      * reseña_articulo
      */
-    if (!isset($_POST['nombre_articulo'])) {
-        echo json_encode(array("status" => 601, "message" => "."));
-    } else {
+    $nombre_articulo = $_POST['nombre_articulo'];
+    if (isset($nombre_articulo) && $nombre_articulo != "") {
         $id_revista = $_POST['id_revista'];
         $nombre_articulo = $_POST['nombre_articulo'];
         $cantidad_paginas = $_POST['cantidad_paginas'];
@@ -74,6 +73,8 @@ function add_article($functions)
         $año_articulo = $_POST['año_articulo'];
         $reseña_articulo = $_POST['reseña_articulo'];
         echo json_encode($functions->add_article($id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo));
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió el nombre del artículo."));
     }
 }
 
