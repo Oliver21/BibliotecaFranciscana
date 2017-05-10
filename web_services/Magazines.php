@@ -27,12 +27,30 @@ if (isset($_POST['action'])) {
         case 5:
             delete_magazine($functions);
             break;
+        case 6:
+            add_magazine_exampler($functions);
+            break;
         default:
             echo json_encode(array("status" => 0, "message" => "Acción no válida."));
     }
-
 } else {
     echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
+}
+
+/**
+ * @param $functions
+ */
+function add_magazine_exampler($functions){
+    $id_revista = $_POST['id_revista'];
+    $id_ejemplar = $_POST['id_ejemplar'];
+
+    if ( $id_revista != "" && $id_ejemplar != "" ) {
+        # Display the result of the insert
+        echo json_encode( $functions->add_magazine_exampler($id_revista, $id_ejemplar) );
+    } else {
+        echo json_encode(array("status" => 600, "message" => "No se información suficiente para la asociación Revista - Ejemplar."));
+    }
+
 }
 
 # get_magazines
@@ -88,6 +106,9 @@ function edit_magazine($functions)
     echo json_encode($functions->edit_magazine($id_revista, $id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales));
 }
 
+/**
+ * @param $functions
+ */
 function add_magazine($functions)
 {
     $id_seccion = $_POST['id_seccion'];
@@ -104,6 +125,9 @@ function add_magazine($functions)
     }
 }
 
+/**
+ * @param $functions
+ */
 function delete_magazine($functions)
 {
     $id_revista = $_POST['id_revista'];

@@ -26,12 +26,33 @@ if (isset($_POST['action'])) {
         case 5:
             delete_article($functions);
             break;
+        case 6:
+            add_article_author($functions);
+            break;
         default:
             echo json_encode(array("status" => 600, "message" => "Acción no válida."));
     }
 
 } else {
     echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
+}
+
+/**
+ * @param $functions
+ */
+function add_article_author($functions){
+    if ( isset($_POST['idArticulo']) && isset( $_POST['idAutor'])) {
+        $idArticulo = $_POST['idArticulo'];
+        $idAutor = $_POST['idAutor'];
+
+        if ( $idArticulo != "" && $idAutor != ""){
+            echo json_encode( $functions->add_article_author($idArticulo, $idAutor) );
+        } else {
+            echo json_encode(array("status" => 0, "message" => "No se recibió información necesaria para la asociación de artículo con autor."));
+        }
+    } else {
+        echo json_encode(array("status" => 0, "message" => "No se recibió información necesaria para la asociación de artículo con autor."));
+    }
 }
 
 # delete article

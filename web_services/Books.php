@@ -31,6 +31,26 @@ if (isset($_POST['action'])){
         case 5:
             delete_book($functions);
             break;
+        # Book - author association
+        case 6:
+            add_book_author($functions);
+            break;
+        # Book - colection association
+        case 7:
+            add_book_collection($functions);
+            break;
+        # Book - work association
+        case 8:
+            add_book_work($functions);
+            break;
+        # Book - serie association
+        case 9:
+            add_book_serie($functions);
+            break;
+        # Book - theme association
+        case 10:
+            add_book_theme($functions);
+            break;
         default:
             echo json_encode( array("status" => 660, "message" => "Acción no válida.") );
             break;
@@ -40,6 +60,20 @@ if (isset($_POST['action'])){
     echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
 }
 
+function add_book_author($functions){
+    if ( isset($_POST['id_libro']) && isset($_POST['id_assoc']) ){
+        $id_libro = $_POST['id_libro'];
+        $id_assoc = $_POST['id_assoc'];
+        if ( $id_libro != "" && $id_assoc != "" ){
+
+        } else {
+            echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+        }
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
+}
+
 # get_books
 /**
  * @param $functions
@@ -47,8 +81,17 @@ if (isset($_POST['action'])){
 function get_books($functions){
     $result = $functions->get_books();
 
+    $page = $_POST['page'] - 1;
+
+    $first_index = $page * 10;
+    $last_index = $first_index + 10;
+
     # Display the result whatever its status is
-    echo json_encode($result);
+    # var_dump($result['books']);
+
+
+
+    echo json_encode( array_slice($result, $first_index, $last_index ) );
 }
 
 # get_specific_book
