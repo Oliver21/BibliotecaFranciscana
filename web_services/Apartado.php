@@ -72,7 +72,7 @@ function add_apartado($functions)
         $id_seccion = $_POST['id_seccion'];
         echo json_encode($functions->add_apartado($id_seccion, $nombre_apartado));
     } else {
-        echo json_encode(array("status" => 601, "message" => "."));
+        echo json_encode(array("status" => 601, "message" => "No se recibió información necesaria del apartado."));
     }
 }
 
@@ -94,7 +94,13 @@ function get_apartados($functions)
  */
 function get_specific_apartado($functions)
 {
+    $id = $_POST['id'];
 
+    if ( isset($id) && $id != "" ){
+        echo json_encode( $functions->get_specific_apartado($id) );
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
 }
 
 # edit_apartado

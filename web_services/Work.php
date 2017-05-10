@@ -83,7 +83,13 @@ function get_works($functions)
  */
 function get_specific_work($functions)
 {
+    $id = $_POST['id'];
 
+    if ( isset($id) && $id != "" ){
+        echo json_encode( $functions->get_specific_work($id) );
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
 }
 
 # edit_work

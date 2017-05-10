@@ -53,7 +53,13 @@ function get_magazines($functions)
  */
 function get_specific_magazine($functions)
 {
+    $id = $_POST['id'];
 
+    if ( isset($id) && $id != "" ){
+        echo json_encode( $functions->get_specific_magazine($id) );
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
 }
 
 # edit_magazine

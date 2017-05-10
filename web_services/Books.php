@@ -56,11 +56,13 @@ function get_books($functions){
  * @param $functions
  */
 function get_specific_book($functions){
-    $id_libro = $_POST['id_libro'];
+    $id = $_POST['id'];
 
-    $result = $functions->get_specific_book($id_libro);
-    
-    echo json_encode( $result ); 
+    if ( isset($id) && $id != "" ){
+        echo json_encode( $functions->get_specific_book($id) );
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
 }
 
 /**

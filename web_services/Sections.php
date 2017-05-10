@@ -85,7 +85,13 @@ function get_sections($functions)
  */
 function get_specific_section($functions)
 {
+    $id = $_POST['id'];
 
+    if ( isset($id) && $id != "" ){
+        echo json_encode( $functions->get_specific_section($id) );
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
 }
 
 # edit_section

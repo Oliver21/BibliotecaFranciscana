@@ -93,7 +93,14 @@ function get_subapartados($functions)
  */
 function get_specific_subapartado($functions)
 {
+    $id = $_POST['id'];
+    $id_apartado = $_POST['id_apartado'];
 
+    if ( isset($id) && $id != "" ){
+        echo json_encode( $functions->get_specific_subapartado($id, $id_apartado) );
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
 }
 
 # edit_subapartado

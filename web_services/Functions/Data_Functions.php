@@ -53,8 +53,21 @@ class Functions
         session_destroy();
     }
 
-    # Check if the user exist in the table
+    function get_specific_user($id)
+    {
+        # Query that select the specific book
+        $query = "SELECT * FROM Usuario WHERE Id_Usuario = $id";
 
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del usuario."));
+        }
+    }
+
+    # Check if the user exist in the table
     /**
      * @param $Username
      * @param $Contrasena
@@ -258,17 +271,12 @@ class Functions
         $query = "SELECT * FROM Libro WHERE id_libro = $id";
 
         if ($result = mysqli_query($this->db, $query)) {
-
             $row = mysqli_fetch_assoc($result);
-
             return $row;
-
-
         } else {
             # If something went wrong
             return (array("status" => 0, "message" => "Algo salió mal obtener la información del libro."));
         }
-
     }
 
     # Add a book to the table
@@ -468,6 +476,19 @@ class Functions
         }
     }
 
+    function get_specific_serie($id)
+    {
+        # Query that select the specific serie
+        $query = "SELECT * FROM Serie WHERE id_serie = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de la serie."));
+        }
+    }
 
     # Insert a new serie
 
@@ -591,6 +612,20 @@ class Functions
         } else {
             # Something went wrong
             return (array("status" => 0, "message" => "Algo salió mal obtener la información de los autores."));
+        }
+    }
+
+    function get_specific_author($id)
+    {
+        # Query that select the specific author
+        $query = "SELECT * FROM Autor WHERE id_autor = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del autor."));
         }
     }
 
@@ -728,6 +763,20 @@ class Functions
         }
     }
 
+    function get_specific_magazine($id)
+    {
+        # Query that select the specific magazine
+        $query = "SELECT * FROM Revista WHERE id_revista = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de la revista."));
+        }
+    }
+
     # Add magazine to the database
     /*
     id_revista
@@ -858,6 +907,20 @@ class Functions
         } else {
             # Something went wrong
             return (array("status" => 0, "message" => "Algo salió mal al insertar una sección."));
+        }
+    }
+
+    function get_specific_section($id)
+    {
+        # Query that select the specific section
+        $query = "SELECT * FROM Seccion WHERE id_seccion = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de la sección."));
         }
     }
 
@@ -995,6 +1058,20 @@ class Functions
         }
     }
 
+    function get_specific_editorial($id)
+    {
+        # Query that select the specific editorial
+        $query = "SELECT * FROM Editorial WHERE id_editorial = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de la editorial."));
+        }
+    }
+
     # Insert a new editorial
 
     /**
@@ -1124,6 +1201,20 @@ class Functions
         }
     }
 
+    function get_specific_apartado($id)
+    {
+        # Query that select the specific apartado
+        $query = "SELECT * FROM Apartado WHERE id_apartado = '$id'";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del apartado."));
+        }
+    }
+
 # Agregar apartados
     /*
      * id_apartado
@@ -1247,6 +1338,20 @@ class Functions
         } else {
             # Something went wrong
             return (array("status" => 0, "message" => "Algo salió mal obtener la información de los préstamos."));
+        }
+    }
+
+    function get_specific_loan($id)
+    {
+        # Query that select the specific book
+        $query = "SELECT * FROM Prestamo WHERE id_prestamo = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del préstamo."));
         }
     }
 
@@ -1385,6 +1490,20 @@ class Functions
         }
     }
 
+    function get_specific_subapartado($id, $id_apartado)
+    {
+        # Query that select the specific book
+        $query = "SELECT * FROM Subapartado WHERE progresivo = $id AND id_apartado = $id_apartado";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del subapartado."));
+        }
+    }
+
 # Add subapartado
     /*
      * progresivo
@@ -1511,6 +1630,20 @@ class Functions
         } else {
             # Something went wrong
             return (array("status" => 0, "message" => "Algo salió mal obtener la información de los artículos."));
+        }
+    }
+
+    function get_specific_article($id)
+    {
+        # Query that select the specific article
+        $query = "SELECT * FROM Articulo WHERE id_articulo = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del artículo."));
         }
     }
 
@@ -1652,6 +1785,20 @@ class Functions
         }
     }
 
+    function get_specific_collection($id)
+    {
+        # Query that select the specific collection
+        $query = "SELECT * FROM Coleccion WHERE id_coleccion = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de la colección."));
+        }
+    }
+
 # Add collections
     /*
          * id_coleccion
@@ -1784,6 +1931,20 @@ class Functions
         }
     }
 
+    function get_specific_work($id)
+    {
+        # Query that select the specific work
+        $query = "SELECT * FROM Obra WHERE id_obra = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de la obra."));
+        }
+    }
+
 # Add work
     /*
      * id_obra
@@ -1909,6 +2070,20 @@ class Functions
         }
     }
 
+    function get_specific_theme($id)
+    {
+        # Query that select the specific theme
+        $query = "SELECT * FROM Tema WHERE id_tema = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del tema."));
+        }
+    }
+
 # Add theme
     /*
      * id_tema
@@ -2029,6 +2204,20 @@ class Functions
         } else {
             # Something went wrong
             return (array("status" => 0, "message" => "Algo salió mal obtener la información de los ejemplares."));
+        }
+    }
+
+    function get_specific_exemplar($id)
+    {
+        # Query that select the specific exemplar
+        $query = "SELECT * FROM Ejemplar WHERE id_datosrevista = $id";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información del ejemplar."));
         }
     }
 
