@@ -29,6 +29,13 @@
       </div>
     </div>
 
+
+
+      <!--BOTON PARA AGREGAR REVISTA-->
+  <a class="btn-floating btn-large waves-effect waves-light red" data-target="revista">
+    <i class="material-icons">add</i></a>
+    <!--|||||||||||||||||||||||||||||||||||||||||||-->
+
     <div class="container">
       <div class="section">
         <div class="row">
@@ -95,6 +102,62 @@
     </div>
   </main>
 
+
+
+  <!-- DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UNA REVISTA-->
+    <div id="revista" class="modal">
+      <div class="modal-content">
+        <h4>Agregar Revista</h4>
+        <div class="row">
+
+          <div class="input-field col s4">
+            <i class="material-icons prefix">class</i>
+            <input id="nombrerevista" type="text" class="validate" >
+            <label for="nombrerevista">Nombre de la revista</label>
+          </div>
+
+          <div class="input-field col s4">
+            <i class="material-icons prefix">class</i>
+            <input id="seccionrevista" type="text" class="validate">
+            <label for="seccionrevista">Sección de la revista</label>
+          </div>
+
+          <div class="input-field col s4">
+            <i class="material-icons prefix">explicit</i>
+            <input id="editorialrevista" type="text" class="validate" >
+            <label for="editorialrevista">Editorial de la revista</label>
+          </div>
+
+          <div class="input-field col s4">
+            <i class="material-icons prefix">subtitles</i>
+            <input id="periodicidad" type="text" class="validate" >
+            <label for="periodicidad">Periodicidad</label>
+          </div>
+
+          <div class="input-field col s4">
+            <i class="material-icons prefix">list</i>
+            <input id="palabrasclave" type="text" class="validate" >
+            <label for="palabrasclave">Palabras Clave</label>
+          </div>
+
+          <div class="input-field col s4">
+            <i class="material-icons prefix">list</i>
+            <input id="notasrevista" type="text" class="validate" >
+            <label for="notasrevista">Notas adicionales</label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <a class="btn waves-effect waves-light" type="submit" name="action" id="addRevista">Agregar Revista
+            <i class="material-icons right">send</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- CIERRA REVISTA -->
+
+
+
   <footer class="page-footer brown">
     <div class="container">
       <div class="row">
@@ -116,6 +179,11 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="../js/materialize.js"></script>
   <script src="../public_html/js/init.js"></script>
+
+  <script src="../js/init.js"></script>
+  <script src="../js/menu.js"></script>
+
+
   <script type="text/javascript">
 
   function validate()
