@@ -146,12 +146,19 @@ function get_books($functions){
     $first_index = $page * 10;
     $last_index = $first_index + 10;
 
+    # var_dump($first_index);
+    # var_dump($last_index);
+    $selected = array();
+    for ($i = $first_index; $i < $last_index; $i++){
+        array_push($selected, $result[$i]);
+    }
+
     # Display the result whatever its status is
     # var_dump($result['books']);
 
 
 
-    echo json_encode( array_slice($result, $first_index, $last_index ) );
+    echo json_encode( $selected );
 }
 
 function get_page_number($functions){

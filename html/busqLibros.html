@@ -54,7 +54,8 @@
                       <th>Borrar</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tbodytable">
+                  <!--
                     <tr>
                       <td>Alvin</td>
                       <td>Eclair</td>
@@ -63,6 +64,7 @@
                       <td><a href="#"><i class="brown-text material-icons">mode_edit</i></a></td>
                       <td><a href="#"><i class="brown-text material-icons">delete</i></a></td>
                     </tr>
+                    -->
                   </tbody>
                 </table>
                 <div class="container">
@@ -287,7 +289,22 @@
                 firstPage: 1,
                 useUrlParameter: false,
                 onClickCallback: function(requestedPage) {
+                    $('#tbodytable').html("");
+
                     console.log('Requested page from #pagination-long: ' + requestedPage);
+
+                    // Cargar la llamada
+                    $.post('../web_services/Books.php', {action : 1, page: requestedPage},
+                        function(returnedData) {
+                        libros = JSON.parse(returnedData);
+
+                        for (var i = 0; i < libros.length; i++){
+                            var text = "<tr><td>" + libros[i].titulo_libro + "</td><td>" + libros[i].subtitulo_libro  +"</td><td>" + libros[i].fecha_edicion +"</td><td>" + libros[i].proveedorlibro +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
+                            $('#tbodytable').append(text);
+                        }
+
+                            console.log(libros.length);
+                        });
 
                 }
             });
