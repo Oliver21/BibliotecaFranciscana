@@ -65,7 +65,7 @@ $('#adduser').click(function () {
 
 
 	$('#addColeccion').click(function () {
-		console.log("Agregamos Seccion");
+		console.log("Agregamos Collecion");
 		var nombreColeccion = document.getElementById('nombreColeccion').value;
 		var numeroColeccion = document.getElementById('numeroColeccion').value;
 		var volumenColeccion = document.getElementById('volumenColeccion').value;
@@ -80,7 +80,7 @@ $('#adduser').click(function () {
 	});
 
 		$('#addApartado').click(function () {
-		console.log("Agregamos Seccion");
+		console.log("Agregamos Apartado");
 		var nombreApartado = document.getElementById('nombreApartado').value;
 		var letraApartado = document.getElementById('letraApartado').value;
 		var seccion = document.getElementById('seccionApartado').value;
@@ -95,7 +95,7 @@ $('#adduser').click(function () {
 
 
 		$('#addObra').click(function () {
-		console.log("Agregamos Seccion");
+		console.log("Agregamos Obra");
 		var nombreObra = document.getElementById('nombreObra').value;
 		var numeroTomo = document.getElementById('numeroTomo').value;
 
@@ -109,7 +109,7 @@ $('#adduser').click(function () {
 
 
 		$('#addSubapartado').click(function () {
-		console.log("Agregamos Seccion");
+		console.log("Agregamos Subapartado");
 		var nombreSubapartado = document.getElementById('subapartado').value;
 		var apartado = document.getElementById('apartado').value;
 		var seccion = document.getElementById('seccionSubapartado').value;
