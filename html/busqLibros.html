@@ -271,11 +271,8 @@
     <script>
     $(function() {
       $(function() {
+        var numPages = 0;
         $('#pagination-long').materializePagination({
-
-          var numPages = 0;
-
-
           onClickCallback: function(requestedPage) {
             // console.log('Requested page from #pagination-long: ' + requestedPage);
             $.post('../web_services/Books.php', {action : 11},
