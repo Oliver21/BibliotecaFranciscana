@@ -51,6 +51,10 @@ if (isset($_POST['action'])){
         case 10:
             add_book_theme($functions);
             break;
+        # Number of pages
+        case 11:
+            get_page_number($functions);
+            break;
         default:
             echo json_encode( array("status" => 660, "message" => "Acción no válida.") );
             break;
@@ -92,6 +96,12 @@ function get_books($functions){
 
 
     echo json_encode( array_slice($result, $first_index, $last_index ) );
+}
+
+function get_page_number($functions){
+    $result = $functions->get_books();
+
+    echo json_encode( array( "pages" =>  count ($result) ));
 }
 
 # get_specific_book
