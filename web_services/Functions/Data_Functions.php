@@ -14,6 +14,7 @@ class Functions
     private $db;
 
     # Constructor
+
     /**
      * Functions constructor.
      */
@@ -28,6 +29,7 @@ class Functions
 
 
     # Destructor
+
     /**
      *
      */
@@ -52,6 +54,7 @@ class Functions
     }
 
     # Check if the user exist in the table
+
     /**
      * @param $Username
      * @param $Contrasena
@@ -80,6 +83,7 @@ class Functions
     }
 
     # Add a user to the 'Usuario' table
+
     /**
      * @param $Nombre
      * @param $Ap_Paterno
@@ -124,6 +128,7 @@ class Functions
     }
 
     # Edit user information
+
     /**
      * @param $Nombre
      * @param $Ap_Paterno
@@ -172,6 +177,7 @@ class Functions
     }
 
     # Delete user
+
     /**
      * @param $Username
      * @return array
@@ -241,6 +247,7 @@ class Functions
     }
 
     # Select a specific book
+
     /**
      * @param $id
      * @return array|null
@@ -265,6 +272,7 @@ class Functions
     }
 
     # Add a book to the table
+
     /**
      * @param $isbn
      * @param $titulo_libro
@@ -330,6 +338,7 @@ class Functions
     }
 
     # Edit books
+
     /**
      * @param $id_libro
      * @param $isbn
@@ -391,6 +400,7 @@ class Functions
     }
 
     # Delete book
+
     /**
      * @param $id_libro
      * @return array
@@ -460,6 +470,7 @@ class Functions
 
 
     # Insert a new serie
+
     /**
      * @param $nombre_serie
      * @param $volumen_serie
@@ -482,6 +493,7 @@ class Functions
     }
 
     # Edit a serie
+
     /**
      * @param $id_serie
      * @param $nombre_serie
@@ -613,6 +625,7 @@ class Functions
     }
 
     # Edit an author
+
     /**
      * @param $id_autor
      * @param $apaterno_autor
@@ -748,6 +761,7 @@ class Functions
     }
 
     # Edit magazine
+
     /**
      * @param $id_revista
      * @param $id_seccion
@@ -787,6 +801,7 @@ class Functions
     }
 
     # Delete magazine
+
     /**
      * @param $id_revista
      * @return array
@@ -847,6 +862,7 @@ class Functions
     }
 
     # get sections
+
     /**
      * @return array
      */
@@ -876,6 +892,7 @@ class Functions
     }
 
     # edit a section
+
     /**
      * @param $id_seccion
      * @param $nombre_seccion
@@ -910,6 +927,7 @@ class Functions
     }
 
     # delete a section
+
     /**
      * @param $id_seccion
      * @return array
@@ -978,6 +996,7 @@ class Functions
     }
 
     # Insert a new editorial
+
     /**
      * @param $nombre_editorial
      * @param $nombre_direccion
@@ -1002,6 +1021,7 @@ class Functions
     }
 
     # Edit a editorial
+
     /**
      * @param $id_editorial
      * @param $nombre_editorial
@@ -1037,6 +1057,7 @@ class Functions
     }
 
     # delete a editorial
+
     /**
      * @param $id_editorial
      * @return array
@@ -1114,10 +1135,11 @@ class Functions
      * @param $nombre_apartado
      * @return array
      */
-    function add_apartado($id_seccion, $nombre_apartado){
+    function add_apartado($id_seccion, $nombre_apartado)
+    {
         # Create the query
         $query = "INSERT INTO Apartado ( id_seccion, nombre_apartado ) VALUES ( $id_seccion, '$nombre_apartado' )";
-        if ( $result = mysqli_query($this->db, $query) ){
+        if ($result = mysqli_query($this->db, $query)) {
             # Everything went right
             return (array("status" => 1, "message" => "El apartado se agregó correctamente."));
         } else {
@@ -1127,23 +1149,25 @@ class Functions
     }
 
 # Editar un apartado
+
     /**
      * @param $id_apartado
      * @param $id_seccion
      * @param $nombre_apartado
      * @return array
      */
-    function edit_apartado($id_apartado, $id_seccion, $nombre_apartado){
+    function edit_apartado($id_apartado, $id_seccion, $nombre_apartado)
+    {
         # Revisar si el apartado a modificar existe
         $query_validate = "SELECT * FROM Apartado WHERE id_apartado = $id_apartado";
 
         # Execute the validation query
-        if ( $result = mysqli_query($this->db, $query_validate) ){
-            if ( $result->num_rows > 0 ){
+        if ($result = mysqli_query($this->db, $query_validate)) {
+            if ($result->num_rows > 0) {
                 # Actualizar el apartado
                 $query_update = "UPDATE Apartado SET id_seccion = $id_seccion, nombre_apartado = '$nombre_apartado' WHERE id_apartado = $id_apartado";
                 # Execute the update query
-                if ( $result = mysqli_query($this->db, $query_update) ){
+                if ($result = mysqli_query($this->db, $query_update)) {
                     # Everything was ok
                     return (array("status" => 1, "message" => "Apartado editado exitosamente."));
                 } else {
@@ -1152,7 +1176,7 @@ class Functions
                 }
             } else {
                 # el apartado no existe
-                return (array("status" => 101, "message" => "El apartado no se encuentra en la base de datos: " . $id_apartado . " ." . mysqli_error($this->db) ));
+                return (array("status" => 101, "message" => "El apartado no se encuentra en la base de datos: " . $id_apartado . " ." . mysqli_error($this->db)));
             }
         } else {
             # If something went wrong
@@ -1164,14 +1188,15 @@ class Functions
      * @param $id_apartado
      * @return array
      */
-    function delete_apartado($id_apartado){
+    function delete_apartado($id_apartado)
+    {
         # Revisar si existe el apartado a eliminar
         $query_validate = "SELECT 1 FROM Apartado WHERE id_apartado = $id_apartado";
 
         # Execute the validation query
-        if ($result = mysqli_query($this->db, $query_validate)){
+        if ($result = mysqli_query($this->db, $query_validate)) {
             # Check the number of results
-            if ($result->num_rows < 1 ){
+            if ($result->num_rows < 1) {
                 # El apartado no existe
                 return (array("status" => 100, "message" => "No existe el apartado a eliminar."));
             } else {
@@ -1180,12 +1205,12 @@ class Functions
                 $query_delete = "DELETE FROM Apartado WHERE id_apartado = $id_apartado";
 
                 # Execute the deletion
-                if ( $result = mysqli_query($this->db, $query_delete) ){
+                if ($result = mysqli_query($this->db, $query_delete)) {
                     # Apartado eliminado
                     return array("status" => 1, "message" => "Apartado eliminado exitosamente.");
                 } else {
                     # If something went wrong
-                    return (array("status" => 101, "message" => "Existió un error al eliminar el apartado." . mysqli_error($this->db) ));
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el apartado." . mysqli_error($this->db)));
                 }
             }
         } else {
@@ -1242,10 +1267,11 @@ class Functions
      * @param $fecha_devolucion
      * @return array
      */
-    function add_loan($id_libro, $id_usuario, $fecha_prestamo, $fecha_vencimiento, $fecha_devolucion){
+    function add_loan($id_libro, $id_usuario, $fecha_prestamo, $fecha_vencimiento, $fecha_devolucion)
+    {
         # Create the query
         $query = "INSERT INTO Prestamo ( id_libro, id_usuario, fecha_prestamo, fecha_vencimiento, fecha_devolucion ) VALUES ( $id_libro, $id_usuario, '$fecha_prestamo', '$fecha_vencimiento', '$fecha_devolucion' )";
-        if ( $result = mysqli_query($this->db, $query) ){
+        if ($result = mysqli_query($this->db, $query)) {
             # Everything went right
             return (array("status" => 1, "message" => "El préstamo se agregó correctamente."));
         } else {
@@ -1255,6 +1281,7 @@ class Functions
     }
 
 # Edit a loan
+
     /**
      * @param $id_prestamo
      * @param $id_libro
@@ -1264,17 +1291,18 @@ class Functions
      * @param $fecha_devolucion
      * @return array
      */
-    function edit_loan($id_prestamo, $id_libro, $id_usuario, $fecha_prestamo, $fecha_vencimiento, $fecha_devolucion){
+    function edit_loan($id_prestamo, $id_libro, $id_usuario, $fecha_prestamo, $fecha_vencimiento, $fecha_devolucion)
+    {
         # Check that the loan exists
         $query_validate = "SELECT * FROM Prestamo WHERE id_prestamo = $id_prestamo";
 
         # Execute the validation query
-        if ( $result = mysqli_query($this->db, $query_validate) ){
-            if ( $result->num_rows > 0 ){
+        if ($result = mysqli_query($this->db, $query_validate)) {
+            if ($result->num_rows > 0) {
                 # Update the loan
                 $query_update = "UPDATE Prestamo SET id_libro = $id_libro, id_usuario = $id_usuario, fecha_prestamo = '$fecha_prestamo', fecha_vencimiento = '$fecha_vencimiento', fecha_devolucion = '$fecha_devolucion' WHERE id_prestamo = $id_prestamo";
                 # Execute the update query
-                if ( $result = mysqli_query($this->db, $query_update) ){
+                if ($result = mysqli_query($this->db, $query_update)) {
                     # Everything was ok
                     return (array("status" => 1, "message" => "Préstamo editado exitosamente."));
                 } else {
@@ -1283,7 +1311,7 @@ class Functions
                 }
             } else {
                 # Loan does not exists
-                return (array("status" => 101, "message" => "El préstamo no se encuentra en la base de datos: " . $id_prestamo . " ." . mysqli_error($this->db) ));
+                return (array("status" => 101, "message" => "El préstamo no se encuentra en la base de datos: " . $id_prestamo . " ." . mysqli_error($this->db)));
             }
         } else {
             # If something went wrong
@@ -1295,14 +1323,15 @@ class Functions
      * @param $id_prestamo
      * @return array
      */
-    function delete_loan($id_prestamo){
+    function delete_loan($id_prestamo)
+    {
         # Check that the author actually exists
         $query_validate = "SELECT 1 FROM Prestamo WHERE id_prestamo = $id_prestamo";
 
         # Execute the validation query
-        if ($result = mysqli_query($this->db, $query_validate)){
+        if ($result = mysqli_query($this->db, $query_validate)) {
             # Check the number of results
-            if ($result->num_rows < 1 ){
+            if ($result->num_rows < 1) {
                 # The loan does not exists
                 return (array("status" => 100, "message" => "No existe el préstamo a eliminar."));
             } else {
@@ -1311,12 +1340,12 @@ class Functions
                 $query_delete = "DELETE FROM Préstamo WHERE id_prestamo = $id_prestamo";
 
                 # Execute the deletion
-                if ( $result = mysqli_query($this->db, $query_delete) ){
+                if ($result = mysqli_query($this->db, $query_delete)) {
                     # the loan was deleted
                     return array("status" => 1, "message" => "Préstamo eliminado exitosamente.");
                 } else {
                     # If something went wrong
-                    return (array("status" => 101, "message" => "Existió un error al eliminar el préstamo." . mysqli_error($this->db) ));
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el préstamo." . mysqli_error($this->db)));
                 }
             }
         } else {
@@ -1369,10 +1398,11 @@ class Functions
      * @param $nombre_subapartado
      * @return array
      */
-    function add_subapartado($id_apartado, $id_seccion, $nombre_subapartado){
+    function add_subapartado($id_apartado, $id_seccion, $nombre_subapartado)
+    {
         # Create the query
         $query = "INSERT INTO Subapartado ( id_apartado, id_seccion, nombre_subapartado ) VALUES ( '$id_apartado', $id_seccion, '$nombre_subapartado' )";
-        if ( $result = mysqli_query($this->db, $query) ){
+        if ($result = mysqli_query($this->db, $query)) {
             # Everything went right
             return (array("status" => 1, "message" => "El subapartado se agregó correctamente."));
         } else {
@@ -1382,6 +1412,7 @@ class Functions
     }
 
 # Edit subapartado
+
     /**
      * @param $progresivo
      * @param $id_apartado
@@ -1389,17 +1420,18 @@ class Functions
      * @param $nombre_subapartado
      * @return array
      */
-    function edit_subapartado($progresivo, $id_apartado, $id_seccion, $nombre_subapartado ){
+    function edit_subapartado($progresivo, $id_apartado, $id_seccion, $nombre_subapartado)
+    {
         # Check that the author exists
         $query_validate = "SELECT * FROM Subapartado WHERE progresivo = $progresivo";
 
         # Execute the validation query
-        if ( $result = mysqli_query($this->db, $query_validate) ){
-            if ( $result->num_rows > 0 ){
+        if ($result = mysqli_query($this->db, $query_validate)) {
+            if ($result->num_rows > 0) {
                 # Actualizar el subapartado
                 $query_update = "UPDATE Subapartado SET id_apartado = '$id_apartado', id_seccion = $id_seccion, nombre_subapartado = '$nombre_subapartado' WHERE progresivo = $progresivo";
                 # Execute the update query
-                if ( $result = mysqli_query($this->db, $query_update) ){
+                if ($result = mysqli_query($this->db, $query_update)) {
                     # Everything was ok
                     return (array("status" => 1, "message" => "Subapartado editado exitosamente."));
                 } else {
@@ -1408,7 +1440,7 @@ class Functions
                 }
             } else {
                 # El subapartado no existe
-                return (array("status" => 101, "message" => "El subapartado no se encuentra en la base de datos: " . $progresivo . " ." . mysqli_error($this->db) ));
+                return (array("status" => 101, "message" => "El subapartado no se encuentra en la base de datos: " . $progresivo . " ." . mysqli_error($this->db)));
             }
         } else {
             # If something went wrong
@@ -1420,14 +1452,15 @@ class Functions
      * @param $progresivo
      * @return array
      */
-    function delete_subapartado($progresivo){
+    function delete_subapartado($progresivo)
+    {
         # Revisar si el subapartado existe en la base de datos
         $query_validate = "SELECT 1 FROM Subapartado WHERE progresivo = $progresivo";
 
         # Execute the validation query
-        if ($result = mysqli_query($this->db, $query_validate)){
+        if ($result = mysqli_query($this->db, $query_validate)) {
             # Check the number of results
-            if ($result->num_rows < 1 ){
+            if ($result->num_rows < 1) {
                 # El subapartado no existe
                 return (array("status" => 100, "message" => "No existe el subapartado a eliminar."));
             } else {
@@ -1436,12 +1469,12 @@ class Functions
                 $query_delete = "DELETE FROM Subapartado WHERE progresivo = $progresivo";
 
                 # Execute the deletion
-                if ( $result = mysqli_query($this->db, $query_delete) ){
+                if ($result = mysqli_query($this->db, $query_delete)) {
                     # El subapartado fue borrado
                     return array("status" => 1, "message" => "Subapartado eliminado exitosamente.");
                 } else {
                     # If something went wrong
-                    return (array("status" => 101, "message" => "Existió un error al eliminar el subapartado." . mysqli_error($this->db) ));
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el subapartado." . mysqli_error($this->db)));
                 }
             }
         } else {
@@ -1500,10 +1533,11 @@ class Functions
      * @param $reseña_articulo
      * @return array
      */
-    function add_article($id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo){
+    function add_article($id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo)
+    {
         # Create the query
         $query = "INSERT INTO Articulo ( id_revista, nombre_articulo, cantidad_paginas, numero_ejemplar, año_articulo, reseña_articulo ) VALUES ( $id_revista, '$nombre_articulo', '$cantidad_paginas', '$numero_ejemplar', '$año_articulo', '$reseña_articulo' )";
-        if ( $result = mysqli_query($this->db, $query) ){
+        if ($result = mysqli_query($this->db, $query)) {
             # Everything went right
             return (array("status" => 1, "message" => "El artículo se agregó correctamente."));
         } else {
@@ -1513,6 +1547,7 @@ class Functions
     }
 
 # Edit an article
+
     /**
      * @param $id_articulo
      * @param $id_revista
@@ -1523,17 +1558,18 @@ class Functions
      * @param $reseña_articulo
      * @return array
      */
-    function edit_article($id_articulo, $id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo){
+    function edit_article($id_articulo, $id_revista, $nombre_articulo, $cantidad_paginas, $numero_ejemplar, $año_articulo, $reseña_articulo)
+    {
         # Check that the article exists
         $query_validate = "SELECT * FROM Articulo WHERE id_articulo = $id_articulo";
 
         # Execute the validation query
-        if ( $result = mysqli_query($this->db, $query_validate) ){
-            if ( $result->num_rows > 0 ){
+        if ($result = mysqli_query($this->db, $query_validate)) {
+            if ($result->num_rows > 0) {
                 # Update the article
                 $query_update = "UPDATE Articulo SET id_revista = $id_revista, nombre_articulo = '$nombre_articulo', cantidad_paginas = '$cantidad_paginas', numero_ejemplar = '$numero_ejemplar', año_articulo = '$año_articulo', reseña_articulo = $reseña_articulo WHERE id_articulo = $id_articulo";
                 # Execute the update query
-                if ( $result = mysqli_query($this->db, $query_update) ){
+                if ($result = mysqli_query($this->db, $query_update)) {
                     # Everything was ok
                     return (array("status" => 1, "message" => "Artículo editado exitosamente."));
                 } else {
@@ -1542,7 +1578,7 @@ class Functions
                 }
             } else {
                 # Article does not exists
-                return (array("status" => 101, "message" => "El artículo no se encuentra en la base de datos: " . $id_articulo . " ." . mysqli_error($this->db) ));
+                return (array("status" => 101, "message" => "El artículo no se encuentra en la base de datos: " . $id_articulo . " ." . mysqli_error($this->db)));
             }
         } else {
             # If something went wrong
@@ -1554,14 +1590,15 @@ class Functions
      * @param $id_articulo
      * @return array
      */
-    function delete_article($id_articulo){
+    function delete_article($id_articulo)
+    {
         # Check that the article actually exists
         $query_validate = "SELECT 1 FROM Articulo WHERE id_articulo = $id_articulo";
 
         # Execute the validation query
-        if ($result = mysqli_query($this->db, $query_validate)){
+        if ($result = mysqli_query($this->db, $query_validate)) {
             # Check the number of results
-            if ($result->num_rows < 1 ){
+            if ($result->num_rows < 1) {
                 # The article does not exists
                 return (array("status" => 100, "message" => "No existe el artículo a eliminar."));
             } else {
@@ -1570,12 +1607,12 @@ class Functions
                 $query_delete = "DELETE FROM Articulo WHERE id_articulo = $id_articulo";
 
                 # Execute the deletion
-                if ( $result = mysqli_query($this->db, $query_delete) ){
+                if ($result = mysqli_query($this->db, $query_delete)) {
                     # the article was deleted
                     return array("status" => 1, "message" => "Artículo eliminado exitosamente.");
                 } else {
                     # If something went wrong
-                    return (array("status" => 101, "message" => "Existió un error al eliminar el artículo." . mysqli_error($this->db) ));
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el artículo." . mysqli_error($this->db)));
                 }
             }
         } else {
@@ -1630,10 +1667,11 @@ class Functions
      * @param $id_seccion
      * @return array
      */
-    function add_collection($nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion ){
+    function add_collection($nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion)
+    {
         # Create the query
         $query = "INSERT INTO Coleccion ( nombre_coleccion, numero_coleccion, volumenes, id_seccion ) VALUES ( '$nombre_coleccion', $numero_coleccion, '$volumenes', $id_seccion )";
-        if ( $result = mysqli_query($this->db, $query) ){
+        if ($result = mysqli_query($this->db, $query)) {
             # Everything went right
             return (array("status" => 1, "message" => "La colección se agregó correctamente."));
         } else {
@@ -1643,6 +1681,7 @@ class Functions
     }
 
 # Edit a collection
+
     /**
      * @param $id_coleccion
      * @param $nombre_coleccion
@@ -1651,17 +1690,18 @@ class Functions
      * @param $id_seccion
      * @return array
      */
-    function edit_collection($id_coleccion, $nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion ){
+    function edit_collection($id_coleccion, $nombre_coleccion, $numero_coleccion, $volumenes, $id_seccion)
+    {
         # Check that the collection exists
         $query_validate = "SELECT * FROM Coleccion WHERE id_coleccion = $id_coleccion";
 
         # Execute the validation query
-        if ( $result = mysqli_query($this->db, $query_validate) ){
-            if ( $result->num_rows > 0 ){
+        if ($result = mysqli_query($this->db, $query_validate)) {
+            if ($result->num_rows > 0) {
                 # Update the collection
                 $query_update = "UPDATE Coleccion SET nombre_coleccion = '$nombre_coleccion', numero_coleccion = $numero_coleccion, volumenes = '$volumenes', id_seccion = $id_seccion WHERE id_coleccion = $id_coleccion";
                 # Execute the update query
-                if ( $result = mysqli_query($this->db, $query_update) ){
+                if ($result = mysqli_query($this->db, $query_update)) {
                     # Everything was ok
                     return (array("status" => 1, "message" => "Colección editada exitosamente."));
                 } else {
@@ -1670,7 +1710,7 @@ class Functions
                 }
             } else {
                 # Serie does not exists
-                return (array("status" => 101, "message" => "La colección no se encuentra en la base de datos: " . $id_coleccion . " ." . mysqli_error($this->db) ));
+                return (array("status" => 101, "message" => "La colección no se encuentra en la base de datos: " . $id_coleccion . " ." . mysqli_error($this->db)));
             }
         } else {
             # If something went wrong
@@ -1682,14 +1722,15 @@ class Functions
      * @param $id_coleccion
      * @return array
      */
-    function delete_collection($id_coleccion){
+    function delete_collection($id_coleccion)
+    {
         # Check that the collection actually exists
         $query_validate = "SELECT 1 FROM Coleccion WHERE id_collecion = $id_coleccion";
 
         # Execute the validation query
-        if ($result = mysqli_query($this->db, $query_validate)){
+        if ($result = mysqli_query($this->db, $query_validate)) {
             # Check the number of results
-            if ($result->num_rows < 1 ){
+            if ($result->num_rows < 1) {
                 # The collection does not exists
                 return (array("status" => 100, "message" => "No existe la coleccion a eliminar."));
             } else {
@@ -1698,12 +1739,12 @@ class Functions
                 $query_delete = "DELETE FROM Coleccion WHERE id_coleccion = $id_coleccion";
 
                 # Execute the deletion
-                if ( $result = mysqli_query($this->db, $query_delete) ){
+                if ($result = mysqli_query($this->db, $query_delete)) {
                     # the collection was deleted
                     return array("status" => 1, "message" => "Coleccion eliminada exitosamente.");
                 } else {
                     # If something went wrong
-                    return (array("status" => 101, "message" => "Existió un error al eliminar la coleccion." . mysqli_error($this->db) ));
+                    return (array("status" => 101, "message" => "Existió un error al eliminar la coleccion." . mysqli_error($this->db)));
                 }
             }
         } else {
@@ -1768,6 +1809,7 @@ class Functions
     }
 
 # Edit a work
+
     /**
      * @param $id_obra
      * @param $nombre_obra
@@ -1890,6 +1932,7 @@ class Functions
     }
 
 # Edit a theme
+
     /**
      * @param $id_tema
      * @param $tema
@@ -1924,6 +1967,7 @@ class Functions
     }
 
     # Delete theme
+
     /**
      * @param $id_tema
      * @return array
@@ -1959,6 +2003,148 @@ class Functions
         }
     }
     //</editor-fold>
+
+    //<editor-fold desc="Exemplar functions">
+    # Get the list of exemplar
+    /**
+     * @return array
+     */
+    function get_exemplars()
+    {
+        # Query that selects all the examplers from the table
+        $query = "SELECT * FROM Ejemplar";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Check for the number of examplers
+            if ($result->num_rows > 0) {
+                $examplers = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($examplers, $row);
+                }
+                $examplers['status'] = 1;
+                return ($examplers);
+            } else {
+                # The themes table is empty
+                return (array("status" => 2, "message" => "No se han agregado ejemplares."));
+            }
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de los ejemplares."));
+        }
+    }
+
+
+    # Insert a new exampler
+
+    /**
+     * @param $ISSN
+     * @param $numero_ejemplar
+     * @param $precio_revista
+     * @param $año_revista
+     * @param $mes_revista
+     * @param $semana_revista
+     * @return array
+     */
+    function add_exampler($ISSN, $numero_ejemplar, $precio_revista, $año_revista, $mes_revista, $semana_revista)
+    {
+        /*
+     * id_datosrevista
+     * ISSN
+     * numero_ejemplar
+     * precio_revista
+     * año_revista
+     * mes_revista
+     * semana_revista
+     */
+        # Create the query
+        $query = "INSERT INTO Ejemplar ( ISSN, numero_ejemplar, precio_revista, año_revista, mes_revista, semana_revista ) " .
+            "VALUES ( '$ISSN', '$numero_ejemplar', '$precio_revista', '$año_revista', '$mes_revista', '$semana_revista' )";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            # Everything went right
+            return (array("status" => 1, "message" => "El ejemplar se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al insertar un ejemplar."));
+        }
+    }
+
+    # Edit a exampler
+
+    /**
+     * @param $id_datosrevista
+     * @param $ISSN
+     * @param $numero_ejemplar
+     * @param $precio_revista
+     * @param $año_revista
+     * @param $mes_revista
+     * @param $semana_revista
+     * @return array
+     */
+    function edit_exampler($id_datosrevista, $ISSN, $numero_ejemplar, $precio_revista, $año_revista, $mes_revista, $semana_revista)
+    {
+        # Check that the exampler exists
+        $query_validate = "SELECT * FROM Ejemplar WHERE id_datosrevista = $id_datosrevista";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)) {
+            if ($result->num_rows > 0) {
+                # Update the exampler
+                $query_update = "UPDATE Ejemplar SET ISSN = '$ISSN', numero_ejemplar = '$numero_ejemplar', precio_revista = '$precio_revista'" .
+                    " año_revista = '$año_revista', mes_revista = '$mes_revista', semana_revista = '$semana_revista' WHERE id_datosrevista = $id_datosrevista";
+                # Execute the update query
+                if ($result = mysqli_query($this->db, $query_update)) {
+                    # Everything was ok
+                    return (array("status" => 1, "message" => "Ejemplar editado exitosamente."));
+                } else {
+                    # If something went wrong
+                    return (array("status" => 100, "message" => "Error al actualizar la información del ejemplar"));
+                }
+            } else {
+                # Exampler does not exists
+                return (array("status" => 101, "message" => "El ejemplar no se encuentra en la base de datos: " . $id_datosrevista . " ." . mysqli_error($this->db)));
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Editar ejemplar: Algo salió mal al validar el ejemplar."));
+        }
+    }
+
+    /**
+     * @param $id_datosrevista
+     * @return array
+     */
+    function delete_exampler($id_datosrevista)
+    {
+        # Check that the exampler actually exists
+        $query_validate = "SELECT 1 FROM Ejemplar WHERE id_datosrevista = $id_datosrevista";
+
+        # Execute the validation query
+        if ($result = mysqli_query($this->db, $query_validate)) {
+            # Check the number of results
+            if ($result->num_rows < 1) {
+                # The exampler does not exists
+                return (array("status" => 100, "message" => "No existe el ejemplar a eliminar."));
+            } else {
+                # Delete the exampler from the database
+                # Query to eliminate the exampler
+                $query_delete = "DELETE FROM Ejemplar WHERE id_datosrevista = $id_datosrevista";
+
+                # Execute the deletion
+                if ($result = mysqli_query($this->db, $query_delete)) {
+                    # the exampler was deleted
+                    return array("status" => 1, "message" => "Ejemplar eliminado exitosamente.");
+                } else {
+                    # If something went wrong
+                    return (array("status" => 101, "message" => "Existió un error al eliminar el ejemplar." . mysqli_error($this->db)));
+                }
+            }
+        } else {
+            # If something went wrong
+            return (array("status" => 0, "message" => "Borrar ejemplar: Algo salió mal al validar el ejemplar."));
+        }
+    }
+    //</editor-fold>
+
 }
 
 //<editor-fold desc="Tests">
