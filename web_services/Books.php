@@ -31,6 +31,26 @@ if (isset($_POST['action'])){
         case 5:
             delete_book($functions);
             break;
+        # Book - author association
+        case 6:
+            add_book_author($functions);
+            break;
+        # Book - colection association
+        case 7:
+            add_book_collection($functions);
+            break;
+        # Book - work association
+        case 8:
+            add_book_work($functions);
+            break;
+        # Book - serie association
+        case 9:
+            add_book_serie($functions);
+            break;
+        # Book - theme association
+        case 10:
+            add_book_theme($functions);
+            break;
         default:
             echo json_encode( array("status" => 660, "message" => "Acción no válida.") );
             break;
@@ -38,6 +58,20 @@ if (isset($_POST['action'])){
 
 } else {
     echo json_encode( array("status" => 666, "message" => "No se recibió acción a realizar.") );
+}
+
+function add_book_author($functions){
+    if ( isset($_POST['id_libro']) && isset($_POST['id_assoc']) ){
+        $id_libro = $_POST['id_libro'];
+        $id_assoc = $_POST['id_assoc'];
+        if ( $id_libro != "" && $id_assoc != "" ){
+
+        } else {
+            echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+        }
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
 }
 
 # get_books

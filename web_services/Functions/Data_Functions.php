@@ -53,6 +53,10 @@ class Functions
         session_destroy();
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_user($id)
     {
         # Query that select the specific book
@@ -345,6 +349,67 @@ class Functions
         }
     }
 
+
+function add_book_author($id_libro, $id_autor){
+    $query = "INSERT INTO Libro_Autor ( id_libro, id_autor) VALUES ( $id_libro, $id_autor )";
+
+    if ($result = mysqli_query($this->db, $query)) {
+        # Everything went right
+        return (array("status" => 1, "message" => "La asociación libro - autor se agregó correctamente."));
+    } else {
+        # Something went wrong
+        return (array("status" => 0, "message" => "Algo salió mal al agregar la asociación libro - autor."));
+    }
+}
+
+function add_book_collection($id_libro, $id_coleccion){
+    $query = "INSERT INTO Libro_Coleccion ( id_libro, id_coleccion ) VALUES ( $id_libro, $id_coleccion )";
+
+    if ($result = mysqli_query($this->db, $query)) {
+        # Everything went right
+        return (array("status" => 1, "message" => "La asociación libro - colección se agregó correctamente."));
+    } else {
+        # Something went wrong
+        return (array("status" => 0, "message" => "Algo salió mal al agregar la asociación libro - colección."));
+    }
+}
+
+function add_book_work($id_libro, $id_obra, $numero_tomo){
+    $query = "INSERT INTO Libro_Obra ( id_libro, id_obra, numero_tomo ) VALUES ( $id_libro, $id_obra, $numero_tomo)";
+
+    if ($result = mysqli_query($this->db, $query)) {
+        # Everything went right
+        return (array("status" => 1, "message" => "La asociación libro - obra se agregó correctamente."));
+    } else {
+        # Something went wrong
+        return (array("status" => 0, "message" => "Algo salió mal al agregar la asociación libro - obra."));
+    }
+}
+
+function add_book_serie($id_libro, $id_serie){
+    $query = "INSERT INTO Libro_Serie ( id_libro, id_serie ) VALUES ( $id_libro, $id_serie )";
+
+    if ($result = mysqli_query($this->db, $query)) {
+        # Everything went right
+        return (array("status" => 1, "message" => "La asociación libro - serie se agregó correctamente."));
+    } else {
+        # Something went wrong
+        return (array("status" => 0, "message" => "Algo salió mal al agregar la asociación libro - serie."));
+    }
+}
+
+function add_book_theme($id_libro, $id_tema){
+    $query = "INSERT INTO Revista_Ejemplar ( id_libro, id_tema ) VALUES ( $id_libro, $id_tema )";
+
+    if ($result = mysqli_query($this->db, $query)) {
+        # Everything went right
+        return (array("status" => 1, "message" => "La asociación libro - tema se agregó correctamente."));
+    } else {
+        # Something went wrong
+        return (array("status" => 0, "message" => "Algo salió mal al agregar la asociación libro - tema."));
+    }
+}
+
     # Edit books
 
     /**
@@ -476,6 +541,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_serie($id)
     {
         # Query that select the specific serie
@@ -615,6 +684,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_author($id)
     {
         # Query that select the specific author
@@ -763,6 +836,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_magazine($id)
     {
         # Query that select the specific magazine
@@ -806,6 +883,24 @@ class Functions
         } else {
             # Something went wrong
             return (array("status" => 0, "message" => "Algo salió mal al insertar una revista."));
+        }
+    }
+
+    /**
+     * @param $id_revista
+     * @param $id_datosrevista
+     * @return array
+     */
+    function add_magazine_exampler($id_revista, $id_datosrevista)
+    {
+        $query = "INSERT INTO Revista_Ejemplar ( id_revista, id_datosrevista ) VALUES ( $id_revista, $id_datosrevista )";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            # Everything went right
+            return (array("status" => 1, "message" => "La asociación revista - ejemplar se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al agregar la asociación revista - ejemplar."));
         }
     }
 
@@ -910,6 +1005,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_section($id)
     {
         # Query that select the specific section
@@ -1058,6 +1157,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_editorial($id)
     {
         # Query that select the specific editorial
@@ -1201,6 +1304,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_apartado($id)
     {
         # Query that select the specific apartado
@@ -1341,6 +1448,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_loan($id)
     {
         # Query that select the specific book
@@ -1490,6 +1601,11 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @param $id_apartado
+     * @return array|null
+     */
     function get_specific_subapartado($id, $id_apartado)
     {
         # Query that select the specific book
@@ -1633,6 +1749,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_article($id)
     {
         # Query that select the specific article
@@ -1676,6 +1796,24 @@ class Functions
         } else {
             # Something went wrong
             return (array("status" => 0, "message" => "Algo salió mal al insertar un artículo."));
+        }
+    }
+
+    /**
+     * @param $idArticulo
+     * @param $idAutor
+     * @return array
+     */
+    function add_article_author($idArticulo, $idAutor)
+    {
+        # Create the query
+        $query = "INSERT INTO Articulo_Autor ( idArticulo, idAutor ) VALUES ( $idArticulo, $idAutor )";
+        if ($result = mysqli_query($this->db, $query)) {
+            # Everything went right
+            return (array("status" => 1, "message" => "La asociación artículo - autor se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al asociar nu artículo con autor."));
         }
     }
 
@@ -1785,6 +1923,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_collection($id)
     {
         # Query that select the specific collection
@@ -1931,6 +2073,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_work($id)
     {
         # Query that select the specific work
@@ -2070,6 +2216,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_theme($id)
     {
         # Query that select the specific theme
@@ -2207,6 +2357,10 @@ class Functions
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     function get_specific_exemplar($id)
     {
         # Query that select the specific exemplar
