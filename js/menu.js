@@ -1,5 +1,9 @@
-$('#addSeccion').click(function () {
-	console.log("Agregamos Seccion");
+
+$('#pagNext').click(function () {
+
+	var dataObject = $('#pagPrev').val();
+
+
 	var nombre = document.getElementById('nombreSeccion').value;
 
 	$.post('../web_services/Sections.php', { action : 4, nombre_seccion : nombre},
@@ -8,6 +12,7 @@ $('#addSeccion').click(function () {
 		Materialize.toast(JSON.parse(returnedData).message, 4000);
 	});
 });
+
 
 $('#adduser').click(function () {
 	console.log("NUEVO USUARIO");
