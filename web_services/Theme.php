@@ -56,11 +56,12 @@ function add_theme($functions)
 {
     # id_tema
     # tema
-    if (!isset($_POST['tema'])) {
-        echo json_encode(array("status" => 601, "message" => "."));
-    } else {
+    $tema = $_POST['tema'];
+    if (isset($tema) && $tema != "" ) {
         $tema = $_POST['tema'];
         echo json_encode($functions->add_theme($tema));
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió información necesaria del tema."));
     }
 }
 

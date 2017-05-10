@@ -145,8 +145,13 @@ function add_book($functions){
     $numero_copias = $_POST['numero_copias'];
     $palabras_clave = $_POST['palabras_clave']; //pendiente
 
-    $result = $functions->add_book($isbn, $titulo_libro, $subtitulo_libro, $titulo_original, $numero_paginas, $id_editorial, $numero_edicion,
-        $fecha_edicion, $lugar_publicacion, $fecha_adquisicion, $costo_libro, $proveedor_libro, $observaciones_libro, $id_seccion, $id_apartado,
-        $volumen_libro, $ilustraciones, $graficas, $mapas, $bibliografia, $indice, $pasta_blanda, $planos, $estatus, $numero_copias, $palabras_clave);
-    echo json_encode( $result );
+    if ( $titulo_libro != "" && $titulo_original != "" ){
+        $result = $functions->add_book($isbn, $titulo_libro, $subtitulo_libro, $titulo_original, $numero_paginas, $id_editorial, $numero_edicion,
+            $fecha_edicion, $lugar_publicacion, $fecha_adquisicion, $costo_libro, $proveedor_libro, $observaciones_libro, $id_seccion, $id_apartado,
+            $volumen_libro, $ilustraciones, $graficas, $mapas, $bibliografia, $indice, $pasta_blanda, $planos, $estatus, $numero_copias, $palabras_clave);
+        echo json_encode( $result );
+    } else {
+        echo json_encode(array("status" => 601, "message" => "No se recibió la información del libro."));
+    }
+
 }

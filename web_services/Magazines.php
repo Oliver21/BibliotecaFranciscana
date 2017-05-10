@@ -94,7 +94,7 @@ function add_magazine($functions)
     if ( isset($nombre_revista) && $nombre_revista != ""){
         echo json_encode($functions->add_magazine($id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales));
     } else {
-        echo json_encode(array("status" => 0, "message" => "No hay nombre de revista."));
+        echo json_encode(array("status" => 0, "message" => "No se recibió el nombre de la revista."));
     }
 }
 

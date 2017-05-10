@@ -54,12 +54,13 @@ function delete_serie($functions){
 function add_serie($functions){
     # nombre_serie
     # volumen_serie
-    if ( ! isset($_POST['nombre_serie']) ){
-        echo json_encode( array("status" => 601, "message" => ".") );
-    } else {
+    $nombre_serie = $_POST['nombre_serie'];
+    if ( isset( $nombre_serie ) && $nombre_serie != "" ){
         $nombre_serie = $_POST['nombre_serie'];
         $volumen_serie = $_POST['volumen_serie'];
         echo json_encode( $functions->insert_serie($nombre_serie, $volumen_serie) );
+    } else {
+        echo json_encode( array("status" => 601, "message" => "No se recibió información necesaria de la serie.") );
     }
 }
 
