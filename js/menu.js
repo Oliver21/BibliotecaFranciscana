@@ -65,7 +65,7 @@ $('#adduser').click(function () {
 
 
 	$('#addColeccion').click(function () {
-		console.log("Agregamos Seccion");
+		console.log("Agregamos Collecion");
 		var nombreColeccion = document.getElementById('nombreColeccion').value;
 		var numeroColeccion = document.getElementById('numeroColeccion').value;
 		var volumenColeccion = document.getElementById('volumenColeccion').value;
@@ -80,13 +80,42 @@ $('#adduser').click(function () {
 	});
 
 		$('#addApartado').click(function () {
-		console.log("Agregamos Seccion");
+		console.log("Agregamos Apartado");
 		var nombreApartado = document.getElementById('nombreApartado').value;
 		var letraApartado = document.getElementById('letraApartado').value;
 		var seccion = document.getElementById('seccionApartado').value;
 
 		$.post('../web_services/Apartado.php', { action : 4, nombre_apartado :nombreApartado,
 			id_apartado : letraApartado, id_seccion : seccion},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
+
+		$('#addObra').click(function () {
+		console.log("Agregamos Obra");
+		var nombreObra = document.getElementById('nombreObra').value;
+		var numeroTomo = document.getElementById('numeroTomo').value;
+
+		$.post('../web_services/Work.php', { action : 4, nombre_obra : nombreObra,
+			numero_tomo : numeroTomo},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
+
+		$('#addSubapartado').click(function () {
+		console.log("Agregamos Subapartado");
+		var nombreSubapartado = document.getElementById('subapartado').value;
+		var apartado = document.getElementById('apartado').value;
+		var seccion = document.getElementById('seccionSubapartado').value;
+
+		$.post('../web_services/Subapartado.php', { action : 4, id_apartado : apartado,
+			id_seccion : seccion, nombre_subapartado : nombreSubapartado},
 		function(returnedData){
 			console.log(returnedData);
 			Materialize.toast(JSON.parse(returnedData).message, 4000);
