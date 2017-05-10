@@ -79,6 +79,20 @@ $('#adduser').click(function () {
 		});
 	});
 
+		$('#addApartado').click(function () {
+		console.log("Agregamos Seccion");
+		var nombreApartado = document.getElementById('nombreApartado').value;
+		var letraApartado = document.getElementById('letraApartado').value;
+		var seccion = document.getElementById('seccionApartado').value;
+
+		$.post('../web_services/Apartado.php', { action : 4, nombre_apartado :nombreApartado,
+			id_apartado : letraApartado, id_seccion : seccion},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
 
 	$('#addLibro').click(function () {
 		console.log("Agregamos Libro");
