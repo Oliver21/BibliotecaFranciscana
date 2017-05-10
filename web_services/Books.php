@@ -101,7 +101,7 @@ function get_books($functions){
 function get_page_number($functions){
     $result = $functions->get_books();
 
-    echo json_encode( array( "pages" =>  count ($result) ));
+    echo json_encode( array( "pages" =>  ceil ( count ($result) / 10 ) ));
 }
 
 # get_specific_book
