@@ -272,17 +272,20 @@
     $(function() {
       $(function() {
         $('#pagination-long').materializePagination({
-          align: 'center',
-          lastPage: 10,
-          firstPage: 1,
-          useUrlParameter: false,
+          var numPages = 0;
           onClickCallback: function(requestedPage) {
             console.log('Requested page from #pagination-long: ' + requestedPage);
             $.post('../web_services/Books.php', {action : 11},
             function(returnedData){
               console.log(returnedData);
               Materialize.toast(JSON.parse(returnedData).pages, 4000);
+              numPages = JSON.parse(returnedData).pages;
             });
+
+            align: 'center',
+            lastPage: numPages,
+            firstPage: 1,
+            useUrlParameter: false,
           }
         });
       });
