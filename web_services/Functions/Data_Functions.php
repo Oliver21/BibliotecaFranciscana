@@ -80,7 +80,7 @@ class Functions
     function check_user($Username, $Contrasena)
     {
         # Query that checks if the user is in the database
-        $query = "SELECT * FROM Usuario WHERE Username = '$Username' AND Contrasena = md5('$Contrasena')";
+        $query = "SELECT * FROM Usuario WHERE Username = '$Username' AND Contrasena = md5('$Contrasena') AND activo = 1";
 
         # Execute query
         if ($result = mysqli_query($this->db, $query)) {
@@ -213,7 +213,7 @@ class Functions
             } else {
                 # Delete the user from the database
                 # Query to eliminate the user
-                $query_delete = "DELETE FROM Usuario WHERE Username = '$Username'";
+                $query_delete = "UPDATE Usuario SET activo = 0 WHERE Username = '$Username'";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -241,7 +241,7 @@ class Functions
     function get_books()
     {
         # Query that selects all the books from the table
-        $query = "SELECT * FROM Libro";
+        $query = "SELECT * FROM Libro AND activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of books
             if ($result->num_rows > 0) {
@@ -492,7 +492,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the book from the database
                 # Query to eliminate the book
-                $query_delete = "DELETE FROM Libro WHERE id_libro = $id_libro";
+                $query_delete = "UPDATE Libro SET activo = 0 WHERE id_libro = $id_libro";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -520,7 +520,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_series()
     {
         # Query that selects all the series from the table
-        $query = "SELECT * FROM Serie";
+        $query = "SELECT * FROM Serie WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of series
             if ($result->num_rows > 0) {
@@ -636,7 +636,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the serie from the database
                 # Query to eliminate the serie
-                $query_delete = "DELETE FROM Serie WHERE id_serie = '$id_serie'";
+                $query_delete = "UPDATE Serie SET activo = 0 WHERE id_serie = '$id_serie'";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -664,7 +664,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_authors()
     {
         # Query that selects all the authors from the table
-        $query = "SELECT * FROM Autor";
+        $query = "SELECT * FROM Autor WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of authors
             if ($result->num_rows > 0) {
@@ -746,7 +746,7 @@ function add_book_theme($id_libro, $id_tema){
     function edit_author($id_autor, $apaterno_autor, $amaterno_autor, $nombre_autor, $nacimiento_autor, $nacionalidad_autor)
     {
         # Check that the author exists
-        $query_validate = "SELECT * FROM Autor WHERE id_autor = $id_autor";
+        $query_validate = "SELECT * FROM Autor WHERE id_autor = $id_autor AND activo = 1";
 
         # Execute the validation query
         if ($result = mysqli_query($this->db, $query_validate)) {
@@ -789,7 +789,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the author from the database
                 # Query to eliminate the author
-                $query_delete = "DELETE FROM Autor WHERE id_autor = '$id_autor'";
+                $query_delete = "UPDATE Autor SET activo = 0 WHERE id_autor = '$id_autor'";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -816,7 +816,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_magazines()
     {
         # Query that selects all the magazines from the table
-        $query = "SELECT * FROM Revista";
+        $query = "SELECT * FROM Revista AND activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of magazines
             if ($result->num_rows > 0) {
@@ -843,7 +843,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_specific_magazine($id)
     {
         # Query that select the specific magazine
-        $query = "SELECT * FROM Revista WHERE id_revista = $id";
+        $query = "SELECT * FROM Revista WHERE id_revista = $id AND activo = 1";
 
         if ($result = mysqli_query($this->db, $query)) {
             $row = mysqli_fetch_assoc($result);
@@ -919,7 +919,7 @@ function add_book_theme($id_libro, $id_tema){
     function edit_magazine($id_revista, $id_seccion, $id_editorial, $nombre_revista, $periodicidad, $palabras_clave, $notas_adicionales)
     {
         # Check that the section exists
-        $query_validate = "SELECT * FROM Revista WHERE id_revista = $id_revista";
+        $query_validate = "SELECT * FROM Revista WHERE id_revista = $id_revista AND activo = 1";
 
         # Execute the validation query
         if ($result = mysqli_query($this->db, $query_validate)) {
@@ -964,7 +964,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the magazine from the database
                 # Query to eliminate the magazine
-                $query_delete = "DELETE FROM Revista WHERE id_revista = '$id_revista'";
+                $query_delete = "UPDATE Revista SET activo = 0 WHERE id_revista = '$id_revista'";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -1012,7 +1012,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_specific_section($id)
     {
         # Query that select the specific section
-        $query = "SELECT * FROM Seccion WHERE id_seccion = $id";
+        $query = "SELECT * FROM Seccion WHERE id_seccion = $id AND activo = 1";
 
         if ($result = mysqli_query($this->db, $query)) {
             $row = mysqli_fetch_assoc($result);
@@ -1031,7 +1031,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_sections()
     {
         # Query that selects all the sections from the table
-        $query = "SELECT * FROM Seccion";
+        $query = "SELECT * FROM Seccion WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of sections
             if ($result->num_rows > 0) {
@@ -1108,7 +1108,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the section from the database
                 # Query to eliminate the section
-                $query_delete = "DELETE FROM Seccion WHERE id_seccion = '$id_seccion'";
+                $query_delete = "UPDATE Seccion SET activo = 0 WHERE id_seccion = '$id_seccion'";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -1136,24 +1136,23 @@ function add_book_theme($id_libro, $id_tema){
     function get_editorial()
     {
         # Query that selects all the editorials from the table
-        $query = "SELECT * FROM Serie";
+        $query = "SELECT * FROM Editorial WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
-            # Check for the number of series
+            # Check for the number of editorials
             if ($result->num_rows > 0) {
-                $series = array();
-                while ($row = mysqli_fetch_row($result)) {
-                    $values = array("id_serie" => $row[0], "nombre_serie" => $row[1], "volumen_serie" => $row[2]);
-                    array_push($series, $values);
+                $editorials = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    array_push($editorials, $row);
                 }
-                $series['status'] = 1;
-                return ($series);
+                $editorials['status'] = 1;
+                return ($editorials);
             } else {
                 # The authors table is empty
-                return (array("status" => 2, "message" => "No se han agregado series."));
+                return (array("status" => 2, "message" => "No se han agregado editoriales."));
             }
         } else {
             # Something went wrong
-            return (array("status" => 0, "message" => "Algo salió mal obtener la información de las series."));
+            return (array("status" => 0, "message" => "Algo salió mal obtener la información de las editoriales."));
         }
     }
 
@@ -1268,7 +1267,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the editorial from the database
                 # Query to eliminate the editorial
-                $query_delete = "DELETE FROM Editorial WHERE id_editorial = $id_editorial";
+                $query_delete = "UPDATE Editorial SET activo = 0 WHERE id_editorial = $id_editorial";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -1296,7 +1295,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_apartados()
     {
         # Query para seleccionar todos los apartados de la tabla
-        $query = "SELECT * FROM Apartado";
+        $query = "SELECT * FROM Apartado WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Revisar el número de apartados
             if ($result->num_rows > 0) {
@@ -1412,7 +1411,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Eliminar el apartado de la base de datos
                 # Query para eliminar el apartado
-                $query_delete = "DELETE FROM Apartado WHERE id_apartado = $id_apartado";
+                $query_delete = "UPDATE Apartado SET activo = 0 WHERE id_apartado = $id_apartado";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -1440,7 +1439,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_loans()
     {
         # Query that selects all the loans from the table
-        $query = "SELECT * FROM Prestamo";
+        $query = "SELECT * FROM Prestamo AND activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of loans
             if ($result->num_rows > 0) {
@@ -1565,7 +1564,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the loan from the database
                 # Query to eliminate the loan
-                $query_delete = "DELETE FROM Préstamo WHERE id_prestamo = $id_prestamo";
+                $query_delete = "UPDATE Préstamo SET activo = 0 WHERE id_prestamo = $id_prestamo";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -1593,7 +1592,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_subapartados()
     {
         # Query para seleccionar todos los subapartados de la base de datos
-        $query = "SELECT * FROM Subapartado";
+        $query = "SELECT * FROM Subapartado AND activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Revisar el número de subapartados
             if ($result->num_rows > 0) {
@@ -1713,7 +1712,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Borrar el subapartado de la base de datos
                 # Query para eliminar el subapartado
-                $query_delete = "DELETE FROM Subapartado WHERE progresivo = $progresivo";
+                $query_delete = "UPDATE Subapartado SET activo = 0 WHERE progresivo = $progresivo";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -1741,7 +1740,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_articles()
     {
         # Query that selects all the articles from the table
-        $query = "SELECT * FROM Articulo";
+        $query = "SELECT * FROM Articulo WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of articles
             if ($result->num_rows > 0) {
@@ -1887,7 +1886,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the article from the database
                 # Query to eliminate the article
-                $query_delete = "DELETE FROM Articulo WHERE id_articulo = $id_articulo";
+                $query_delete = "UPDATE Articulo SET activo = 0 WHERE id_articulo = $id_articulo";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -1915,7 +1914,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_collections()
     {
         # Query that selects all the collections from the table
-        $query = "SELECT * FROM Coleccion";
+        $query = "SELECT * FROM Coleccion WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of collections
             if ($result->num_rows > 0) {
@@ -2037,7 +2036,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the collection from the database
                 # Query to eliminate the collection
-                $query_delete = "DELETE FROM Coleccion WHERE id_coleccion = $id_coleccion";
+                $query_delete = "UPDATE Coleccion SET activo = 0 WHERE id_coleccion = $id_coleccion";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -2065,7 +2064,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_works()
     {
         # Query that selects all the works from the table
-        $query = "SELECT * FROM Obra";
+        $query = "SELECT * FROM Obra WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of works
             if ($result->num_rows > 0) {
@@ -2181,7 +2180,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the work from the database
                 # Query to eliminate the work
-                $query_delete = "DELETE FROM Obra WHERE id_obra = $id_obra";
+                $query_delete = "UPDATE Obra SET activo = 0 WHERE id_obra = $id_obra";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -2208,7 +2207,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_themes()
     {
         # Query that selects all the themes from the table
-        $query = "SELECT * FROM Tema";
+        $query = "SELECT * FROM Tema WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of themes
             if ($result->num_rows > 0) {
@@ -2323,7 +2322,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the theme from the database
                 # Query to eliminate the theme
-                $query_delete = "DELETE FROM Tema WHERE id_tema = '$id_tema'";
+                $query_delete = "UPDATE Tema SET activo = 0 WHERE id_tema = '$id_tema'";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
@@ -2349,7 +2348,7 @@ function add_book_theme($id_libro, $id_tema){
     function get_exemplars()
     {
         # Query that selects all the examplers from the table
-        $query = "SELECT * FROM Ejemplar";
+        $query = "SELECT * FROM Ejemplar WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of examplers
             if ($result->num_rows > 0) {
@@ -2482,7 +2481,7 @@ function add_book_theme($id_libro, $id_tema){
             } else {
                 # Delete the exampler from the database
                 # Query to eliminate the exampler
-                $query_delete = "DELETE FROM Ejemplar WHERE id_datosrevista = $id_datosrevista";
+                $query_delete = "UPDATE Ejemplar SET activo = 0 WHERE id_datosrevista = $id_datosrevista";
 
                 # Execute the deletion
                 if ($result = mysqli_query($this->db, $query_delete)) {
