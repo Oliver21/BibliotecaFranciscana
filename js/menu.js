@@ -108,6 +108,21 @@ $('#adduser').click(function () {
 	});
 
 
+		$('#addSubapartado').click(function () {
+		console.log("Agregamos Seccion");
+		var nombreSubapartado = document.getElementById('subapartado').value;
+		var apartado = document.getElementById('apartado').value;
+		var seccion = document.getElementById('seccionSubapartado').value;
+
+		$.post('../web_services/Subapartado.php', { action : 4, id_apartado : apartado,
+			id_seccion : seccion, nombre_subapartado : nombreSubapartado},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
+
 	$('#addLibro').click(function () {
 		console.log("Agregamos Libro");
 		var titulolibro = document.getElementById('titulolibro').value;
