@@ -154,3 +154,22 @@ $('#addRevista').click(function () {
         });
 
 });
+
+
+
+$('#addautor').click(function () {
+    console.log("Agregamos Autor");
+    var nombreautor = document.getElementById('nombreautor').value;
+    var paternoautor = document.getElementById('paternoautor').value;
+    var maternoautor = document.getElementById('maternoautor').value;
+    var nacimientoautor = document.getElementById('nacimientoautor').value;
+    var nacionalidadautor = document.getElementById('nacionalidadautor').value;
+
+    $.post('../web_services/Authors.php', { action : 4, apaterno_autor : paternoautor, amaterno_autor: maternoautor,
+        nombre_autor: nombreautor, nacimiento_autor: nacimientoautor, nacionalidad_autor: nacionalidadautor},
+        function(returnedData){
+            console.log(returnedData);
+            Materialize.toast(JSON.parse(returnedData).message, 4000);
+        });
+
+});
