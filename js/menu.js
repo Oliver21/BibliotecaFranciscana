@@ -94,6 +94,20 @@ $('#adduser').click(function () {
 	});
 
 
+		$('#addObra').click(function () {
+		console.log("Agregamos Seccion");
+		var nombreObra = document.getElementById('nombreObra').value;
+		var numeroTomo = document.getElementById('numeroTomo').value;
+
+		$.post('../web_services/Work.php', { action : 4, nombre_obra : nombreObra,
+			numero_tomo : numeroTomo},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
+
 	$('#addLibro').click(function () {
 		console.log("Agregamos Libro");
 		var titulolibro = document.getElementById('titulolibro').value;
