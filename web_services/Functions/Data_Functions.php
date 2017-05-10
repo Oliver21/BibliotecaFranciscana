@@ -1157,6 +1157,18 @@ function add_book_theme($id_libro, $id_tema){
         }
     }
 
+    function add_editorial_serie($id_editorial, $id_serie){
+        $query = "INSERT INTO Editorial_Serie ( id_editorial, id_serie) VALUES ( $id_editorial, $id_serie )";
+
+        if ($result = mysqli_query($this->db, $query)) {
+            # Everything went right
+            return (array("status" => 1, "message" => "La asociación editorial - serie se agregó correctamente."));
+        } else {
+            # Something went wrong
+            return (array("status" => 0, "message" => "Algo salió mal al agregar la asociación editorial - serie."));
+        }
+    }
+
     /**
      * @param $id
      * @return array|null

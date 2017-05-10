@@ -27,12 +27,29 @@ if (isset($_POST['action'])) {
         case 5:
             delete_editorial($functions);
             break;
+        case 6:
+            add_editorial_serie($functions);
+            break;
         default:
             echo json_encode(array("status" => 600, "message" => "Acción no válida."));
     }
 
 } else {
     echo json_encode(array("status" => 666, "message" => "No se recibió acción a realizar."));
+}
+
+function add_editorial_serie($functions){
+    if ( isset($_POST['id_editorial']) && isset($_POST['id_assoc']) ){
+        $id_editorial = $_POST['id_editorial'];
+        $id_assoc = $_POST['id_assoc'];
+        if ( $id_editorial != "" && $id_assoc != "" ){
+            echo json_encode( $functions->add_editorial_serie($id_editorial, $id_assoc) );
+        } else {
+            echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+        }
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
 }
 
 # delete editorial

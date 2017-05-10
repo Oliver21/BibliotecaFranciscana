@@ -69,7 +69,63 @@ function add_book_author($functions){
         $id_libro = $_POST['id_libro'];
         $id_assoc = $_POST['id_assoc'];
         if ( $id_libro != "" && $id_assoc != "" ){
+            echo json_encode( $functions->add_book_author($id_libro, $id_assoc) );
+        } else {
+            echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+        }
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
+}
 
+function add_book_collection($functions){
+    if ( isset($_POST['id_libro']) && isset($_POST['id_assoc']) ){
+        $id_book = $_POST['id_book'];
+        $id_assoc= $_POST['id_assoc'];
+        if ( $id_book != "" && $id_assoc != "" ){
+            echo json_encode( $functions->add_book_collection($id_book, $id_assoc) );
+        } else {
+            echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+        }
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
+}
+
+function add_book_work($functions){
+    if ( isset($_POST['id_libro']) && isset($_POST['id_assoc']) ){
+        $id_book = $_POST['id_book'];
+        $id_assoc= $_POST['id_assoc'];
+        if ( $id_book != "" && $id_assoc != "" ){
+            echo json_encode( $functions->add_book_work($id_book, $id_assoc) );
+        } else {
+            echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+        }
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
+}
+
+function add_book_serie($functions){
+    if ( isset($_POST['id_libro']) && isset($_POST['id_assoc']) ){
+        $id_book = $_POST['id_book'];
+        $id_assoc= $_POST['id_assoc'];
+        if ( $id_book != "" && $id_assoc != "" ){
+            echo json_encode( $functions->add_book_serie($id_book, $id_assoc) );
+        } else {
+            echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+        }
+    } else {
+        echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
+    }
+}
+
+function add_book_theme($functions){
+    if ( isset($_POST['id_libro']) && isset($_POST['id_assoc']) ){
+        $id_book = $_POST['id_book'];
+        $id_assoc= $_POST['id_assoc'];
+        if ( $id_book != "" && $id_assoc != "" ){
+            echo json_encode( $functions->add_book_theme($id_book, $id_assoc) );
         } else {
             echo json_encode( array("status" => 599, "message" => "No se recibió el identificador.") );
         }
