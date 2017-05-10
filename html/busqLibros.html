@@ -55,270 +55,278 @@
                     </tr>
                   </thead>
                   <tbody id="tbodytable">
-                  <!--
+                    <!--
                     <tr>
-                      <td>Alvin</td>
-                      <td>Eclair</td>
-                      <td>Eclair</td>
-                      <td>Eclair</td>
-                      <td><a href="#"><i class="brown-text material-icons">mode_edit</i></a></td>
-                      <td><a href="#"><i class="brown-text material-icons">delete</i></a></td>
-                    </tr>
-                    -->
-                  </tbody>
-                </table>
-                <div class="container">
-                  <div id="pagination-long"></div>
-                </div>
-              </div>
+                    <td>Alvin</td>
+                    <td>Eclair</td>
+                    <td>Eclair</td>
+                    <td>Eclair</td>
+                    <td><a href="#"><i class="brown-text material-icons">mode_edit</i></a></td>
+                    <td><a href="#"><i class="brown-text material-icons">delete</i></a></td>
+                  </tr>
+                -->
+              </tbody>
+            </table>
+            <div class="container">
+              <div id="pagination-long"></div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UN LIBRO -->
-      <div id="libro" class="modal">
-        <div class="modal-content">
-          <h4>Agregar Libro</h4>
-          <div class="row">
+  <!-- DIV QUE CONTIENEN LOS CAMPOS PARA AGREGAR UN LIBRO -->
+  <div id="libro" class="modal">
+    <div class="modal-content">
+      <h4>Agregar Libro</h4>
+      <div class="row">
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">class</i>
-              <input id="titulolibro" type="text" class="validate" >
-              <label for="last_name">Titulo</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">class</i>
+          <input id="titulolibro" type="text" class="validate" >
+          <label for="last_name">Titulo</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">class</i>
-              <input id="isbn" type="text" class="validate">
-              <label for="last_name">ISBN/ISSN</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">class</i>
+          <input id="isbn" type="text" class="validate">
+          <label for="last_name">ISBN/ISSN</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">class</i>
-              <input id="titulooriginallibro" type="text" class="validate" >
-              <label for="last_name">Titulo original</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">class</i>
+          <input id="titulooriginallibro" type="text" class="validate" >
+          <label for="last_name">Titulo original</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">subtitles</i>
-              <input id="subtitulolibro" type="text" class="validate" >
-              <label for="last_name">Subtitulo</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">subtitles</i>
+          <input id="subtitulolibro" type="text" class="validate" >
+          <label for="last_name">Subtitulo</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">description</i>
-              <input id="edicionlibro" type="number" class="validate" >
-              <label for="last_name">Número de edición</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">description</i>
+          <input id="edicionlibro" type="number" class="validate" >
+          <label for="last_name">Número de edición</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">room</i>
-              <input id="lugarpublicacionlibro" type="text" class="validate" >
-              <label for="last_name">Lugar publico</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">room</i>
+          <input id="lugarpublicacionlibro" type="text" class="validate" >
+          <label for="last_name">Lugar publico</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">today</i>
-              <input id="fechalibro" type="date" class="validate" style="font-size: 10pt;">
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">today</i>
+          <input id="fechalibro" type="date" class="validate" style="font-size: 10pt;">
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">library_books</i>
-              <input id="copiaslibro" type="number" class="validate" >
-              <label for="last_name">Número de copias</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">library_books</i>
+          <input id="copiaslibro" type="number" class="validate" >
+          <label for="last_name">Número de copias</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">shopping_cart</i>
-              <input id="costolibro" type="number" class="validate" >
-              <label for="last_name">Costo</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">shopping_cart</i>
+          <input id="costolibro" type="number" class="validate" >
+          <label for="last_name">Costo</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">library_books</i>
-              <input id="paginaslibro" type="number" class="validate" >
-              <label for="last_name">Número de páginas</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">library_books</i>
+          <input id="paginaslibro" type="number" class="validate" >
+          <label for="last_name">Número de páginas</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">store</i>
-              <input id="proovedorlibro" type="text" class="validate" >
-              <label for="last_name">Proovedor</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">store</i>
+          <input id="proovedorlibro" type="text" class="validate" >
+          <label for="last_name">Proovedor</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">library_books</i>
-              <input id="seccionlibro" type="text" class="validate" >
-              <label for="last_name">Sección</label>
-            </div>
+        <div class="input-field col s4">
+          <select>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+          </select>
+          <label>Sección</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">explicit</i>
-              <input id="editoriallibro" type="text" class="validate" >
-              <label for="last_name">Editorial</label>
-            </div>
+        <div class="input-field col s4">
+          <select>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+          </select>
+          <label>Editorial</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">assignment_ind</i>
-              <input id="autorlibro" type="text" class="validate" >
-              <label for="last_name">Autor</label>
-            </div>
+        <div class="input-field col s4">
+          <select>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+          </select>
+          <label>Autor</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">view_carousel</i>
-              <input id="volumenlibro" type="text" class="validate" >
-              <label for="volumenlibro">Volumen libro</label>
-            </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">view_carousel</i>
+          <input id="volumenlibro" type="text" class="validate" >
+          <label for="volumenlibro">Volumen Libro</label>
+        </div>
 
-            <div class="input-field col s4">
-              <i class="material-icons prefix">class</i>
-              <input id="apartado" type="text" class="validate" >
-              <label for="apartado">Apartado</label>
-            </div>
+        <div class="input-field col s12">
+          <select>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+          </select>
+          <label>Apartado</label>
+        </div>
 
-          </div>
+      </div>
 
-          <div class="row">
+      <div class="row">
 
-            <div class="input-field col s4">
-              <input type="checkbox" id="ilustraciones">
-              <label for="ilustraciones">Ilustraciones</label>
-            </div>
+        <div class="input-field col s4">
+          <input type="checkbox" id="ilustraciones">
+          <label for="ilustraciones">Ilustraciones</label>
+        </div>
 
-            <div class="input-field col s4">
-              <input type="checkbox" id="graficas">
-              <label for="graficas">Gráficas</label>
-            </div>
+        <div class="input-field col s4">
+          <input type="checkbox" id="graficas">
+          <label for="graficas">Gráficas</label>
+        </div>
 
-            <div class="input-field col s4">
-              <input type="checkbox" id="mapas">
-              <label for="mapas">Mapas</label>
-            </div>
+        <div class="input-field col s4">
+          <input type="checkbox" id="mapas">
+          <label for="mapas">Mapas</label>
+        </div>
 
-            <div class="input-field col s4">
-              <input type="checkbox" id="bibliografia">
-              <label for="bibliografia">Bibliografía</label>
-            </div>
+        <div class="input-field col s4">
+          <input type="checkbox" id="bibliografia">
+          <label for="bibliografia">Bibliografía</label>
+        </div>
 
-            <div class="input-field col s4">
-              <input type="checkbox" id="pasta">
-              <label for="pasta">Pasta blanda</label>
-            </div>
+        <div class="input-field col s4">
+          <input type="checkbox" id="pasta">
+          <label for="pasta">Pasta blanda</label>
+        </div>
 
-            <div class="input-field col s4">
-              <input type="checkbox" id="planos">
-              <label for="planos">Planos</label>
-            </div>
+        <div class="input-field col s4">
+          <input type="checkbox" id="planos">
+          <label for="planos">Planos</label>
+        </div>
 
-            <div class="input-field col s4">
-              <input type="checkbox" id="indice">
-              <label for="indice">Indice</label>
-            </div>
+        <div class="input-field col s4">
+          <input type="checkbox" id="indice">
+          <label for="indice">Indice</label>
+        </div>
 
-            <div class="input-field col s4">
-              <input type="checkbox" id="disponible">
-              <label for="disponible">Disponible</label>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <a class="btn waves-effect waves-light" type="submit" name="action" id="addLibro">Agregar Libro
-              <i class="material-icons right">send</i>
-            </a>
-          </div>
+        <div class="input-field col s4">
+          <input type="checkbox" id="disponible">
+          <label for="disponible">Disponible</label>
         </div>
       </div>
-      <!-- AQUI TERMINA EL LIBRO -->
-    </main>
 
-    <footer class="page-footer brown">
-      <div class="container">
-        <div class="row">
-          <div class="col s12">
-            <h5 class="white-text">Teologado Franciscano</h5>
-            <p class="grey-text text-lighten-4">La Biblioteca Franciscana tiene como misión facilitar el acceso a la información para apoyar, fortalecer y fomentar tanto la investigación como la enseñanza, por medio de la adquisición, catalogación, aseguramiento y preservación de valiosos materiales literarios, históricos, filosóficos y teológicos así como archivos documentales.</p>
-          </div>
-        </div>
+      <div class="modal-footer">
+        <a class="btn waves-effect waves-light" type="submit" name="action" id="addLibro">Agregar Libro
+          <i class="material-icons right">send</i>
+        </a>
       </div>
-      <div class="footer-copyright brown darken-3">
-        <div class="container">
-          <a class="brown-text text-lighten-4 right">© 2017 Instituto Tecnológico de Estudios Superiores de Monterrey</a>
-        </div>
+    </div>
+  </div>
+  <!-- AQUI TERMINA EL LIBRO -->
+</main>
+
+<footer class="page-footer brown">
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <h5 class="white-text">Teologado Franciscano</h5>
+        <p class="grey-text text-lighten-4">La Biblioteca Franciscana tiene como misión facilitar el acceso a la información para apoyar, fortalecer y fomentar tanto la investigación como la enseñanza, por medio de la adquisición, catalogación, aseguramiento y preservación de valiosos materiales literarios, históricos, filosóficos y teológicos así como archivos documentales.</p>
       </div>
-    </footer>
+    </div>
+  </div>
+  <div class="footer-copyright brown darken-3">
+    <div class="container">
+      <a class="brown-text text-lighten-4 right">© 2017 Instituto Tecnológico de Estudios Superiores de Monterrey</a>
+    </div>
+  </div>
+</footer>
 
 
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="../js/materialize.js"></script>
-    <script src="../public_html/js/init.js"></script>
-    <script src="../js/init.js"></script>
-    <script src="../js/menu.js"></script>
-    <script src="../js/busqLibros.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="../js/materialize-pagination.min.js"></script>
-    <script type="text/javascript">
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../js/materialize.js"></script>
+<script src="../public_html/js/init.js"></script>
+<script src="../js/init.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/busqLibros.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="../js/materialize-pagination.min.js"></script>
+<script type="text/javascript">
 
-    function validate()
-    {
-      var opts = document.getElementById("opciones");
-      var selectedValue = opts.options[opts.selectedIndex].value;
-      if (selectedValue == 0)
-      {
-        Materialize.toast('Debe elegir una categoría de busqueda', 4000)
-      }
-    }
-    </script>
+function validate()
+{
+  var opts = document.getElementById("opciones");
+  var selectedValue = opts.options[opts.selectedIndex].value;
+  if (selectedValue == 0)
+  {
+    Materialize.toast('Debe elegir una categoría de busqueda', 4000)
+  }
+}
+</script>
 
-    <script>
-    $(function() {
-      $(function() {
-
-
-        var numPages = 0;
-
-        $.post('../web_services/Books.php', {action : 11},
-        function(returnedData){
-          console.log(returnedData);
-          Materialize.toast(JSON.parse(returnedData).pages, 4000);
-          numPages = JSON.parse(returnedData).pages;
-
-            $('#pagination-long').materializePagination({
-                align: 'center',
-                lastPage: numPages,
-                firstPage: 1,
-                useUrlParameter: false,
-                onClickCallback: function(requestedPage) {
-                    $('#tbodytable').html("");
-
-                    console.log('Requested page from #pagination-long: ' + requestedPage);
-
-                    // Cargar la llamada
-                    $.post('../web_services/Books.php', {action : 1, page: requestedPage},
-                        function(returnedData) {
-                        libros = JSON.parse(returnedData);
-
-                        for (var i = 0; i < libros.length; i++){
-                            var text = "<tr><td>" + libros[i].titulo_libro + "</td><td>" + libros[i].subtitulo_libro  +"</td><td>" + libros[i].fecha_edicion +"</td><td>" + libros[i].proveedorlibro +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
-                            $('#tbodytable').append(text);
-                        }
-
-                            console.log(libros.length);
-                        });
-
-                }
-            });
+<script>
+$(function() {
+  $(function() {
 
 
-        });
+    var numPages = 0;
 
+    $.post('../web_services/Books.php', {action : 11},
+    function(returnedData){
+      console.log(returnedData);
+      Materialize.toast(JSON.parse(returnedData).pages, 4000);
+      numPages = JSON.parse(returnedData).pages;
 
+      $('#pagination-long').materializePagination({
+        align: 'center',
+        lastPage: numPages,
+        firstPage: 1,
+        useUrlParameter: false,
+        onClickCallback: function(requestedPage) {
+          $('#tbodytable').html("");
 
+          console.log('Requested page from #pagination-long: ' + requestedPage);
+
+          // Cargar la llamada
+          $.post('../web_services/Books.php', {action : 1, page: requestedPage},
+          function(returnedData) {
+            libros = JSON.parse(returnedData);
+
+            for (var i = 0; i < libros.length; i++){
+              var text = "<tr><td>" + libros[i].titulo_libro + "</td><td>" + libros[i].subtitulo_libro  +"</td><td>" + libros[i].fecha_edicion +"</td><td>" + libros[i].proveedorlibro +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
+              $('#tbodytable').append(text);
+            }
+
+            console.log(libros.length);
+          });
+
+        }
       });
+
+
     });
-    </script>
 
 
-  </body>
-  </html>
+
+  });
+});
+</script>
+
+
+</body>
+</html>
