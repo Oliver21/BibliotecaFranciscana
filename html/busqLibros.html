@@ -272,26 +272,28 @@
     $(function() {
       $(function() {
         $('#pagination-long').materializePagination({
+
           var numPages = 0;
+
+
           onClickCallback: function(requestedPage) {
-            console.log('Requested page from #pagination-long: ' + requestedPage);
+            // console.log('Requested page from #pagination-long: ' + requestedPage);
             $.post('../web_services/Books.php', {action : 11},
             function(returnedData){
               console.log(returnedData);
               Materialize.toast(JSON.parse(returnedData).pages, 4000);
               numPages = JSON.parse(returnedData).pages;
             });
-
-            align: 'center',
-            lastPage: numPages,
-            firstPage: 1,
-            useUrlParameter: false,
           }
+          align: 'center',
+          lastPage: numPages,
+          firstPage: 1,
+          useUrlParameter: false,
         });
       });
     });
     </script>
 
 
-    </body>
-    </html>
+  </body>
+  </html>
