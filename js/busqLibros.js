@@ -4,8 +4,11 @@ $('#addLibroButton').click(function () {
             action: 1
         },
         function (returnedData) {
-            console.log(JSON.parse(returnedData));
+            // console.log(JSON.parse(returnedData));
             options = JSON.parse(returnedData);
+
+            console.log(options[0]);
+            console.log(options.length);
 
             var text = "";
             for (var i = 0; i < options.length; i++){
