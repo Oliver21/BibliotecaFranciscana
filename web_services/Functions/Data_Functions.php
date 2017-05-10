@@ -1348,7 +1348,7 @@ function add_book_theme($id_libro, $id_tema){
     function add_apartado($id_apartado, $id_seccion, $nombre_apartado)
     {
         # Create the query
-        $query = "INSERT INTO Apartado ( id_apartado, id_seccion, nombre_apartado ) VALUES ( $id_apartado, $id_seccion, '$nombre_apartado' )";
+        $query = "INSERT INTO Apartado ( id_apartado, id_seccion, nombre_apartado ) VALUES ( '$id_apartado', $id_seccion, '$nombre_apartado' )";
         if ($result = mysqli_query($this->db, $query)) {
             # Everything went right
             return (array("status" => 1, "message" => "El apartado se agregó correctamente."));
