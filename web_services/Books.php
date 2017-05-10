@@ -81,8 +81,17 @@ function add_book_author($functions){
 function get_books($functions){
     $result = $functions->get_books();
 
+    $page = $_POST['page'] - 1;
+
+    $first_index = $page * 10;
+    $last_index = $first_index + 10;
+
     # Display the result whatever its status is
-    echo json_encode($result);
+    # var_dump($result['books']);
+
+
+
+    echo json_encode( array_slice($result, $first_index, $last_index ) );
 }
 
 # get_specific_book

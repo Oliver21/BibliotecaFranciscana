@@ -252,7 +252,7 @@ class Functions
                 $answer = array("books" => $books, "status" => 1);
                 # var_dump($answer);
                 # $books['status'] = 1;
-                return ($answer);
+                return ($books);
             } else {
                 # There are no books in the table
                 return (array("status" => 2, "message" => "No se han agregado libros."));
