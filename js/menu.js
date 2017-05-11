@@ -78,8 +78,9 @@ $('#adduser').click(function () {
 				$('#addSerie').click(function () {
 		console.log("Agregamos Serie");
 		var nombreSerie = document.getElementById('nombreSerie').value;
+		var nombreEditorial = document.getElementById('nombreEditorial').value;
 
-		$.post('../web_services/Series.php', { action : 4, nombre_serie : nombreSerie},
+		$.post('../web_services/Series.php', { action : 4, nombre_serie : nombreSerie, nombre_editorial : nombreEditorial},
 		function(returnedData){
 			console.log(returnedData);
 			Materialize.toast(JSON.parse(returnedData).message, 4000);
