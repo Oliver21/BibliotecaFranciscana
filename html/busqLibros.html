@@ -48,7 +48,7 @@
                 <table class="striped">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th style="visibility: hidden;">ID</th>
                       <th>Nombre</th>
                       <th>Autor</th>
                       <th>Año</th>
@@ -151,7 +151,7 @@
         </div>
 
         <div class="input-field col s4">
-          <select>
+          <select id="section_select">
             <option value="" disabled selected>Escoger Opción</option>
             <option value="1">Option 1</option>
           </select>
@@ -261,11 +261,39 @@
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script type="text/javascript">
+      $.post('../web_services/Sections.php', {
+              action: 1
+          },
+          function (returnedData) {
+              // console.log(JSON.parse(returnedData));
+              var options = JSON.parse(returnedData);
+              var sections = options['sections'];
+
+              var text = "";
+              text = "<option value='3'>Test</option>";
+              $('#section_select').append(text);
+
+              for (var i = 0; i < sections.length; i++){
+                  var seccion = sections[i];
+                  // console.log(sections[i]);
+                  text = "<option value='" + seccion.id_seccion  +"'>"+ seccion.nombre_seccion + "</option>";
+                  $('#section_select').append(text);
+
+                  // Añadir también a los spans
+                  $('.dropdown-content .select-dropdown').append("<li><span>" + seccion.nombre_seccion  + "</span></li>");
+
+              }
+
+              //        "<option value="1">Option 1</option>";
+              //      Materialize.toast(JSON.parse(returnedData).message, 4000);
+          });
+  </script>
+  <script src="../js/busqLibros.js"></script>
 <script src="../js/materialize.js"></script>
-<script src="../public_html/js/init.js"></script>
+<!-- <script src="../public_html/js/init.js"></script> -->
 <script src="../js/init.js"></script>
 <script src="../js/menu.js"></script>
-<script src="../js/busqLibros.js"></script>
 <script src="../js/materialize-pagination.min.js"></script>
 <script>
 $(function() {
@@ -274,7 +302,7 @@ $(function() {
     $.post('../web_services/Books.php', {action : 11},
     function(returnedData){
       console.log(returnedData);
-      Materialize.toast(JSON.parse(returnedData).pages, 4000);
+      Materialize.toast("Libros cargados exitosamente.", 4000);
       numPages = JSON.parse(returnedData).pages;
 
       $('#pagination-long').materializePagination({
@@ -289,7 +317,7 @@ $(function() {
           function(returnedData) {
             libros = JSON.parse(returnedData);
             for (var i = 0; i < libros.length; i++){
-              var text = "<tr><td style=\"visibility:\" class=\"divOne\">" + libros[i].id_libro + "</td><td>" + libros[i].titulo_libro + "</td><td>" + libros[i].subtitulo_libro  +"</td><td>" + libros[i].fecha_edicion +"</td><td>" + libros[i].proveedorlibro +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
+              var text = "<tr><td style=\"visibility: hidden\" class=\"divOne\">" + libros[i].id_libro + "</td><td>" + libros[i].titulo_libro + "</td><td>" + libros[i].subtitulo_libro  +"</td><td>" + libros[i].fecha_edicion +"</td><td>" + libros[i].proveedorlibro +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
               $('#tbodytable').append(text);
             }
           });
