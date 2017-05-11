@@ -75,6 +75,19 @@ $('#adduser').click(function () {
 	});
 
 
+				$('#addSerie').click(function () {
+		console.log("Agregamos Serie");
+		var nombreSerie = document.getElementById('nombreSerie').value;
+		var nombreEditorial = document.getElementById('nombreEditorial').value;
+
+		$.post('../web_services/Series.php', { action : 4, nombre_serie : nombreSerie, nombre_editorial : nombreEditorial},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
+
 	$('#addColeccion').click(function () {
 		console.log("Agregamos Collecion");
 		var nombreColeccion = document.getElementById('nombreColeccion').value;
@@ -84,6 +97,25 @@ $('#adduser').click(function () {
 
 		$.post('../web_services/Collections.php', { action : 4, nombre_coleccion : nombreColeccion,
 			numero_coleccion : numeroColeccion, volumenes : volumenColeccion, id_seccion : seccionColeccion},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
+
+	$('#addEjemplar').click(function () {
+		console.log("Agregamos Ejemplar");
+		var revistaEjemplar = document.getElementById('revistaEjemplar').value;
+		var issnEjemplar = document.getElementById('issnEjemplar').value;
+		var numeroEjemplar = document.getElementById('numeroEjemplar').value;
+		var precioEjemplar = document.getElementById('precioEjemplar').value;
+		var anoEjemplar = document.getElementById('anoEjemplar').value;
+		var mesEjemplar = document.getElementById('mesEjemplar').value;
+		var semanaEjemplar = document.getElementById('semanaEjemplar').value;
+
+		$.post('../web_services/Exampler.php', { action : 4, ISSN : issnEjemplar, numero_ejemplar : numeroEjemplar,
+			precio_revista : precioEjemplar, año_revista : anoEjemplar, mes_revista : mesEjemplar, semana_revista : semanaEjemplar},
 		function(returnedData){
 			console.log(returnedData);
 			Materialize.toast(JSON.parse(returnedData).message, 4000);
