@@ -241,7 +241,7 @@ class Functions
     function get_books()
     {
         # Query that selects all the books from the table
-        $query = "SELECT * FROM Libro AND activo = 1";
+        $query = "SELECT * FROM Libro WHERE activo = 1";
         if ($result = mysqli_query($this->db, $query)) {
             # Check for the number of books
             if ($result->num_rows > 0) {
@@ -1039,7 +1039,7 @@ function add_book_theme($id_libro, $id_tema){
                 while ($row = mysqli_fetch_assoc($result)) {
                     array_push($sections, $row);
                 }
-                $answer = array("books" => $sections, "status" => 1);
+                $answer = array("sections" => $sections, "status" => 1);
                 # var_dump($answer);
                 # $books['status'] = 1;
                 return ($answer);

@@ -5,15 +5,22 @@ $('#addLibroButton').click(function () {
         },
         function (returnedData) {
             // console.log(JSON.parse(returnedData));
-            options = JSON.parse(returnedData);
-
-            console.log(options[0]);
-            console.log(options.length);
+            var options = JSON.parse(returnedData);
+            var sections = options['sections'];
 
             var text = "";
-            for (var i = 0; i < options.length; i++){
-                text = "<option value=" + options[i].id_seccion  +">"+ options[i].nombre_seccion + "</option>";
+            text = "<option value='3'>Test</option>";
+            $('#section_select').append(text);
+
+            for (var i = 0; i < sections.length; i++){
+                var seccion = sections[i];
+                // console.log(sections[i]);
+                text = "<option value='" + seccion.id_seccion  +"'>"+ seccion.nombre_seccion + "</option>";
                 $('#section_select').append(text);
+
+                // Añadir también a los spans
+                $('.dropdown-content .select-dropdown').append("<li><span>" + seccion.nombre_seccion  + "</span></li>");
+
             }
 
     //        "<option value="1">Option 1</option>";
