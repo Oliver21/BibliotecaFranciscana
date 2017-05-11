@@ -13,7 +13,7 @@ if (isset($_POST['action'])) {
     switch ($action) {
         # Select the list of editorials
         case 1:
-            get_editorials($functions);
+            get_editorial($functions);
             break;
         case 2:
             get_specific_editorial($functions);
@@ -95,9 +95,9 @@ function add_editorial($functions)
 /**
  * @param $functions
  */
-function get_editorials($functions)
+function get_editorial($functions)
 {
-    $result = $functions->get_editorials();
+    $result = $functions->get_editorial();
     $page = $_POST['page'] - 1;
 
     $first_index = $page * 10;
@@ -115,7 +115,7 @@ function get_editorials($functions)
 
 
 function get_page_number($functions){
-    $result = $functions->get_editorials();
+    $result = $functions->get_editorial();
 
     echo json_encode( array( "pages" =>  ceil ( count ($result) / 10 ) ));
 }
