@@ -27,6 +27,9 @@ if (isset($_POST['action'])){
         case 5:
             delete_serie($functions);
             break;
+        case 11:
+            get_page_number($functions);
+            break;
         default:
             echo json_encode( array("status" => 600, "message" => "Acción no válida.") );
     }
@@ -71,8 +74,30 @@ function add_serie($functions){
 function get_series($functions){
     $result = $functions->get_series();
 
+    $page = $_POST['page'] - 1;
+
+    $first_index = $page * 10;
+    $last_index = $first_index + 10;
+
+    # var_dump($first_index);
+    # var_dump($last_index);
+    $selected = array();
+    for ($i = $first_index; $i < $last_index; $i++){
+        array_push($selected, $result[$i]);
+    }
+
     # Display the result whatever its status is
-    echo json_encode($result);
+    # var_dump($result['books']);
+
+
+
+    echo json_encode( $selected );
+}
+
+function get_page_number($functions){
+    $result = $functions->get_books();
+
+    echo json_encode( array( "pages" =>  ceil ( count ($result) / 10 ) ));
 }
 
 # get_specific_serie

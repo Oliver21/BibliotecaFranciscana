@@ -48,21 +48,18 @@
               <table class="striped">
                 <thead>
                   <tr>
-                    <th>Nombre Editorial</th>
+                    <th style="visibility: hidden;">ID</th>
                     <th>Nombre serie</th>
                     <th>Ver</th>
                     <th>Borrar</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Editorial Juanito</td>
-                    <td>Serie Historia</td>
-                    <td><a href="#"><i class="brown-text material-icons">mode_edit</i></a></td>
-                    <td><a href="#"><i class="brown-text material-icons">delete</i></a></td>
-                  </tr>
+                <tbody id="tbodytable">
                 </tbody>
               </table>
+              <div class="container">
+              <div id="pagination-long"></div>
+            </div>
             </div>
           </div>
         </div>
@@ -149,14 +146,31 @@ function validate()
 <script>
 $(function() {
   $(function() {
-    $('#pagination-long').materializePagination({
-      align: 'center',
-      lastPage: 10,
-      firstPage: 1,
-      useUrlParameter: false,
-      onClickCallback: function(requestedPage) {
-        console.log('Requested page from #pagination-long: ' + requestedPage);
-      }
+    var numPages = 0;
+    $.post('../web_services/Series.php', {action : 11},
+    function(returnedData){
+      console.log(returnedData);
+      Materialize.toast("Series cargados exitosamente.", 4000);
+      numPages = JSON.parse(returnedData).pages;
+
+      $('#pagination-long').materializePagination({
+        align: 'center',
+        lastPage: numPages,
+        firstPage: 1,
+        useUrlParameter: false,
+        onClickCallback: function(requestedPage) {
+          $('#tbodytable').html("");
+          // Cargar la llamada
+          $.post('../web_services/Series.php', {action : 1, page: requestedPage},
+          function(returnedData) {
+            series = JSON.parse(returnedData);
+            for (var i = 0; i < series.length; i++){
+              var text = "<tr><td style=\"visibility: hidden\" class=\"divOne\">" + series[i].id_serie + "</td><td>" + series[i].nombre_serie + "</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
+              $('#tbodytable').append(text);
+            }
+          });
+        }
+      });
     });
   });
 });
