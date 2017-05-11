@@ -196,7 +196,6 @@ $(function() {
             revistas = JSON.parse(returnedData);
             for (var i = 0; i < revistas.length; i++){
               var text = "<tr><td style=\"visibility:hidden\" class=\"divOne\">" + revistas[i].id_revista + "</td><td>" + revistas[i].nombre_revista + "</td><td>" + revistas[i].id_editorial  +"</td><td>" + revistas[i].id_seccion +"</td><td>" + revistas[i].periodicidad +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
-               console.log(text);
               $('#tbodytable').append(text);
             }
           });

@@ -46,6 +46,7 @@
                 <table class="striped">
                   <thead>
                     <tr>
+                      <th style="visibility: hidden;">ID</th>
                       <th>Nombre</th>
                       <th>Dirección</th>
                       <th>Ver</th>
@@ -53,22 +54,22 @@
 
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tbodytable">
+                                        <!--
                     <tr>
                       <td>Alvin</td>
                       <td>Eclair</td>
+                      <td>Eclair</td>
+                      <td>Eclair</td>
                       <td><a href="#"><i class="brown-text material-icons">mode_edit</i></a></td>
                       <td><a href="#"><i class="brown-text material-icons">delete</i></a></td>
-                    </tr>
+
+                    </tr> -->
                   </tbody>
                 </table>
-                <ul class="right-align pagination">
-                  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                  <li class="active"><a href="#!">1</a></li>
-                  <li class="waves-effect"><a href="#!">2</a></li>
-                  <li class="waves-effect"><a href="#!">3</a></li>
-                  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
+                <div class="container">
+                  <div id="pagination-long"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -142,27 +143,38 @@
       }
     }
     </script>
-
     <script>
-    $(function() {
-      $(function() {
-        $('#pagination-long').materializePagination({
-          align: 'center',
-          lastPage: 10,
-          firstPage: 1,
-          useUrlParameter: false,
-          onClickCallback: function(requestedPage) {
-            console.log('Requested page from #pagination-long: ' + requestedPage);
-            $.post('../web_services/Books.php', {action : 11},
-            function(returnedData){
-              console.log(returnedData);
-              Materialize.toast(JSON.parse(returnedData).message, 4000);
-            });
-          }
-        });
+$(function() {
+  $(function() {
+    var numPages = 0;
+    $.post('../web_services/Editorial.php', {action : 11},
+    function(returnedData){
+      console.log(returnedData);
+      Materialize.toast(JSON.parse(returnedData).pages, 4000);
+      numPages = JSON.parse(returnedData).pages;
+
+      $('#pagination-long').materializePagination({
+        align: 'center',
+        lastPage: numPages,
+        firstPage: 1,
+        useUrlParameter: false,
+        onClickCallback: function(requestedPage) {
+          $('#tbodytable').html("");
+          // Cargar la llamada
+          $.post('../web_services/Editorial.php', {action : 1, page: requestedPage},
+          function(returnedData) {
+            editoriales = JSON.parse(returnedData);
+            for (var i = 0; i < editoriales.length; i++){
+              var text = "<tr><td style=\"visibility:hidden\" class=\"divOne\">" + editoriales[i].id_editorial + "</td><td>" + editoriales[i].nombre_editorial + "</td><td>" + editoriales[i].nombre_direccion +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
+              $('#tbodytable').append(text);
+            }
+          });
+        }
       });
     });
-    </script>
+  });
+});
+</script>
 
   </body>
   </html>

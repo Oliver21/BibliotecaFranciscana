@@ -30,6 +30,9 @@ if (isset($_POST['action'])) {
         case 6:
             add_editorial_serie($functions);
             break;
+        case 11:
+            get_page_number($functions);
+            break;
         default:
             echo json_encode(array("status" => 600, "message" => "Acción no válida."));
     }
@@ -94,10 +97,27 @@ function add_editorial($functions)
  */
 function get_editorials($functions)
 {
-    $result = $functions->get_editorial();
+    $result = $functions->get_editorials();
+    $page = $_POST['page'] - 1;
 
+    $first_index = $page * 10;
+    $last_index = $first_index + 10;
+
+    # var_dump($first_index);
+    # var_dump($last_index);
+    $selected = array();
+    for ($i = $first_index; $i < $last_index; $i++){
+        array_push($selected, $result[$i]);
+    }
     # Display the result whatever its status is
-    echo json_encode($result);
+    echo json_encode($selected);
+}
+
+
+function get_page_number($functions){
+    $result = $functions->get_editorials();
+
+    echo json_encode( array( "pages" =>  ceil ( count ($result) / 10 ) ));
 }
 
 # get_specific_editorial
