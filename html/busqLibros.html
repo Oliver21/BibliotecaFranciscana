@@ -289,7 +289,7 @@ $(function() {
           function(returnedData) {
             libros = JSON.parse(returnedData);
             for (var i = 0; i < libros.length; i++){
-              var text = "<tr><td style=\"visibility:\" class=\"divOne\">" + libros[i].id_libro + "</td><td>" + libros[i].titulo_libro + "</td><td>" + libros[i].subtitulo_libro  +"</td><td>" + libros[i].fecha_edicion +"</td><td>" + libros[i].proveedorlibro +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
+              var text = "<tr><td style=\"visibility:\" class=\"divOne\">" + libros[i].id_libro + "</td><td>" + libros[i].titulo_libro + "</td><td>" + libros[i].subtitulo_libro  +"</td><td>" + libros[i].fecha_edicion +"</td><td>" + libros[i].proveedorlibro +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a id='delete' href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
               $('#tbodytable').append(text);
             }
           });
@@ -302,15 +302,17 @@ $(function() {
 
 <script type="text/javascript">
 
-    /*
-$(function){
-  $("td").on("click", function () {
-    console.log(
-      $("[type='hidden']", this).val()
-    );
+$(function() {
+  $(function() {
+    $("#delete").on("click", function () {
+      console.log($("[type='hidden']", this).val())
+      $.post('../web_services/Books.php', {action : 5, page: $("[type='hidden']", this).val()},
+      function(returnedData) {
+      });
+    });
   });
-};
-*/
+});
+
 </script>
 </body>
 </html>
