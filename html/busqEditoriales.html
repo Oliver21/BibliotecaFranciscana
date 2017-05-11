@@ -164,6 +164,7 @@ $(function() {
           $.post('../web_services/Editorial.php', {action : 1, page: requestedPage},
           function(returnedData) {
             editoriales = JSON.parse(returnedData);
+            console.log(editoriales);
             for (var i = 0; i < editoriales.length; i++){
               var text = "<tr><td style=\"visibility:hidden\" class=\"divOne\">" + editoriales[i].id_editorial + "</td><td>" + editoriales[i].nombre_editorial + "</td><td>" + editoriales[i].nombre_direccion +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
               $('#tbodytable').append(text);
