@@ -75,6 +75,18 @@ $('#adduser').click(function () {
 	});
 
 
+				$('#addSerie').click(function () {
+		console.log("Agregamos Serie");
+		var nombreSerie = document.getElementById('nombreSerie').value;
+
+		$.post('../web_services/Series.php', { action : 4, nombre_serie : nombreSerie},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
+
 	$('#addColeccion').click(function () {
 		console.log("Agregamos Collecion");
 		var nombreColeccion = document.getElementById('nombreColeccion').value;
