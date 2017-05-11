@@ -53,23 +53,13 @@
                       <th>Borrar</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>A</td>
-                      <td>Rituales</td>
-                      <td>Catolicismo</td>
-                      <td><a href="#"><i class="brown-text material-icons">mode_edit</i></a></td>
-                      <td><a href="#"><i class="brown-text material-icons">delete</i></a></td>
-                    </tr>
+                  <tbody id="tbodytable">
+            
                   </tbody>
                 </table>
-                <ul class="right-align pagination">
-                  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                  <li class="active"><a href="#!">1</a></li>
-                  <li class="waves-effect"><a href="#!">2</a></li>
-                  <li class="waves-effect"><a href="#!">3</a></li>
-                  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
+                <div class="container">
+              <div id="pagination-long"></div>
+            </div>
               </div>
             </div>
 
@@ -154,20 +144,37 @@
     </script>
 
     <script>
-    $(function() {
-      $(function() {
-        $('#pagination-long').materializePagination({
-          align: 'center',
-          lastPage: 10,
-          firstPage: 1,
-          useUrlParameter: false,
-          onClickCallback: function(requestedPage) {
-            console.log('Requested page from #pagination-long: ' + requestedPage);
-          }
-        });
+$(function() {
+  $(function() {
+    var numPages = 0;
+    $.post('../web_services/Apartado.php', {action : 11},
+    function(returnedData){
+      console.log(returnedData);
+      Materialize.toast("Apartados cargados exitosamente.", 4000);
+      numPages = JSON.parse(returnedData).pages;
+
+      $('#pagination-long').materializePagination({
+        align: 'center',
+        lastPage: numPages,
+        firstPage: 1,
+        useUrlParameter: false,
+        onClickCallback: function(requestedPage) {
+          $('#tbodytable').html("");
+          // Cargar la llamada
+          $.post('../web_services/Apartado.php', {action : 1, page: requestedPage},
+          function(returnedData) {
+            apartados = JSON.parse(returnedData);
+            for (var i = 0; i < apartados.length; i++){
+              var text = "<tr><td>" + apartados[i].id_apartado + "</td><td>" + apartados[i].nombre_apartado + "</td><td>" + apartados[i].nombre_seccion  +"</td><td><a href='#'><i class='brown-text material-icons'>mode_edit</i></a></td> <td><a href='#'><i class='brown-text material-icons'>delete</i></a></td></tr>";
+              $('#tbodytable').append(text);
+            }
+          });
+        }
       });
     });
-    </script>
+  });
+});
+</script>
 
   </body>
   </html>
