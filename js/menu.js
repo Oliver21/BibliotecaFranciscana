@@ -103,6 +103,25 @@ $('#adduser').click(function () {
 		});
 	});
 
+
+	$('#addEjemplar').click(function () {
+		console.log("Agregamos Ejemplar");
+		var revistaEjemplar = document.getElementById('revistaEjemplar').value;
+		var issnEjemplar = document.getElementById('issnEjemplar').value;
+		var numeroEjemplar = document.getElementById('numeroEjemplar').value;
+		var precioEjemplar = document.getElementById('precioEjemplar').value;
+		var anoEjemplar = document.getElementById('anoEjemplar').value;
+		var mesEjemplar = document.getElementById('mesEjemplar').value;
+		var semanaEjemplar = document.getElementById('semanaEjemplar').value;
+
+		$.post('../web_services/Exampler.php', { action : 4, ISSN : issnEjemplar, numero_ejemplar : numeroEjemplar,
+			precio_revista : precioEjemplar, año_revista : anoEjemplar, mes_revista : mesEjemplar, semana_revista : semanaEjemplar},
+		function(returnedData){
+			console.log(returnedData);
+			Materialize.toast(JSON.parse(returnedData).message, 4000);
+		});
+	});
+
 		$('#addApartado').click(function () {
 		console.log("Agregamos Apartado");
 		var nombreApartado = document.getElementById('nombreApartado').value;
