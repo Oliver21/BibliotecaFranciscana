@@ -1,6 +1,6 @@
 $('#addLibroButton').click(function () {
     // Cargar el dropdown de seccion, editorial, autor y apartado
-    $.post('../web_services/Authors.php', {
+    $.post('../web_services/Sections.php', {
             action: 1
         },
         function (returnedData) {
@@ -12,8 +12,8 @@ $('#addLibroButton').click(function () {
 
             var text = "";
             for (var i = 0; i < options.length; i++){
-                text = "<option value=" + options[i].id_autor  +">"+ ( options[i].nombre_autor + " " +options[i].apaterno_autor ) + "</option>";
-                $('#autor_select').append(text);
+                text = "<option value=" + options[i].id_seccion  +">"+ options[i].nombre_seccion + "</option>";
+                $('#section_select').append(text);
             }
 
     //        "<option value="1">Option 1</option>";
